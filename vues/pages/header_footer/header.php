@@ -11,17 +11,14 @@
         </ul>
     </nav>
 
-     <?php 
-     var_dump($_SESSION['utilisateur']);
-     if (isset($_SESSION['utilisateur'])): ?>
-    <!-- Si l'utilisateur est connecté -->
-    <a href="profil">Mon Profil</a>
-    <form action="accueil" id="deconnexion" method="POST">
-        <button type="submit" name="bDeconnexion">Déconnexion</button>
-    </form>
+     <?php if (isset($_SESSION['utilisateur'])): ?>
+        <!-- Si l'utilisateur est connecté -->
+        <a href="profil">Mon Profil</a>
+        <form action="deconnexion" id="deconnexion" method="POST">
+            <button type="submit" name="bDeconnexion">Déconnexion</button>
+        </form>
     <?php else: ?>
-    <!-- Si l'utilisateur est un visiteur -->
-    <a href="connexion">Nous rejoindre</a>
-    <?php endif; ?>
-    
+        <!-- Si l'utilisateur est un visiteur -->
+        <a href="connexion">Nous rejoindre</a>
+    <?php endif; ?>    
 </header>

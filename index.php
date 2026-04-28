@@ -70,5 +70,8 @@ switch($page) {
     case 'politique':
         include __DIR__ . '/controleurs/controleur_politique.php';
         break;
+    case 'deconnexion':
+        include __DIR__ . '/controleurs/controleur_deconnexion.php';
+        break;
 }
 ?>
