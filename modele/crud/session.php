@@ -1,7 +1,7 @@
 <?php
 require_once "../bdd/connexionBdd.php";
 /*La table session est garder un utilisateur connecté.
-Seulement 2 champs : token, utilisateur_id avec token en pk.
+Seulement 2 champs : token, utilisateur_id avec token en pk et utilisateur_id unique
 On va faire un token de connexion simpliste. On va utiliser time() suivi d'un - et puis un nombre aléatoire de 10 chiffres
 */
 
@@ -100,13 +100,13 @@ function supprimerSession($token) {
 }
 
 /**
- * Supprime toutes les sessions d'un utilisateur.
+ * Supprime la session d'un utilisateur.
  *
  * @param int $utilisateur_id L'ID de l'utilisateur
- * @return bool true si au moins une session a été supprimée, false sinon
+ * @return bool true si une session a été supprimée, false sinon
  * @throws PDOException En cas d'erreur sql
  */
-function supprimerSessionsUtilisateur($utilisateur_id) {
+function supprimerSessionUtilisateur($utilisateur_id) {
 	global $connexionBdd;
 	$requete = $connexionBdd->prepare("DELETE FROM session WHERE utilisateur_id = :utilisateur_id");
 	$requete->execute([':utilisateur_id' => $utilisateur_id]);
