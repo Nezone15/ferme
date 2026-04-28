@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (isset($_POST['bInscription'])) {
     require_once '../modele/visiteur/inscription.php';
     // On récupère et sécurise les données du formulaire d'inscription
@@ -26,7 +25,7 @@ if (isset($_POST['bInscription'])) {
             //3 cas de figure : tout fonctionne, l'email est déjà utilisé ou une erreur sql survient.
             try {
                 inscription($email, $nom, $prenom, $mdp, $tel, $rue, $numero, $boite, $code_postal, $commune, $pays);
-                $_SESSION['succes_inscription'] = "Votre inscription a bien réussie. Vous pouvez maintenant vous connecter.";
+                $_SESSION['inscription_succes'] = "Votre inscription a bien réussie. Vous pouvez maintenant vous connecter.";
                 header('Location: connexion');
                 exit();
             } catch (PDOException $e) {

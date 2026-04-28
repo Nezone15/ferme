@@ -10,7 +10,7 @@
     <main>
         <h1>Inscription</h1>
         <?php if (isset($erreur_inscription)) {
-            echo "<p id='erreur_inscription'>$erreur_inscription</p>";
+            echo "<p'>$erreur_inscription</p>";
             unset($erreur_inscription);
         }
         ?>

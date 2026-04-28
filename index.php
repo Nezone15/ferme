@@ -1,4 +1,5 @@
 <?php
+session_start();
 // On récupère la page demandée, sinon par défaut c'est l'accueil
 $page = $_GET['page'] ?? 'accueil';
 switch($page) {

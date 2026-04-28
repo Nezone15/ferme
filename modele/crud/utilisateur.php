@@ -105,29 +105,6 @@ function utilisateurParEmail($email) {
     return $requete->fetch(PDO::FETCH_ASSOC);
 }
 
-/**
- * Récupère les données d'un utilisateur à partir de son email et de son mot de passe.
- * 
- * @param string $email L'email de l'utilisateur
- * @param string $mdp Le mot de passe de l'utilisateur
- * 
- * @return array|false Les données de l'utilisateur ou false si les identifiants sont incorrects
- * 
- * @throws PDOException En cas d'erreur sql
- */
-function utilisateurParEmailEtMdp($email, $mdp) {
-    global $connexionBdd;
-    $requete = $connexionBdd->prepare("SELECT * FROM utilisateur WHERE email = :email");
-    $requete->execute([':email' => $email]);
-    $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
-    if ($utilisateur && password_verify($mdp, $utilisateur['mdp'])) {
-        return $utilisateur;
-    }
-    return false;
-}
-
-
-
 //UPDATE
 
 /**

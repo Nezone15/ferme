@@ -9,6 +9,10 @@
     <?php include 'header_footer/header.php'; ?>
     <main>
         <h1>Connexion</h1>
+        <?php if (isset($_SESSION['inscription_succes'])) {
+            echo '<p>' . $_SESSION['inscription_succes'] . '</p>';
+            unset($_SESSION['inscription_succes']);
+        }?>
         <form action="connexion" method="post">
             <label for="email">Email :</label>
             <input type="text" id="email" name="email" required>
