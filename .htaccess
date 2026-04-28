@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# 1. Empêcher l'accès direct aux dossiers (sécurité)
+Options -Indexes
+
+# 2. Si le fichier demandé existe (ex: une image, un .css), on l'affiche normalement
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# 3. Sinon, on renvoie tout vers index.php en créant la variable "page"
+# Exemple : actus devient index.php?page=actus
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?page=$1 [L,QSA]
+
+# 4. Optionnel : Pour les actualités avec ID (ex: /actualites/12)
+RewriteRule ^actualites/([0-9]+)$ index.php?page=actualites&id=$1 [L,QSA]
