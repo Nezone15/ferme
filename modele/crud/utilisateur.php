@@ -1,6 +1,6 @@
 <?php
 require_once "../bdd/connexionBdd.php";
-/*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, tel, adresse, code_postal, commune, pays, date_creation, derniere_visite
+/*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation, derniere_visite
 Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
 */
 
@@ -15,27 +15,31 @@ Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
  * @param string $prenom Le prénom de l'utilisateur
  * @param int $admin Indique si l'utilisateur est administrateur (0 ou 1)
  * @param string|null $tel Le numéro de téléphone de l'utilisateur
- * @param string|null $adresse L'adresse de l'utilisateur
+ * @param string|null $rue La rue de l'utilisateur
+ * @param string|null $numero Le numéro de rue de l'utilisateur
+ * @param string|null $boite La boîte postale de l'utilisateur
  * @param string|null $code_postal Le code postal de l'utilisateur
  * @param string|null $commune La commune de l'utilisateur
  * @param string|null $pays Le pays de l'utilisateur
  * 
  * @return int L'ID de l'utilisateur créé
  * 
- *  @throws PDOException En cas d'erreur sql
+ *  @throws PDOException En cas d'erreur sql ou échec d'unicité de l'email
  */
-function creerUtilisateur($email, $mdp, $nom, $prenom, $admin = 0, $tel = null, $adresse = null, $code_postal = null, $commune = null, $pays = null) {
+function creerUtilisateur($email, $mdp, $nom, $prenom, $admin = 0, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
     global $connexionBdd;
-    $requete = $connexionBdd->prepare("INSERT INTO utilisateur (email, mdp, nom, prenom, admin, tel, adresse, code_postal, commune, pays, date_creation, derniere_visite)
-     VALUES (:email, :mdp, :nom, :prenom, :admin, :tel, :adresse, :code_postal, :commune, :pays, NOW(), NOW())");
+    $requete = $connexionBdd->prepare("INSERT INTO utilisateur (email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation, derniere_visite)
+     VALUES (:email, :mdp, :nom, :prenom, :admin, :tel, :rue, :numero, :boite, :code_postal, :commune, :pays, NOW(), NOW())");
     $requete->execute([
         ':email' => $email,
-        ':mdp' => password_hash($mdp, PASSWORD_DEFAULT), // Hash du mot de passe pour la sécurité
+        ':mdp' => password_hash($mdp, PASSWORD_DEFAULT),
         ':nom' => $nom,
         ':prenom' => $prenom,
         ':admin' => $admin,
         ':tel' => $tel,
-        ':adresse' => $adresse,
+        ':rue' => $rue,
+        ':numero' => $numero,
+        ':boite' => $boite,
         ':code_postal' => $code_postal,
         ':commune' => $commune,
         ':pays' => $pays

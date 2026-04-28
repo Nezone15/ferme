@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Actualite</title>
-	<script src="/vues/js/modaleConnexion.js" defer></script>
 	<script defer src="/vues/js/actualite.js"></script>
 	<link rel="stylesheet" href="/vues/style/style.css">
 	<link rel="stylesheet" href="/vues/style/actualite.css">

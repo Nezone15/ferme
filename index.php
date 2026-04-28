@@ -1,7 +1,6 @@
 <?php
 // On récupère la page demandée, sinon par défaut c'est l'accueil
 $page = $_GET['page'] ?? 'accueil';
-
 switch($page) {
     case 'accueil':
         include 'controleurs/controleur_accueil.php';
@@ -15,12 +14,18 @@ switch($page) {
     case 'actualites':
         include 'controleurs/controleur_actualites.php';
         break;
+    case 'connexion':
+        include 'controleurs/controleur_connexion.php';
+        break;
+    case 'inscription':
+        include 'controleurs/controleur_inscription.php';
+        break;
     case 'profil':
         include 'controleurs/controleur_profil.php';
         break;
     case 'vueAdmin':
         include 'controleurs/controleur_vueAdmin.php';
-        break;    
+        break;
     case 'tn':
         include 'controleurs/controleur_tn.php';
         break;
@@ -32,9 +37,6 @@ switch($page) {
         break;
     case 'politique':
         include 'controleurs/controleur_politique.php';
-        break;
-    default:
-        include 'controleurs/controleur_accueil.php';
         break;
 }
 ?>

@@ -5,8 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Contact</title>
 	<script defer src="/vues/js/contact.js"></script>
-	<script src="/vues/js/modaleConnexion.js" defer></script>
-	<script src="/vues/js/modaleInscription.js" defer></script>
 	<link rel="stylesheet" href="/vues/style/style.css">
 	<link rel="stylesheet" href="/vues/style/contact.css">
 </head>

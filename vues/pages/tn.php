@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Terre Nouvelle</title>
 	<script defer src="/vues/js/tn.js"></script>
-	<script src="/vues/js/modaleConnexion.js" defer></script>
 	<link rel="stylesheet" href="/vues/style/style.css">
 	<link rel="stylesheet" href="/vues/style/tn.css">
 </head>
