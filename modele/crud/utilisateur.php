@@ -1,6 +1,6 @@
 <?php
 require_once "../bdd/connexionBdd.php";
-/*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation, derniere_visite
+/*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation
 Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
 */
 
@@ -28,8 +28,8 @@ Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
  */
 function creerUtilisateur($email, $mdp, $nom, $prenom, $admin = 0, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
     global $connexionBdd;
-    $requete = $connexionBdd->prepare("INSERT INTO utilisateur (email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation, derniere_visite)
-     VALUES (:email, :mdp, :nom, :prenom, :admin, :tel, :rue, :numero, :boite, :code_postal, :commune, :pays, NOW(), NOW())");
+    $requete = $connexionBdd->prepare("INSERT INTO utilisateur (email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation)
+     VALUES (:email, :mdp, :nom, :prenom, :admin, :tel, :rue, :numero, :boite, :code_postal, :commune, :pays, NOW())");
     $requete->execute([
         ':email' => $email,
         ':mdp' => password_hash($mdp, PASSWORD_DEFAULT),
@@ -128,19 +128,6 @@ function modifierUtilisateur($id, $modifications) {
     }
     $requete = $connexionBdd->prepare("UPDATE utilisateur SET " . implode(', ', $changements) . " WHERE id = :id");
     $requete->execute($params);
-    return ($requete->rowCount() > 0);
-}
-
-/**
- * Met à jour la date de dernière visite d'un utilisateur.
- * @param int $id L'ID de l'utilisateur
- * @return bool true si la mise à jour a été effectuée, false sinon
- * @throws PDOException En cas d'erreur sql
- */
-function updateDerniereVisite($id) {
-    global $connexionBdd;
-    $requete = $connexionBdd->prepare("UPDATE utilisateur SET derniere_visite = NOW() WHERE id = :id");
-    $requete->execute([':id' => $id]);
     return ($requete->rowCount() > 0);
 }
 

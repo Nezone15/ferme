@@ -1,6 +1,5 @@
 <?php
 if (isset($_POST['bConnexion'])) {
-    //A FAIRE
     require_once '../modele/visiteur/connexion.php';
     $email = trim(htmlspecialchars($_POST['email']));
     $mdp = trim(htmlspecialchars($_POST['mdp']));
@@ -9,13 +8,14 @@ if (isset($_POST['bConnexion'])) {
         $utilisateur = connexion($email, $mdp);
         if ($utilisateur) {
             // Connexion réussie, on stocke les infos de l'utilisateur en session
-            require_once '../modele/crud/session.php';
             $_SESSION['utilisateur'] = $utilisateur;
 
             //Maintenant on lui fait sa session de connexion et on lui met son cookie de 13 mois.
+            require_once '../modele/crud/session.php';
             $token = creerSession($utilisateur['id']);
             setcookie('token_connexion', $token, time() + (86400 * 30), "/", '', false, true);
-
+            
+            // Redirection vers la page d'accueil après connexion
             header('Location: accueil');
             exit();
         } else {
