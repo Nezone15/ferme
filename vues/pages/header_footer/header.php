@@ -11,7 +11,9 @@
         </ul>
     </nav>
 
-     <?php if (isset($_SESSION['utilisateur'])): ?>
+     <?php 
+     var_dump($_SESSION['utilisateur']);
+     if (isset($_SESSION['utilisateur'])): ?>
     <!-- Si l'utilisateur est connecté -->
     <a href="profil">Mon Profil</a>
     <form action="accueil" id="deconnexion" method="POST">

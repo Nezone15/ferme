@@ -3,7 +3,6 @@ if (isset($_POST['bConnexion'])) {
     require_once __DIR__ . '/../modele/visiteur/connexion.php';
     $email = trim(htmlspecialchars($_POST['email']));
     $mdp = trim(htmlspecialchars($_POST['mdp']));
-    var_dump($email, $mdp);
     
     try {
         $utilisateur = connexion($email, $mdp);
@@ -11,8 +10,10 @@ if (isset($_POST['bConnexion'])) {
             // Connexion réussie, on stocke les infos de l'utilisateur en session
             $_SESSION['utilisateur'] = $utilisateur;
 
-            //Maintenant on lui fait sa session de connexion et on lui met son cookie de 13 mois.
+            //Maintenant on lui fait sa session de connexion
+            //On supprime une ancienne si elle existe et on lui met son cookie de 13 mois.
             require_once __DIR__ . '/../modele/crud/session.php';
+            supprimerSessionUtilisateur($utilisateur['id']);
             $token = creerSession($utilisateur['id']);
             setcookie('token_connexion', $token, time() + (86400 * 30), "/", '', false, true);
             
@@ -24,6 +25,7 @@ if (isset($_POST['bConnexion'])) {
         }
     } catch (PDOException $e) {
         // Gérer l'erreur SQL
+        var_dump($e->getMessage());
         $erreur_connexion = "Nous avons rencontré un problème lors de la connexion. Veuillez réessayer plus tard.";
     }
 }
