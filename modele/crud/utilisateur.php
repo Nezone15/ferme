@@ -100,10 +100,8 @@ function utilisateurParId($id) {
  */
 function utilisateurParEmail($email) {
     global $connexionBdd;
-    var_dump($email);
     $requete = $connexionBdd->prepare("SELECT * FROM utilisateur WHERE email = :email");
     $requete->execute([':email' => $email]);
-    var_dump($requete->fetch(PDO::FETCH_ASSOC));
     return $requete->fetch(PDO::FETCH_ASSOC);
 }
 

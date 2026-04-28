@@ -11,7 +11,6 @@
  */
 function connexion($email, $mdp) {
     require_once __DIR__ . '/../crud/utilisateur.php';
-    var_dump($email, $mdp);
     $utilisateur = utilisateurParEmail($email);
     if ($utilisateur && password_verify($mdp, $utilisateur['mdp'])) {
         // Connexion réussie, on renvoie les infos de l'utilisateur

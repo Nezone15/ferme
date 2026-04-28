@@ -10,7 +10,7 @@
     <main>
         <h1>Connexion</h1>
         <?php if (isset($_SESSION['inscription_succes'])) {
-            echo '<p>' . $_SESSION['inscription_succes'] . '</p>';
+            echo '<p style="color: green;">' . $_SESSION['inscription_succes'] . '</p>';
             unset($_SESSION['inscription_succes']);
         }
         if (isset($erreur_connexion)) {

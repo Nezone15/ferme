@@ -7,17 +7,19 @@ if (isset($_POST['bInscription'])) {
     $prenom = trim(htmlspecialchars($_POST['prenom']));
     $mdp = trim(htmlspecialchars($_POST['mdp']));
     $mdpConfirme = trim(htmlspecialchars($_POST['mdpConfirme']));
-    $tel = trim(htmlspecialchars($_POST['tel'])) ?? null;
-    $rue = trim(htmlspecialchars($_POST['rue'])) ?? null;
-    $numero = trim(htmlspecialchars($_POST['numero'])) ?? null;
-    $boite = trim(htmlspecialchars($_POST['boite'])) ?? null;
-    $code_postal = trim(htmlspecialchars($_POST['code_postal'])) ?? null;
-    $commune = trim(htmlspecialchars($_POST['commune'])) ?? null;
-    $pays = trim(htmlspecialchars($_POST['pays'])) ?? null;
+
+    //Pour les champs optionnels, on regarde s'ils sont vides. Si oui ils prennent null
+    $tel = (trim($_POST['tel']) == '') ? null : htmlspecialchars(trim($_POST['tel']));
+    $rue = (trim(htmlspecialchars($_POST['rue'])) == '') ? null : htmlspecialchars(trim($_POST['rue']));
+    $numero = (trim(htmlspecialchars($_POST['numero'])) == '') ? null : htmlspecialchars(trim($_POST['numero']));
+    $boite = (trim(htmlspecialchars($_POST['boite'])) == '') ? null : htmlspecialchars(trim($_POST['boite']));
+    $code_postal = (trim(htmlspecialchars($_POST['code_postal'])) == '') ? null : htmlspecialchars(trim($_POST['code_postal']));
+    $commune = (trim(htmlspecialchars($_POST['commune'])) == '') ? null : htmlspecialchars(trim($_POST['commune']));
+    $pays = (trim(htmlspecialchars($_POST['pays'])) == '') ? null : htmlspecialchars(trim($_POST['pays']));
 
     //On appelle la fonction qui vérifie si les données sont valides.
     //Ensuite selon le retour, on fait un switch pour indiquer à l'utilisateur ce qui a foiré ou si l'inscription a réussi.
-    //Pour l'instant ma vérification est basique. Je fais pas tous les champs à voir plus tard.
+    //Pour l'instant ma vérification est basique. Je fais même pas tous les champs à voir plus tard.
     $validation = verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $numero);
     switch ($validation) {
         case 'succes':
