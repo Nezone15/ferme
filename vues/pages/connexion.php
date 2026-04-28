@@ -6,13 +6,19 @@
     <title>Se connecter</title>
 </head>
 <body>
-    <?php include 'header_footer/header.php'; ?>
+    <?php include __DIR__ . '/header_footer/header.php'; ?>
     <main>
         <h1>Connexion</h1>
         <?php if (isset($_SESSION['inscription_succes'])) {
             echo '<p>' . $_SESSION['inscription_succes'] . '</p>';
             unset($_SESSION['inscription_succes']);
-        }?>
+        }
+        if (isset($erreur_connexion)) {
+            echo "<p style='color: red;'>$erreur_connexion</p>";
+            unset($erreur_connexion);
+        }
+        ?>
+
         <form action="connexion" method="post">
             <label for="email">Email :</label>
             <input type="text" id="email" name="email" required>
@@ -25,6 +31,6 @@
             <a href="inscription">Pas encore inscrit ?</a>
         </form>
     </main>
-    <?php include 'header_footer/footer.php'; ?>
+    <?php include __DIR__ . '/header_footer/footer.php'; ?>
 </body>
 </html>

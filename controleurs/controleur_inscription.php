@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['bInscription'])) {
-    require_once '../modele/visiteur/inscription.php';
+    require_once __DIR__ . '/../modele/visiteur/inscription.php';
     // On récupère et sécurise les données du formulaire d'inscription
     $email = trim(htmlspecialchars($_POST['email']));
     $nom = trim(htmlspecialchars($_POST['nom']));

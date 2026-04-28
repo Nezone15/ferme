@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/vues/style/accueil.css">
 </head>
 <body>
-    <?php include 'header_footer/header.php'; ?>
+    <?php include __DIR__ . '/header_footer/header.php'; ?>
     <main>
         <!--Section carousel -->
         <section class="carousel">
@@ -136,7 +136,7 @@
         </section>
 
     </main>
-    <?php include 'header_footer/footer.php'; ?>
+    <?php include __DIR__ . '/header_footer/footer.php'; ?>
     
 </body>
 </html>

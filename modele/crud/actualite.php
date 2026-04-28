@@ -1,5 +1,5 @@
 <?php
-require_once "../bdd/connexionBdd.php";
+require_once __DIR__ . "/../bdd/connexionBdd.php";
 /*La table actualite contient les champs id(ai), titre, contenu, image, date, likes.
 Titre est unique. Date est indexé et généré par défaut(CURRENT_TIMESTAMP).
 */

@@ -1,5 +1,5 @@
 <?php
-require_once "../bdd/connexionBdd.php";
+require_once __DIR__ . "/../bdd/connexionBdd.php";
 /*La table session est garder un utilisateur connecté.
 Seulement 2 champs : token, utilisateur_id avec token en pk et utilisateur_id unique
 On va faire un token de connexion simpliste. On va utiliser time() suivi d'un - et puis un nombre aléatoire de 10 chiffres

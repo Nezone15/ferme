@@ -1,5 +1,5 @@
 <?php
-require_once "../bdd/connexionBdd.php";
+require_once __DIR__ . "/../bdd/connexionBdd.php";
 /*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation
 Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
 */
@@ -100,8 +100,10 @@ function utilisateurParId($id) {
  */
 function utilisateurParEmail($email) {
     global $connexionBdd;
+    var_dump($email);
     $requete = $connexionBdd->prepare("SELECT * FROM utilisateur WHERE email = :email");
     $requete->execute([':email' => $email]);
+    var_dump($requete->fetch(PDO::FETCH_ASSOC));
     return $requete->fetch(PDO::FETCH_ASSOC);
 }
 

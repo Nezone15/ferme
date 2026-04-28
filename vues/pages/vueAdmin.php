@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="/vues/style/vueAdmin.css">
 </head>
 <body>
-    <?php include 'header_footer/header.php'; ?>
+    <?php include __DIR__ . '/header_footer/header.php'; ?>
 	<main>
 		<section class="banniere">
 			<h1>Administrateur</h1>
@@ -54,6 +54,6 @@
 			</div>
 		</section>
 	</main>
-	<?php include 'header_footer/footer.php'; ?>
+	<?php include __DIR__ . '/header_footer/footer.php'; ?>
 </body>
 </html>
