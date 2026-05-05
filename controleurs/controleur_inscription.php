@@ -7,6 +7,8 @@ if (isset($_POST['bInscription'])) {
     $prenom = trim(htmlspecialchars($_POST['prenom']));
     $mdp = trim(htmlspecialchars($_POST['mdp']));
     $mdpConfirme = trim(htmlspecialchars($_POST['mdpConfirme']));
+    $question_id = (int)trim(htmlspecialchars($_POST['question_id']));
+    $reponse_secrete = strtolower(trim(htmlspecialchars($_POST['reponse_secrete'])));
 
     //Pour les champs optionnels, on regarde s'ils sont vides. Si oui ils prennent null
     $tel = (trim($_POST['tel']) == '') ? null : htmlspecialchars(trim($_POST['tel']));
@@ -20,19 +22,19 @@ if (isset($_POST['bInscription'])) {
     //On appelle la fonction qui vérifie si les données sont valides.
     //Ensuite selon le retour, on fait un switch pour indiquer à l'utilisateur ce qui a foiré ou si l'inscription a réussi.
     //Pour l'instant ma vérification est basique. Je fais même pas tous les champs à voir plus tard.
-    $validation = verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $numero);
+    $validation = verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $question_id, $reponse_secrete, $numero);
     switch ($validation) {
         case 'succes':
             //Ici les données sont vérifiées. Il ne reste plus qu'à l'insérer en bdd. 
             //3 cas de figure : tout fonctionne, l'email est déjà utilisé ou une erreur sql survient.
             try {
-                inscription($email, $nom, $prenom, $mdp, $tel, $rue, $numero, $boite, $code_postal, $commune, $pays);
+                inscription($email, $nom, $prenom, $mdp, $question_id, $reponse_secrete, $tel, $rue, $numero, $boite, $code_postal, $commune, $pays);
                 $_SESSION['inscription_succes'] = "Votre inscription a bien réussie. Vous pouvez maintenant vous connecter.";
                 header('Location: connexion');
                 exit();
             } catch (PDOException $e) {
                 if ($e->getCode() === '23000') { // Code d'erreur pour violation de contrainte d'unicité
-                    $erreur_inscription = "Cette adresse email est déjà utilisée.";
+                    $erreur_inscription = "Cette adresse mail est déjà utilisée.";
                 } else {
                     $erreur_inscription = "Une erreur est survenue lors de l'inscription. Veuillez réessayer.";
                 }
@@ -65,9 +67,18 @@ if (isset($_POST['bInscription'])) {
         case 'champs_manquants':
             $erreur_inscription = "Veuillez remplir tous les champs obligatoires.";
             break;
+        case 'question_invalide':
+            $erreur_inscription = "La question secrète choisie n'est pas valide.";
+            break;
+        case 'reponse_secrete_courte':
+            $erreur_inscription = "La réponse à la question secrète doit contenir au moins 2 caractères.";
+            break;
         default:
             $erreur_inscription = "Une erreur est survenue lors de l'inscription.";
     }
+} else {
+    require_once __DIR__ . '/../modele/crud/question.php';
+    $questions = question();
+    include(__DIR__ . '/../vues/pages/inscription.php');
 }
-include(__DIR__ . '/../vues/pages/inscription.php');
 ?>

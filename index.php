@@ -52,6 +52,9 @@ switch($page) {
     case 'inscription':
         include __DIR__ . '/controleurs/controleur_inscription.php';
         break;
+    case 'mdpOublie':
+        include __DIR__ . '/controleurs/controleur_mdpOublie.php';
+        break;
     case 'profil':
         include __DIR__ . '/controleurs/controleur_profil.php';
         break;

@@ -30,6 +30,17 @@
             <label for="mdpConfirme">Confirmer le mot de passe :</label>
             <input type="password" id="mdpConfirme" name="mdpConfirme" maxlength="72" required>
 
+            <label for="question">Choix de votre question secrète :</label>
+            <select id="question" name="question_id" required>
+                <option value="">Sélectionnez une question</option>
+                <?php foreach ($questions as $q) { ?>
+                    <option value="<?= $q['id'] ?>"><?= $q['question'] ?></option>
+                <?php } ?>
+            </select>
+
+            <label for="reponse">Réponse à votre question secrète :</label>
+            <input type="text" id="reponse" name="reponse_secrete" maxlength="100" required>
+
             <label for="tel">Téléphone(optionnel) :</label>
             <input type="text" id="tel" name="tel" maxlength="20">
 

@@ -6,11 +6,13 @@
  * @param string $prenom Le prénom du visiteur
  * @param string $mdp Le mot de passe du visiteur
  * @param string $mdpConfirme La confirmation du mot de passe
+ * @param int $question_id L'ID de la question secrète choisie par le visiteur
+ * @param string $reponse_secrete La réponse à la question secrète du visiteur
  * @param string|null $numero Le numéro de l'adresse du visiteur (optionnel)
  * @return string L'erreur rencontrée ou 'succes' si les données sont valides
  */
-function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $numero = null) {
-    if (empty($email) || empty($nom) || empty($prenom) || empty($mdp) || empty($mdpConfirme)) {
+function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $question_id, $reponse_secrete, $numero = null) {
+    if (empty($email) || empty($nom) || empty($prenom) || empty($mdp) || empty($mdpConfirme) || empty($question_id) || empty($reponse_secrete)) {
         return "champs_manquants";
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 255) {
@@ -37,6 +39,12 @@ function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $num
     if (strlen($prenom) < 2) {
         return "prenom_court";
     }
+    if (1 > $question_id || $question_id > 5) {
+        return "question_invalide";
+    }
+    if (strlen($reponse_secrete) < 2) {
+        return "reponse_secrete_courte";
+    }
     return 'succes';
 }
 
@@ -47,6 +55,8 @@ function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $num
  * @param string $nom Le nom du visiteur
  * @param string $prenom Le prénom du visiteur
  * @param string $mdp Le mot de passe du visiteur
+ * @param int $question_id L'ID de la question secrète choisie par le visiteur
+ * @param string $reponse_secrete La réponse à la question secrète du visiteur
  * @param string|null $tel Le numéro de téléphone du visiteur (optionnel)
  * @param string|null $rue La rue de l'adresse du visiteur (optionnel)
  * @param string|null $numero Le numéro de l'adresse du visiteur (optionnel)
@@ -59,8 +69,8 @@ function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $num
  * 
  * @throws PDOException En cas d'erreur sql ou échec d'unicité de l'email
  */
-function inscription($email, $nom, $prenom, $mdp, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
+function inscription($email, $nom, $prenom, $mdp, $question_id, $reponse_secrete, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
     require_once __DIR__ . '/../crud/utilisateur.php';
-    //le 0 c'est pour le admin
-    return creerUtilisateur($email, $mdp, $nom, $prenom, 0, $tel, $rue, $numero, $boite, $code_postal, $commune, $pays);
+    return creerUtilisateur(email: $email, mdp: $mdp, nom: $nom, prenom: $prenom, question_id: $question_id, reponse_secrete: $reponse_secrete, admin: 0, tel: $tel, rue: $rue, numero: $numero, boite: $boite, code_postal: $code_postal, commune: $commune, pays: $pays);
 }
+?>

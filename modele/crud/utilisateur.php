@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../bdd/connexionBdd.php";
-/*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation
-Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
+/*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, question_id, reponse_secrete, date_creation, derniere_activite, tel, rue, numero, boite, code_postal, commune, pays
+Les champs obligatoires sont : email, mdp, nom, prenom, question_id, reponse_secrete.
 */
 
 //CREATE
@@ -13,6 +13,8 @@ Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
  * @param string $mdp Le mot de passe de l'utilisateur
  * @param string $nom Le nom de l'utilisateur
  * @param string $prenom Le prénom de l'utilisateur
+ * @param int $question_id L'ID de la question secrète
+ * @param string $reponse_secrete La réponse à la question secrète
  * @param int $admin Indique si l'utilisateur est administrateur (0 ou 1)
  * @param string|null $tel Le numéro de téléphone de l'utilisateur
  * @param string|null $rue La rue de l'utilisateur
@@ -26,15 +28,17 @@ Les seuls qui sont obligatoires sont email, mdp, nom et prenom.
  * 
  *  @throws PDOException En cas d'erreur sql ou échec d'unicité de l'email
  */
-function creerUtilisateur($email, $mdp, $nom, $prenom, $admin = 0, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
+function creerUtilisateur($email, $mdp, $nom, $prenom, $question_id, $reponse_secrete, $admin = 0, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
     global $connexionBdd;
-    $requete = $connexionBdd->prepare("INSERT INTO utilisateur (email, mdp, nom, prenom, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation)
-     VALUES (:email, :mdp, :nom, :prenom, :admin, :tel, :rue, :numero, :boite, :code_postal, :commune, :pays, NOW())");
+    $requete = $connexionBdd->prepare("INSERT INTO utilisateur (email, mdp, nom, prenom, question_id, reponse_secrete, admin, tel, rue, numero, boite, code_postal, commune, pays, date_creation, derniere_activite)
+     VALUES (:email, :mdp, :nom, :prenom, :question_id, :reponse_secrete, :admin, :tel, :rue, :numero, :boite, :code_postal, :commune, :pays, NOW(), NOW())");
     $requete->execute([
         ':email' => $email,
         ':mdp' => password_hash($mdp, PASSWORD_DEFAULT),
         ':nom' => $nom,
         ':prenom' => $prenom,
+        ':question_id' => $question_id,
+        ':reponse_secrete' => password_hash($reponse_secrete, PASSWORD_DEFAULT),
         ':admin' => $admin,
         ':tel' => $tel,
         ':rue' => $rue,
@@ -106,6 +110,35 @@ function utilisateurParEmail($email) {
 }
 
 //UPDATE
+
+/**
+ * Modifie le mot de passe d'un utilisateur dans la base de données.
+ * @param int $id L'ID de l'utilisateur
+ * @param string $nouveauMdp Le nouveau mot de passe de l'utilisateur
+ * @return bool true si la modification a été effectuée, false sinon
+ * @throws PDOException En cas d'erreur sql
+ */
+function modifierMdp($id, $nouveauMdp) {
+    global $connexionBdd;
+    $requete = $connexionBdd->prepare("UPDATE utilisateur SET mdp = :mdp WHERE id = :id");
+    $requete->execute([
+        ':mdp' => password_hash($nouveauMdp, PASSWORD_DEFAULT),
+        ':id' => $id
+    ]);
+    return ($requete->rowCount() > 0);
+}
+
+/**
+ * Met à jour la date de dernière activité d'un utilisateur dans la base de données.
+ * @param int $id L'ID de l'utilisateur
+ * @return void
+ * @throws PDOException En cas d'erreur sql
+ */
+function modifierDerniereActivite($id) {
+    global $connexionBdd;
+    $requete = $connexionBdd->prepare("UPDATE utilisateur SET derniere_activite = NOW() WHERE id = :id");
+    $requete->execute([':id' => $id]);
+}
 
 /**
  * Modifie les données d'un utilisateur dans la base de données.

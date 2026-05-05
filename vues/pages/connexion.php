@@ -17,6 +17,10 @@
             echo "<p style='color: red;'>$erreur_connexion</p>";
             unset($erreur_connexion);
         }
+        if (isset($_SESSION['reset_mdp_succes'])) {
+            echo '<p style="color: green;">' . $_SESSION['reset_mdp_succes'] . '</p>';
+            unset($_SESSION['reset_mdp_succes']);
+        }
         ?>
 
         <form action="connexion" method="post">
@@ -28,6 +32,7 @@
 
             <button type="submit" name="bConnexion">Se connecter</button>
             <button type="reset">Annuler</button>
+            <a href="mdpOublie">Mot de passe oublié ?</a>
             <a href="inscription">Pas encore inscrit ?</a>
         </form>
     </main>
