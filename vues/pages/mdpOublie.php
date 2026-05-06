@@ -9,25 +9,39 @@
     <?php include __DIR__ . '/header_footer/header.php'; ?>
     <main>
         <h1>Mot de passe oublié</h1>
+        <!--Le processus de réinitialisation du mot de passe se fait en plusieurs étapes :
+        1. Entrer l'adresse email
+        2. Répondre à la question secrète qu'on vient de recevoir grâce à l'email fourni
+        3. Réinitialiser le mot de passe
+        Donc les ifs vont servir à vérifier à quelle étape on est ou bien s'il y a eu une erreur.
+        On peut alors soit afficher l'erreur, soit afficher le formulaire correspondant. 
+        -->
+
+        <!-- Ce premier if est si on a échoué à l'étape 1 et que l'email n'est pas trouvé. On peut virer l'erreur de la session, une fois affichée -->
         <?php if (isset($erreur_email_introuvable)): ?>
                 <p style="color: red;"><?php echo $erreur_email_introuvable; ?></p>
                 <?php unset($erreur_email_introuvable); ?>
         <?php endif; ?>
 
+        <!-- Ce if est si on a échoué à l'étape 3 et que la réponse secrète est incorrecte. 
+         Là on fait unset parce qu'on veut enlever l'utilisateur associé à l'email de la session -->
         <?php if (isset($_SESSION['reponse']) && $_SESSION['reponse'] === false): ?>
                 <p style="color: red;">Votre réponse est incorrecte. TU ES SUSPECT.</p>
-            <?php session_unset();session_destroy();?>
+            <?php session_unset();?>
         <?php endif; ?>
 
+        <!-- Etape 1 : Entrer l'adresse email. D'ailleurs pour ça qu'on vérifie qui'il n'a pas encore eu sa question -->
         <?php if (!isset($_SESSION['question'])): ?>
             <p>Veuillez entrer votre adresse email pour recevoir votre question secrète.</p>        
             <form action="mdpOublie" method="post">
                 <label for="email">Email :</label>
                 <input type="text" id="email" name="email" required>
 
-                <button type="submit" name="bQuestion">Envoyer</button>
+                <button type="submit" name="bEmail">Envoyer</button>
                 <button type="reset">Annuler</button>
             </form>
+
+        <!-- Etape 2 : Afficher la question et demander la réponse secrète -->
         <?php elseif (isset($_SESSION['question']) && !isset($_SESSION['reponse'])): ?>
             <p>Votre question secrète est : <strong><?php echo htmlspecialchars($_SESSION['question']['question']); ?></strong></p>
             <form action="mdpOublie" method="post">
@@ -35,11 +49,17 @@
                 <input type="text" id="reponse_secrete" name="reponse_secrete" required>
                 <button type="submit" name="bReponse">Valider</button>
             </form>
+
+        <!-- Etape 3 : Si la réponse est correcte, afficher le formulaire de réinitialisation du mot de passe.-->    
         <?php elseif (isset($_SESSION['reponse']) && $_SESSION['reponse'] === true): ?>
-            <?php if (isset($erreur_mdp_non_correspondant)): ?>
-                <p style="color: red;"><?php echo $erreur_mdp_non_correspondant; ?></p>
-                <?php unset($erreur_mdp_non_correspondant); ?>
+            
+            <!-- Si le mdp n'est pas conforme, on affiche l'erreur. Comme tout est encore en session, il réatterrit direct ici et peut
+             corriger son erreur. On unset l'erreur une fois affichée-->
+            <?php if (isset($erreur_mdp_non_conforme)): ?>
+                <p style="color: red;"><?php echo $erreur_mdp_non_conforme; ?></p>
+                <?php unset($erreur_mdp_non_conforme); ?>
             <?php endif; ?>
+
             <p style="color: green;">Votre réponse est correcte. Vous pouvez maintenant réinitialiser votre mot de passe.</p>
             <form action="mdpOublie" method="post">
                 <label for="nouveauMdp">Nouveau mot de passe :</label>
@@ -50,10 +70,7 @@
                 <button type="reset">Annuler</button>
             </form>
         <?php endif; ?>
-        
-
     </main>
-    <?php include __DIR__ . '/header_footer/footer.php'; ?>
-    
+    <?php include __DIR__ . '/header_footer/footer.php'; ?>    
 </body>
 </html>

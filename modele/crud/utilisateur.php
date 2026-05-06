@@ -1,7 +1,11 @@
 <?php
 require_once __DIR__ . "/../bdd/connexionBdd.php";
-/*La table utilisateur contient les champs suivants : id, email, mdp, nom, prenom, admin, question_id, reponse_secrete, date_creation, derniere_activite, tel, rue, numero, boite, code_postal, commune, pays
+/*La table utilisateur contient les champs suivants : 
+id, email, mdp, nom, prenom, admin, question_id, reponse_secrete, date_creation, derniere_activite, tel, rue, numero, boite, code_postal, commune, pays
 Les champs obligatoires sont : email, mdp, nom, prenom, question_id, reponse_secrete.
+question_id est une fk vers question. RESTRICT la question ne peut pas être supprimée si un utilisateur y est lié.
+email est unique
+derniere_activite est mis à jour à chaque fois que l'utilisateur se connecte ou modifie ses données. Permet de supprimer les utilisateurs inactifs depuis plus de 5 ans.
 */
 
 //CREATE
@@ -86,7 +90,7 @@ function utilisateurSaufAdmin() {
  * 
  * @throws PDOException En cas d'erreur sql
  */
-function utilisateurParId($id) {
+function utilisateurId($id) {
     global $connexionBdd;
     $requete = $connexionBdd->prepare("SELECT * FROM utilisateur WHERE id = :id");
     $requete->execute([':id' => $id]);
@@ -102,7 +106,7 @@ function utilisateurParId($id) {
  * 
  * @throws PDOException En cas d'erreur sql
  */
-function utilisateurParEmail($email) {
+function utilisateurEmail($email) {
     global $connexionBdd;
     $requete = $connexionBdd->prepare("SELECT * FROM utilisateur WHERE email = :email");
     $requete->execute([':email' => $email]);
@@ -141,23 +145,26 @@ function modifierDerniereActivite($id) {
 }
 
 /**
- * Modifie les données d'un utilisateur dans la base de données.
+ * Modifie les données d'un utilisateur dans la base de données. Les champs autorisés sont : email, nom, prenom, tel, rue, numero, boite, code_postal, commune, pays. 
  * 
  * @param int $id L'ID de l'utilisateur à modifier
- * @param array $modifications Un tableau associatif des champs à modifier et de leurs nouvelles valeurs
+ * @param array $modifications Un tableau associatif des champs à modifier et de leurs nouvelles valeurs.
  * @return bool true si une modification a été effectuée, false sinon
- * @throws PDOException En cas d'erreur sql
+ * @throws PDOException En cas d'erreur sql dont l'unicité de l'email.
  */
 function modifierUtilisateur($id, $modifications) {
     global $connexionBdd;
+    $champsAutorises = ['email', 'nom', 'prenom', 'tel', 'rue', 'numero', 'boite', 'code_postal', 'commune', 'pays'];
     $changements = [];
     $params = [':id' => $id];
     foreach ($modifications as $champ => $valeur) {
-        if ($champ === 'mdp') {
-            $valeur = password_hash($valeur, PASSWORD_DEFAULT);
+        if (in_array($champ, $champsAutorises)) {           
+            $changements[] = "$champ = :$champ";
+            $params[":$champ"] = $valeur;
         }
-        $changements[] = "$champ = :$champ";
-        $params[":$champ"] = $valeur;
+    }
+    if (empty($changements)) {
+        return false; // Aucun champ à modifier
     }
     $requete = $connexionBdd->prepare("UPDATE utilisateur SET " . implode(', ', $changements) . " WHERE id = :id");
     $requete->execute($params);

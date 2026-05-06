@@ -8,6 +8,9 @@
             <li><a href="actualites">Actualités</a></li>
             <li><a href="tn">Terre Nouvelle</a></li>
             <li><a href="contact">Contact</a></li>
+             <?php if (isset($_SESSION['utilisateur']) && $_SESSION['utilisateur']['admin'] === 1): ?>
+            <li><a href="admin">Espace Admin</a></li>
+            <?php endif; ?>   
         </ul>
     </nav>
 

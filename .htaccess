@@ -11,5 +11,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Exemple : actus devient index.php?page=actus
 RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?page=$1 [L,QSA]
 
-# 4. Optionnel : Pour les actualités avec ID (ex: /actualites/12)
-RewriteRule ^actualites/([0-9]+)$ index.php?page=actualites&id=$1 [L,QSA]
+# 4. Pour les actualités avec ID (ex: /actualite/12)
+RewriteRule ^actualite/([0-9]+)$ index.php?page=actualite&id=$1 [L,QSA]

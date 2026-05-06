@@ -14,37 +14,55 @@
 		<section class="banniere">
 			<h1>Profil</h1>
 		</section>
-
-
-		<!-- Un form pour permettre à l'utilisateur de modifier ses informations personnelles. En value, il faudra mettre ses données actuelles -->
+			
+		<!-- Un form pour permettre à l'utilisateur de modifier ses informations personnelles. En value, il y a ses données actuelles qui sont présentes en session-->
 		<section>
 			<h2>Vos informations personnelles</h2>
+			
+			<!-- Ici l'utilisateur a déjà tenté de modifier son profil. On affiche un message selon le résultat. -->
+			<?php if (isset($erreur)) : ?>
+				<div class="erreur">
+					<p style="color: red;"><?= $erreur ?></p>
+				</div>
+			<?php unset($erreur); endif; ?>
+			<?php if (isset($succes)) : ?>
+				<div class="succes">
+					<p style="color: green;"><?= $succes ?></p>
+				</div>
+			<?php unset($succes); endif; ?>
+
 			<form action="profil" method="post">
 				<label for="nom">Nom :</label>
-				<input type="text" id="nom" name="nom" value="nom" required>
+				<input type="text" id="nom" name="nom" value="<?= $_SESSION['utilisateur']['nom'] ?>" required>
 
 				<label for="prenom">Prénom :</label>
-				<input type="text" id="prenom" name="prenom" value="prénom" required>
+				<input type="text" id="prenom" name="prenom" value="<?= $_SESSION['utilisateur']['prenom'] ?>" required>
 
 				<label for="email">Email :</label>
-				<input type="email" id="email" name="email" value="email" required>
+				<input type="email" id="email" name="email" value="<?= $_SESSION['utilisateur']['email'] ?>" required>
 
-				<label for="tel">Téléphone :</label>
-				<input type="tel" id="tel" name="tel" value="téléphone" required>
+				<label for="tel">Téléphone(optionnel) :</label>
+				<input type="tel" id="tel" name="tel" value="<?= $_SESSION['utilisateur']['tel'] ?>">
 
-				<label for="adresse">Adresse :</label>
-				<input type="text" id="adresse" name="adresse" value="adresse" required>
+				<label for="rue">Rue(optionnel) :</label>
+				<input type="text" id="rue" name="rue" value="<?= $_SESSION['utilisateur']['rue'] ?>">
 
-				<label for="code_postal">Code postal :</label>
-				<input type="text" id="code_postal" name="code_postal" value="code_postal" required>
+				<label for="numero">Numéro(optionnel) :</label>
+				<input type="text" id="numero" name="numero" value="<?= $_SESSION['utilisateur']['numero'] ?>">
 
-				<label for="commune">Commune :</label>
-				<input type="text" id="commune" name="commune" value="commune" required>
+				<label for="boite">Boîte(optionnel) :</label>
+				<input type="text" id="boite" name="boite" value="<?= $_SESSION['utilisateur']['boite'] ?>">
 
-				<label for="pays">Pays :</label>
-				<input type="text" id="pays" name="pays" value="pays" required>				
+				<label for="code_postal">Code postal(optionnel) :</label>
+				<input type="text" id="code_postal" name="code_postal" value="<?= $_SESSION['utilisateur']['code_postal'] ?>">
 
-				<button type="submit">Enregistrer les modifications</button>
+				<label for="commune">Commune(optionnel) :</label>
+				<input type="text" id="commune" name="commune" value="<?= $_SESSION['utilisateur']['commune'] ?>">
+
+				<label for="pays">Pays(optionnel) :</label>
+				<input type="text" id="pays" name="pays" value="<?= $_SESSION['utilisateur']['pays'] ?>">				
+
+				<button type="submit" name="modifier_profil">Enregistrer les modifications</button>
 				<button type="reset">Annuler</button>
 			</form>
 		</section>

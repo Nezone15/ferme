@@ -5,18 +5,18 @@ session_start();
 if (isset($_COOKIE['token_connexion']) && !isset($_SESSION['utilisateur'])) {
     require_once __DIR__ . '/modele/crud/session.php';
     try {
-        $session = sessionParToken($_COOKIE['token_connexion']);
+        $session = sessionToken($_COOKIE['token_connexion']);
         if ($session) {
             // Si le token est valide on récupère l'utilisateur on le met dans $_SESSION 
             // Dans tous les cas on supprimera l'ancien token. Si l'utilisateur existe bien on lui fait un nouveau.
             require_once __DIR__ . '/modele/crud/utilisateur.php';
             require_once __DIR__ . '/modele/crud/session.php';
-            $utilisateur = utilisateurParId($session['utilisateur_id']);
-            supprimerSession($session['id']);
+            $utilisateur = utilisateurId($session['utilisateur_id']);
+            supprimerSession($session['token']);
             if ($utilisateur) {
                 $_SESSION['utilisateur'] = $utilisateur;            
                 $token = creerSession($utilisateur['id']);
-                setcookie('token_connexion', $token, time() + (86400 * 30), "/", '', false, true);
+                setcookie('token_connexion', $token, time() + (86400 * 30 * 13), "/", '', false, true);
             } else {
                 // Si l'utilisateur n'existe pas, on supprime le cookie            
                 setcookie('token_connexion', '', time() - 3600, "/", '', false, true);
@@ -46,6 +46,9 @@ switch($page) {
     case 'actualites':
         include __DIR__ . '/controleurs/controleur_actualites.php';
         break;
+    case 'actualite':
+        include __DIR__ . '/controleurs/controleur_actualite.php';
+        break;
     case 'connexion':
         include __DIR__ . '/controleurs/controleur_connexion.php';
         break;
@@ -58,8 +61,8 @@ switch($page) {
     case 'profil':
         include __DIR__ . '/controleurs/controleur_profil.php';
         break;
-    case 'vueAdmin':
-        include __DIR__ . '/controleurs/controleur_vueAdmin.php';
+    case 'admin':
+        include __DIR__ . '/controleurs/controleur_admin.php';
         break;
     case 'tn':
         include __DIR__ . '/controleurs/controleur_tn.php';

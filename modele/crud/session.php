@@ -1,14 +1,16 @@
 <?php
 require_once __DIR__ . "/../bdd/connexionBdd.php";
 /*La table session est garder un utilisateur connecté.
-Seulement 2 champs : token, utilisateur_id avec token en pk et utilisateur_id unique
+Seulement 3 champs : token, utilisateur_id, date_creation avec token en pk et utilisateur_id unique
 On va faire un token de connexion simpliste. On va utiliser time() suivi d'un - et puis un nombre aléatoire de 10 chiffres
+utilisateur_id est une fk vers utilisateur. Suppression en cascade.
+date_creation est la date de création de la session. Permet de supprimer les sessions expirées (plus de 13 mois)
 */
 
 //Create
 
 /**
- * Génère un token de session au format "timestamp-xxxxxxxxxx".
+ * Génère un token de session au format "timestamp-xxxxxxxxxx". Les x représentent un nombre aléatoire de 10 chiffres.
  *
  * @return string Le token généré
  */
@@ -28,7 +30,7 @@ function genererTokenSession() {
 function creerSession($utilisateur_id) {
 	global $connexionBdd;
 	$token = genererTokenSession();
-	$requete = $connexionBdd->prepare("INSERT INTO session (token, utilisateur_id) VALUES (:token, :utilisateur_id)");
+	$requete = $connexionBdd->prepare("INSERT INTO session (token, utilisateur_id, date_creation) VALUES (:token, :utilisateur_id, NOW())");
 	$requete->execute([
 		':token' => $token,
 		':utilisateur_id' => $utilisateur_id
@@ -60,7 +62,7 @@ function session() {
  *
  * @throws PDOException En cas d'erreur sql
  */
-function sessionParToken($token) {
+function sessionToken($token) {
 	global $connexionBdd;
 	$requete = $connexionBdd->prepare("SELECT * FROM session WHERE token = :token");
 	$requete->execute([':token' => $token]);

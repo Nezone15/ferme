@@ -50,7 +50,7 @@ function question() {
  * 
  * @throws PDOException En cas d'erreur sql
  */
-function questionParId($id) {
+function questionId($id) {
     global $connexionBdd;
     $requete = $connexionBdd->prepare("SELECT * FROM question WHERE id = :id");
     $requete->execute([

@@ -17,15 +17,10 @@ function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $que
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 255) {
         return "email_invalide";
-    }
-    if (strlen($mdp) < 6) {
-        return "mdp_court";
-    }
-    if (!preg_match('/\d/', $mdp)) {
-        return "mdp_chiffre";
-    }
-    if (!preg_match('/[A-Z]/', $mdp)) {
-        return "mdp_majuscule";
+    }    
+    $verifieMdp = verifierMdp($mdp);
+    if ($verifieMdp !== 'succes') {
+        return $verifieMdp;
     }
     if ($mdp !== $mdpConfirme) {
         return "mdp_confirme_incorrect";
@@ -72,5 +67,23 @@ function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $que
 function inscription($email, $nom, $prenom, $mdp, $question_id, $reponse_secrete, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
     require_once __DIR__ . '/../crud/utilisateur.php';
     return creerUtilisateur(email: $email, mdp: $mdp, nom: $nom, prenom: $prenom, question_id: $question_id, reponse_secrete: $reponse_secrete, admin: 0, tel: $tel, rue: $rue, numero: $numero, boite: $boite, code_postal: $code_postal, commune: $commune, pays: $pays);
+}
+
+/** 
+ * Vérifie la conformité d'un mot de passe selon les critères suivants : au moins 6 caractères, contient au moins un chiffre, contient au moins une majuscule.
+ * @param string $mdp Le mot de passe à vérifier
+ * @return string L'erreur rencontrée ou 'succes' si le mot de passe est conforme
+ */
+function verifierMdp($mdp) {
+    if (strlen($mdp) < 6) {
+        return "mdp_court";
+    }
+    if (!preg_match('/\d/', $mdp)) {
+        return "mdp_chiffre";
+    }
+    if (!preg_match('/[A-Z]/', $mdp)) {
+        return "mdp_majuscule";
+    }
+    return 'succes';
 }
 ?>

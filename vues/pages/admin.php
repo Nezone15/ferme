@@ -3,20 +3,35 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Vue admin</title>
-	<script defer src="/vues/js/vueAdmin.js"></script>
+	<title>Espace Administrateur</title>
+	<script defer src="/vues/js/admin.js"></script>
 	<link rel="stylesheet" href="/vues/style/style.css">
-	<link rel="stylesheet" href="/vues/style/vueAdmin.css">
+	<link rel="stylesheet" href="/vues/style/admin.css">
 </head>
 <body>
     <?php include __DIR__ . '/header_footer/header.php'; ?>
 	<main>
 		<section class="banniere">
-			<h1>Administrateur</h1>
+			<h1>Espace Administrateur</h1>
 		</section>
 
 		<section>
 			<h2>Créer une actualité</h2>
+			 <!-- Afficher le message si l'admin a déjà tenté de créer une actualité -->
+			<?php 
+			if (isset($creation_actu)) {
+				echo $creation_actu;
+				unset($creation_actu);
+			}?>
+
+			<!-- Formulaire pour créer une actualité.
+			 Le enctype permet de dire que ce sera pas juste du texte. Comme ça l'admin peut charger une image -->
+			<form action="admin" method="POST" enctype="multipart/form-data">
+				<input type="text" name="titre" placeholder="Titre de l'actualité" required>
+				<textarea name="contenu" placeholder="Contenu de l'actualité" required></textarea>
+				<input type="file" name="image" accept="image/*" required>
+				<button type="submit" name="bCreerActu">Créer</button>
+			</form>
 		</section>
 
 		<section>

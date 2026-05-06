@@ -65,7 +65,7 @@ function dernieresActus() {
  *
  * @throws PDOException En cas d'erreur sql
  */
-function actualiteParId($id) {
+function actualiteId($id) {
 	global $connexionBdd;
 	$requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE id = :id");
 	$requete->execute([':id' => $id]);
@@ -81,7 +81,7 @@ function actualiteParId($id) {
  *
  * @throws PDOException En cas d'erreur sql
  */
-function actualiteParTitre($titre) {
+function actualiteTitre($titre) {
     global $connexionBdd;
     $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE titre = :titre");
     $requete->execute([':titre' => $titre]);

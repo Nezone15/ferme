@@ -11,13 +11,20 @@ if (isset($_POST['bInscription'])) {
     $reponse_secrete = strtolower(trim(htmlspecialchars($_POST['reponse_secrete'])));
 
     //Pour les champs optionnels, on regarde s'ils sont vides. Si oui ils prennent null
-    $tel = (trim($_POST['tel']) == '') ? null : htmlspecialchars(trim($_POST['tel']));
-    $rue = (trim(htmlspecialchars($_POST['rue'])) == '') ? null : htmlspecialchars(trim($_POST['rue']));
-    $numero = (trim(htmlspecialchars($_POST['numero'])) == '') ? null : htmlspecialchars(trim($_POST['numero']));
-    $boite = (trim(htmlspecialchars($_POST['boite'])) == '') ? null : htmlspecialchars(trim($_POST['boite']));
-    $code_postal = (trim(htmlspecialchars($_POST['code_postal'])) == '') ? null : htmlspecialchars(trim($_POST['code_postal']));
-    $commune = (trim(htmlspecialchars($_POST['commune'])) == '') ? null : htmlspecialchars(trim($_POST['commune']));
-    $pays = (trim(htmlspecialchars($_POST['pays'])) == '') ? null : htmlspecialchars(trim($_POST['pays']));
+    $tel = trim(htmlspecialchars($_POST['tel']));
+    $tel = ($tel == '') ? null : $tel;
+    $rue = trim(htmlspecialchars($_POST['rue']));
+    $rue = ($rue == '') ? null : $rue;
+    $numero = trim(htmlspecialchars($_POST['numero']));
+    $numero = ($numero == '') ? null : $numero;
+    $boite = trim(htmlspecialchars($_POST['boite']));
+    $boite = ($boite == '') ? null : $boite;
+    $code_postal = trim(htmlspecialchars($_POST['code_postal']));
+    $code_postal = ($code_postal == '') ? null : $code_postal;
+    $commune = trim(htmlspecialchars($_POST['commune']));
+    $commune = ($commune == '') ? null : $commune;
+    $pays = trim(htmlspecialchars($_POST['pays']));
+    $pays = ($pays == '') ? null : $pays;
 
     //On appelle la fonction qui vérifie si les données sont valides.
     //Ensuite selon le retour, on fait un switch pour indiquer à l'utilisateur ce qui a foiré ou si l'inscription a réussi.
@@ -33,7 +40,9 @@ if (isset($_POST['bInscription'])) {
                 header('Location: connexion');
                 exit();
             } catch (PDOException $e) {
-                if ($e->getCode() === '23000') { // Code d'erreur pour violation de contrainte d'unicité
+                if ($e->getCode() === '23000') { 
+                    // Code d'erreur pour violation de contrainte. Dans ce cas-ci, je sais que le problème vient de l'email déjà utilisé.
+                    //Si jamais je voulais vraiment être précis, je peux regarder si l'errorInfo[1] est 1062. C'est le code spécifique pour l'unicité en mySQL. 
                     $erreur_inscription = "Cette adresse mail est déjà utilisée.";
                 } else {
                     $erreur_inscription = "Une erreur est survenue lors de l'inscription. Veuillez réessayer.";

@@ -55,7 +55,7 @@ function commentaire() {
  *
  * @throws PDOException En cas d'erreur sql
  */
-function commentaireParId($id) {
+function commentaireId($id) {
     global $connexionBdd;
     $requete = $connexionBdd->prepare("SELECT * FROM commentaire WHERE id = :id");
     $requete->execute([':id' => $id]);
