@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../bdd/connexionBdd.php";
+require_once MODELE . "bdd/connexionBdd.php";
 /*La table commentaire contient les champs suivants : id, utilisateur_id, actualite_id, message, date
 utilisateur_id et actualite_id sont des clés étrangères vers les tables utilisateur et actualite.
 utilisateur_id peut etre null si le commentaire est anonyme suite à une suppression de compte par exemple.

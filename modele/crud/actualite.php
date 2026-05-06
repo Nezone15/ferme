@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../bdd/connexionBdd.php";
+require_once MODELE . "bdd/connexionBdd.php";
 /*La table actualite contient les champs id(ai), titre, contenu, image, date, likes.
 Titre est unique. Date est indexé et généré par défaut(CURRENT_TIMESTAMP).
 */
@@ -15,7 +15,7 @@ Titre est unique. Date est indexé et généré par défaut(CURRENT_TIMESTAMP).
  *
  * @return int L'ID de l'actualité créée
  *
- * @throws PDOException En cas d'erreur sql
+ * @throws PDOException En cas d'erreur sql, notamment si le titre n'est pas unique
  */
 function creerActualite($titre, $contenu, $image) {
 	global $connexionBdd;

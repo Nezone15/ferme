@@ -1,3 +1,3 @@
 <?php
-include(__DIR__ . '/../vues/pages/actualites.php');
+include(VUES . 'pages/actualites.php');
 ?>

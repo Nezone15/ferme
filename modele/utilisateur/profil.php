@@ -33,7 +33,7 @@ function verificationProfil($email, $nom, $prenom, $numero=null) {
  * @return string L'erreur rencontrée ou 'succes' si la modification a été effectuée avec succès
  */
 function modifierProfil($formulaire) {
-    require_once __DIR__ . '/../crud/utilisateur.php';
+    require_once MODELE . 'crud/utilisateur.php';
 
     //Avec le formulaire, on regarde ce qui diffère de l'utilisateur qu'on a en session
     $utilisateur = $_SESSION['utilisateur'];

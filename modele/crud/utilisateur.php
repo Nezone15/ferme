@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../bdd/connexionBdd.php";
+require_once MODELE . "bdd/connexionBdd.php";
 /*La table utilisateur contient les champs suivants : 
 id, email, mdp, nom, prenom, admin, question_id, reponse_secrete, date_creation, derniere_activite, tel, rue, numero, boite, code_postal, commune, pays
 Les champs obligatoires sont : email, mdp, nom, prenom, question_id, reponse_secrete.

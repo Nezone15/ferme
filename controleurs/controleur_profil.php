@@ -29,7 +29,7 @@ if (!isset($_SESSION['utilisateur'])) {
 
     //On va les vérifier et puis si c'est ok mettre à jour la base de données. 
     //Toutes les données n'ont pas une vérification spécifique. A compléter plus tard au besoin.
-    require_once __DIR__ . '/../modele/utilisateur/profil.php';
+    require_once MODELE . 'utilisateur/profil.php';
     $verification = verificationProfil($formulaire['email'], $formulaire['nom'], $formulaire['prenom'], $formulaire['numero']);
 
     switch ($verification) {
@@ -73,5 +73,5 @@ if (!isset($_SESSION['utilisateur'])) {
             break;
     }
 }
-include(__DIR__ . '/../vues/pages/profil.php');
+include(VUES . 'pages/profil.php');
 ?>

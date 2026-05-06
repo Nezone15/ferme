@@ -65,7 +65,7 @@ function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $que
  * @throws PDOException En cas d'erreur sql ou échec d'unicité de l'email
  */
 function inscription($email, $nom, $prenom, $mdp, $question_id, $reponse_secrete, $tel = null, $rue = null, $numero = null, $boite = null, $code_postal = null, $commune = null, $pays = null) {
-    require_once __DIR__ . '/../crud/utilisateur.php';
+    require_once MODELE . 'crud/utilisateur.php';
     return creerUtilisateur(email: $email, mdp: $mdp, nom: $nom, prenom: $prenom, question_id: $question_id, reponse_secrete: $reponse_secrete, admin: 0, tel: $tel, rue: $rue, numero: $numero, boite: $boite, code_postal: $code_postal, commune: $commune, pays: $pays);
 }
 

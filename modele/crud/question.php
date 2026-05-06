@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../bdd/connexionBdd.php";
+require_once MODELE . "bdd/connexionBdd.php";
 
 /*
 La table question contient les champs suivants : id, question

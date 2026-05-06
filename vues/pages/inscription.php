@@ -6,7 +6,7 @@
     <title>S'inscrire</title>
 </head>
 <body>
-    <?php include __DIR__ . '/header_footer/header.php'; ?>
+    <?php include VUES . 'pages/header_footer/header.php'; ?>
     <main>
         <h1>Inscription</h1>
         <?php if (isset($erreur_inscription)) {
@@ -67,6 +67,6 @@
             <a href="connexion">Déjà inscrit ?</a>
         </form>
     </main>
-    <?php include __DIR__ . '/header_footer/footer.php'; ?>
+    <?php include VUES . 'pages/header_footer/footer.php'; ?>
 </body>
 </html>

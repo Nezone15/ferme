@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['bConnexion'])) {
-    require_once __DIR__ . '/../modele/visiteur/connexion.php';
+    require_once MODELE . 'visiteur/connexion.php';
     $email = trim(htmlspecialchars($_POST['email']));
     $mdp = trim(htmlspecialchars($_POST['mdp']));
     
@@ -17,6 +17,6 @@ if (isset($_POST['bConnexion'])) {
         $erreur_connexion = "Nous avons rencontré un problème lors de la connexion. Veuillez réessayer plus tard.";
     }
 }
-include(__DIR__ . '/../vues/pages/connexion.php');
+include(VUES . 'pages/connexion.php');
 
 ?>

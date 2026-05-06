@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="/vues/style/actualite.css">
 </head>
 <body>
-    <?php include __DIR__ . '/header_footer/header.php'; ?>
+    <?php include VUES . 'pages/header_footer/header.php'; ?>
 	<main>
 		<section>
 			<!-- Faudra récupérer les données de l'actualité depuis la base de données et les afficher ici -->
@@ -47,6 +47,6 @@
 			</div>
 		</section>
 	</main>
-	<?php include __DIR__ . '/header_footer/footer.php'; ?>
+	<?php include VUES . 'pages/header_footer/footer.php'; ?>
 </body>
 </html>

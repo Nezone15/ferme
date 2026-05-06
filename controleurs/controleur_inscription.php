@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['bInscription'])) {
-    require_once __DIR__ . '/../modele/visiteur/inscription.php';
+    require_once MODELE . 'visiteur/inscription.php';
     // On récupère et sécurise les données du formulaire d'inscription
     $email = trim(htmlspecialchars($_POST['email']));
     $nom = trim(htmlspecialchars($_POST['nom']));
@@ -86,8 +86,8 @@ if (isset($_POST['bInscription'])) {
             $erreur_inscription = "Une erreur est survenue lors de l'inscription.";
     }
 } else {
-    require_once __DIR__ . '/../modele/crud/question.php';
+    require_once MODELE . 'crud/question.php';
     $questions = question();
-    include(__DIR__ . '/../vues/pages/inscription.php');
+    include(VUES . 'pages/inscription.php');
 }
 ?>

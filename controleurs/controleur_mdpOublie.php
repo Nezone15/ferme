@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/../modele/crud/utilisateur.php";
-require_once __DIR__ . "/../modele/crud/question.php";
+require_once MODELE . "crud/utilisateur.php";
+require_once MODELE . "crud/question.php";
 
 /*
 Le processus de réinitialisation du mot de passe se fait en plusieurs étapes :
@@ -42,7 +42,7 @@ if (isset($_POST['bEmail'])) {
     //Vérification de correspondance
     if ($nouveauMdp === $confirmeMdp) {
         //Vérification de la conformité du mdp. On indique l'erreur précise pour que l'utilisateur puisse corriger.
-        include_once __DIR__ . "/../modele/visiteur/inscription.php";
+        include_once MODELE . "visiteur/inscription.php";
         $verifieMdp = verifierMdp($nouveauMdp);
         if ($verifieMdp !== 'succes') {
             switch ($verifieMdp) {
@@ -68,5 +68,5 @@ if (isset($_POST['bEmail'])) {
         $erreur_mdp_non_conforme = "Les mots de passe ne correspondent pas.";
     }
 }
-include __DIR__ . "/../vues/pages/mdpOublie.php";
+include VUES . "pages/mdpOublie.php";
 ?>

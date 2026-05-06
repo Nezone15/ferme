@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../crud/utilisateur.php';
+require_once MODELE . 'crud/utilisateur.php';
 /**
  * Fonction de connexion d'un utilisateur
  * 
@@ -30,7 +30,7 @@ function connexionReussie($utilisateur) {
 
     //Maintenant on lui fait sa session de connexion
     //On supprime une ancienne si elle existe et on lui met son cookie de 13 mois.
-    require_once __DIR__ . '/../crud/session.php';
+    require_once MODELE . 'crud/session.php';
     supprimerSessionUtilisateur($utilisateur['id']);
     $token = creerSession($utilisateur['id']);
     setcookie('token_connexion', $token, time() + (86400 * 30 * 13), "/", '', false, true);

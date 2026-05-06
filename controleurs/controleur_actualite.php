@@ -6,7 +6,7 @@ if (!isset($_GET['id'])) {
 } 
 
 //Maintenant on peut récupérer l'actu grâce à son id
-require_once(__DIR__ . '/../modele/crud/actualite.php');
+require_once(MODELE . 'crud/actualite.php');
 $actu = actualiteId($_GET['id']);  
     
 //Si l'actu n'existe pas on redirige vers la page des actualités
@@ -15,6 +15,6 @@ if (!$actu) {
     header('Location: actualites');
     exit();
 } else {
-    include(__DIR__ . '/../vues/pages/actualite.php');
+    include(VUES . 'pages/actualite.php');
 }
 ?>

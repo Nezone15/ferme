@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="/vues/style/tn.css">
 </head>
 <body>    
-    <?php include __DIR__ . '/header_footer/header.php'; ?>
+    <?php include VUES . 'pages/header_footer/header.php'; ?>
     <main>
         <section class="banniere">
 				<h1>Terre Nouvelle</h1>
@@ -19,6 +19,6 @@
            <p>J'ai pas d'inspi ici. Faudra remplir le contenu plus tard.</p>
 		</section>
     </main>
-    <?php include __DIR__ . '/header_footer/footer.php'; ?>    
+    <?php include VUES . 'pages/header_footer/footer.php'; ?>    
 </body>
 </html>

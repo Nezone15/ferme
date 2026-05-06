@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../modele/admin.php');
+require_once(MODELE . 'admin.php');
 
 // Ce n'est pas un admin, on le renvoie à la page d'accueil
 if (!isset($_SESSION['utilisateur']) || $_SESSION['utilisateur']['admin'] !== 1) {
@@ -12,10 +12,10 @@ if (isset($_POST['bCreerActu'])) {
     $titre = trim(htmlspecialchars($_POST['titre']));
     $contenu = trim(htmlspecialchars($_POST['contenu']));
     $image = $_FILES['image'];
-    $verification = verificationCreationActu($titre, $contenu, $image);
+    $verification = verificationActu($titre, $contenu, $image);
     switch ($verification) {
         case 'titre':
-            $creation_actu = '<p style="color: red;">Le titre doit être entre 5 et 100 caractères.</p>';
+            $creation_actu = '<p style="color: red;">Le titre doit être entre 4 et 100 caractères.</p>';
             break;
         case 'contenu':
             $creation_actu = '<p style="color: red;">Le contenu doit être d\'au moins 20 caractères.</p>';
@@ -31,7 +31,7 @@ if (isset($_POST['bCreerActu'])) {
             break;
         case 'succes':
             $chemin_image = stockerImage($image);
-            require_once(__DIR__ . '/../modele/actualite.php');
+            require_once(MODELE . 'crud/actualite.php');
             try {
                 creerActualite($titre, $contenu, $chemin_image);
                 $creation_actu = '<p style="color: green;">L\'actualité a été créée avec succès.</p>';
@@ -48,5 +48,5 @@ if (isset($_POST['bCreerActu'])) {
             
      }
 }
-include(__DIR__ . '/../vues/pages/admin.php');
+include(VUES . 'pages/admin.php');
 ?>

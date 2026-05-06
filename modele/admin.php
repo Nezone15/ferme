@@ -8,7 +8,7 @@
  * @param array $image Les données de l'image de l'actualité
  * @return string Un message d'erreur ou de succès
  */
-function verificationCreationActu($titre, $contenu, $image) {
+function verificationActu($titre, $contenu, $image) {
     if (!verificationTitre($titre)) {
         return 'titre';
     }
@@ -28,12 +28,12 @@ function verificationCreationActu($titre, $contenu, $image) {
 }
 
 /**
- * Vérifie que le titre de l'actualité est valide (entre 5 et 100 caractères)
+ * Vérifie que le titre de l'actualité est valide (entre 4 et 100 caractères)
  * @param string $titre Le titre à vérifier
  * @return bool Vrai si le titre est valide, faux sinon
  */
 function verificationTitre($titre) {
-    return(strlen($titre) >= 5 && strlen($titre) <= 100);
+    return(strlen($titre) >= 4 && strlen($titre) <= 100);
 }
 
 /**
@@ -55,13 +55,6 @@ function verificationExtensionImage($image) {
     $mime_type = $finfo->file($image['tmp_name']);
     $types_acceptes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     return in_array($mime_type, $types_acceptes);
-}
-
-
-function cheminImage($image) {
-    $hash = md5_file($image['tmp_name']);
-    $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
-    return 'images/' . $hash . '.' . $extension;
 }
 
 /**
@@ -90,9 +83,9 @@ function stockerImage($image) {
 
     // 4. Vérifier si le fichier existe déjà pour éviter les doublons
     //On oublie pas le dir parce que sinon php va être duper
-    if (!file_exists(__DIR__ . '/' . $chemin)) {
+    if (!file_exists(ROOT . $chemin)) {
         // Si le fichier n'existe pas, on peut le télécharger vers le dossier images
-        move_uploaded_file($image['tmp_name'], __DIR__ . '/' . $chemin);
+        move_uploaded_file($image['tmp_name'], ROOT . $chemin);
     }
     return $chemin;
 }

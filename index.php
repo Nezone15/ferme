@@ -1,16 +1,21 @@
 <?php
 session_start();
+//On va définir ici la racine du projet pour pouvoir faire des includes plus facilement
+define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+define('MODELE', ROOT . 'modele' . DIRECTORY_SEPARATOR);
+define('VUES', ROOT . 'vues' . DIRECTORY_SEPARATOR);
+define('CONTROLEURS', ROOT . 'controleurs' . DIRECTORY_SEPARATOR);
 
 //On regarde s'il y a un cookie de connexion et si oui si on a pas déjà l'utilisateur en $_SESSION
 if (isset($_COOKIE['token_connexion']) && !isset($_SESSION['utilisateur'])) {
-    require_once __DIR__ . '/modele/crud/session.php';
+    require_once MODELE . 'crud/session.php';
     try {
         $session = sessionToken($_COOKIE['token_connexion']);
         if ($session) {
             // Si le token est valide on récupère l'utilisateur on le met dans $_SESSION 
             // Dans tous les cas on supprimera l'ancien token. Si l'utilisateur existe bien on lui fait un nouveau.
-            require_once __DIR__ . '/modele/crud/utilisateur.php';
-            require_once __DIR__ . '/modele/crud/session.php';
+            require_once MODELE . 'crud/utilisateur.php';
+            require_once MODELE . 'crud/session.php';
             $utilisateur = utilisateurId($session['utilisateur_id']);
             supprimerSession($session['token']);
             if ($utilisateur) {
@@ -35,49 +40,49 @@ if (isset($_COOKIE['token_connexion']) && !isset($_SESSION['utilisateur'])) {
 $page = $_GET['page'] ?? 'accueil';
 switch($page) {
     case 'accueil':
-        include __DIR__ . '/controleurs/controleur_accueil.php';
+        include CONTROLEURS . 'controleur_accueil.php';
         break;
     case 'maison':
-        include __DIR__ . '/controleurs/controleur_maison.php';
+        include CONTROLEURS . 'controleur_maison.php';
         break;
     case 'bois':
-        include __DIR__ . '/controleurs/controleur_bois.php';
+        include CONTROLEURS . 'controleur_bois.php';
         break;
     case 'actualites':
-        include __DIR__ . '/controleurs/controleur_actualites.php';
+        include CONTROLEURS . 'controleur_actualites.php';
         break;
     case 'actualite':
-        include __DIR__ . '/controleurs/controleur_actualite.php';
+        include CONTROLEURS . 'controleur_actualite.php';
         break;
     case 'connexion':
-        include __DIR__ . '/controleurs/controleur_connexion.php';
+        include CONTROLEURS . 'controleur_connexion.php';
         break;
     case 'inscription':
-        include __DIR__ . '/controleurs/controleur_inscription.php';
+        include CONTROLEURS . 'controleur_inscription.php';
         break;
     case 'mdpOublie':
-        include __DIR__ . '/controleurs/controleur_mdpOublie.php';
+        include CONTROLEURS . 'controleur_mdpOublie.php';
         break;
     case 'profil':
-        include __DIR__ . '/controleurs/controleur_profil.php';
+        include CONTROLEURS . 'controleur_profil.php';
         break;
     case 'admin':
-        include __DIR__ . '/controleurs/controleur_admin.php';
+        include CONTROLEURS . 'controleur_admin.php';
         break;
     case 'tn':
-        include __DIR__ . '/controleurs/controleur_tn.php';
+        include CONTROLEURS . 'controleur_tn.php';
         break;
     case 'contact':
-        include __DIR__ . '/controleurs/controleur_contact.php';
+        include CONTROLEURS . 'controleur_contact.php';
         break;
     case 'mentions':
-        include __DIR__ . '/controleurs/controleur_mentions.php';
+        include CONTROLEURS . 'controleur_mentions.php';
         break;
     case 'politique':
-        include __DIR__ . '/controleurs/controleur_politique.php';
+        include CONTROLEURS . 'controleur_politique.php';
         break;
     case 'deconnexion':
-        include __DIR__ . '/controleurs/controleur_deconnexion.php';
+        include CONTROLEURS . 'controleur_deconnexion.php';
         break;
 }
 ?>

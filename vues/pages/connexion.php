@@ -6,7 +6,7 @@
     <title>Se connecter</title>
 </head>
 <body>
-    <?php include __DIR__ . '/header_footer/header.php'; ?>
+    <?php include VUES . 'pages/header_footer/header.php'; ?>
     <main>
         <h1>Connexion</h1>
         <?php if (isset($_SESSION['inscription_succes'])) {
@@ -36,6 +36,6 @@
             <a href="inscription">Pas encore inscrit ?</a>
         </form>
     </main>
-    <?php include __DIR__ . '/header_footer/footer.php'; ?>
+    <?php include VUES . 'pages/header_footer/footer.php'; ?>
 </body>
 </html>
