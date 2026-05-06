@@ -36,29 +36,100 @@
 
 		<section>
 			<h2>Gérer les actualités</h2>
+
 			<search>
-				<input type="text" placeholder="Rechercher une actualité...">
-				<button type="submit">Rechercher</button>
+				<form action="admin" method="get">
+					<?php (isset($_GET['recherche'])) ? $valeur_recherche = trim(htmlspecialchars($_GET['recherche'])) : $valeur_recherche = ''; ?>
+					<input type="text" name="recherche" placeholder="Rechercher une actualité..." value="<?= $valeur_recherche ?>">
+					<select name="tri">
+						<option checked value="date">Trier par date</option>
+						<option value="titre">Trier par titre</option>
+					</select>
+					<select name="ordre">
+						<option checked value="DESC">Ordre décroissant</option>
+						<option value="ASC">Ordre croissant</option>
+					</select>
+					<button type="submit">Rechercher</button>
+					<a href="admin">Réinitialiser</a>
+				</form>
 			</search>
-			<!-- Ici, utiliser une boucle PHP pour afficher les actualités depuis la base de données -->
-			<!-- Exemple d'actualité -->
-			<div class="actualite">
-				<span class="date">01/01/2024</span>
-				<h3>Titre de l'actualité</h3>
-				<p>Publié le 01/01/2024 dans la catégorie Politique</p>
-				<p>Contenu de l'actualité...</p>
-				<div>
-					<a href="#">Modifier</a>
-					<a href="#">Supprimer</a>
-				</div>
+			
+			<h3>Liste des actualités</h3>
+			<p><?= $totalActus ?> actualité(s) trouvée(s).</p>
+			<table>
+				<thead>
+					<!-- Rendre titre et date cliquable pour trier par titre ou date.
+					 Ma fonction me génère l'URL de tri.
+					 Faudra surement changer les ↑ avec css pour que ce soit plus joli-->
+					<tr>
+						<th>Lien vers l'actualité</th>
+						<th>
+							<a href="<?= genererUrlTri('titre', $prochainOrdre, $recherche) ?>">
+                			Titre <?= ($tri === 'titre') ? ($ordre === 'ASC' ? '↑' : '↓') : '' ?></a>
+						</th>
+						<th>
+							<a href="<?= genererUrlTri('date', $prochainOrdre, $recherche) ?>">
+								Date de publication <?= ($tri === 'date') ? ($ordre === 'ASC' ? '↑' : '↓') : '' ?>
+							</a>
+						</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- Ici, utiliser une boucle PHP pour afficher les actualités depuis la base de données s'il y en a.
+				 On va en afficher 10 à la fois. Donc faut mettre en place une pagination.
+				 Il faut aussi ajouter des fonctions dans le crud alors pour gérer la pagination en utilisant OFFSET -->
+					 <?php if (empty($actualites)): ?>
+					<tr>
+						<td colspan="4">Aucune actualité trouvée.</td>
+					</tr>
+				<?php endif ?>
+			 	<?php foreach ($actualites as $actu): ?>
+					<tr>
+						<td><a href="actu?id=<?php echo $actu['id']; ?>" target="_blank">Voir l'actualité</a></td>
+						<td><?php echo $actu['titre']; ?></td>
+						<td><?php echo $actu['date']; ?></td>
+						<td>
+							<form action="actualite/?id=<?php echo $actu['id']; ?>" method="post">
+								<button type="submit" name="bModifierActu">Modifier</button>
+							</form>
+							<form method="post">
+								<input type="hidden" name="id_actu" value="<?php echo $actu['id']; ?>">
+								<button type="submit" name="bSupprimerActu">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+			 	<?php endforeach ?>
+				</tbody>
+			</table>
+			<div>
+				<!-- Ici, ajouter les liens pour la pagination. -->
+				<?php
+				for ($i = 1; $i <= $paginationMax; $i++) {
+					$parametres = "?pagination=$i";
+					if (isset($_GET['tri'])) {
+						$parametres .= "&tri=" . urlencode($_GET['tri']);
+					}
+					if (isset($_GET['ordre'])) {
+						$parametres .= "&ordre=" . urlencode($_GET['ordre']);
+					}
+					if (isset($_GET['recherche'])) {
+						$parametres .= "&recherche=" . urlencode($_GET['recherche']);
+					}
+					echo '<a href="admin' . $parametres . '">' . $i . '</a> ';
+				}
+				?>
 			</div>
+			
 		</section>
 
 		<section>
 			<h2>Gérer les utilisateurs</h2>
 			<search>
-				<input type="text" placeholder="Rechercher un utilisateur...">
-				<button type="submit">Rechercher</button>
+				<form action="admin" method="post">
+					<input type="text" name="recherche_utilisateur" placeholder="Rechercher un utilisateur...">
+					<button type="submit" name="bRechercherUtilisateur">Rechercher</button>
+				</form>
 			</search>
 			<!-- Ici, utiliser une boucle PHP pour afficher les utilisateurs depuis la base de données -->
 			<!-- Exemple d'utilisateur -->

@@ -1,11 +1,12 @@
 <?php
-require_once(MODELE . 'admin.php');
-
 // Ce n'est pas un admin, on le renvoie à la page d'accueil
 if (!isset($_SESSION['utilisateur']) || $_SESSION['utilisateur']['admin'] !== 1) {
     header('Location: accueil');
     exit();
 }
+
+require_once(MODELE . 'admin.php');
+require_once(MODELE . 'crud/actualite.php');
 
 //Création d'une actualité
 if (isset($_POST['bCreerActu'])) {
@@ -31,7 +32,6 @@ if (isset($_POST['bCreerActu'])) {
             break;
         case 'succes':
             $chemin_image = stockerImage($image);
-            require_once(MODELE . 'crud/actualite.php');
             try {
                 creerActualite($titre, $contenu, $chemin_image);
                 $creation_actu = '<p style="color: green;">L\'actualité a été créée avec succès.</p>';
@@ -45,8 +45,59 @@ if (isset($_POST['bCreerActu'])) {
                     $creation_actu = '<p style="color: red;">Une erreur est survenue lors de la création de l\'actualité.</p>';
                 }
             }
-            
      }
 }
+
+if (isset($_POST['bSupprimerActu'])) {
+    $id_actu = (int)$_POST['id_actu'];
+    try {
+        $suppression = supprimerActualite($id_actu);
+        if (!$suppression) {
+            $suppression_message = '<p style="color: red;">L\'actualité n\'a pas été trouvée?? Bizarre hein. J\'espère que vous avez un dev sous le pouce :)</p>';
+        } else {
+            $suppression_message = '<p style="color: green;">L\'actualité a été supprimée avec succès.</p>';
+        }
+    } catch (Exception $e) {
+        error_log('Erreur lors de la suppression de l\'actualité : ' . $e->getMessage());
+        $suppression_message = '<p style="color: red;">Une erreur est survenue lors de la suppression de l\'actualité.</p>';
+    }
+}
+
+//On regarde si tri, ordre ou pagination ont été spécifié.
+if (isset($_GET['tri'])) {
+        $tri = $_GET['tri'];
+} else {
+        $tri = 'date';
+}
+if (isset($_GET['ordre'])) {
+        $ordre = $_GET['ordre'];
+} else {
+        $ordre = 'DESC';
+}
+//Prochain ordre est utilisé dans l'entete de ma table pour pouvoir modifier l'ordre de tri
+$prochainOrdre = ($ordre === 'ASC') ? 'DESC' : 'ASC';
+
+if (isset($_GET['pagination'])) {
+        $pagination = (int)$_GET['pagination'];
+} else {
+        $pagination = 1;
+}
+
+//Là si l'admin a fait une recherche via mots-clés ou pas
+if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
+    $recherche = trim(htmlspecialchars($_GET['recherche']));
+    $resultat_recherche = rechercheActusMots($recherche, $tri, $ordre, $pagination);
+    $totalActus = $resultat_recherche['total'];
+    $actualites = $resultat_recherche['actualites'];
+} else {
+    //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
+    $recherche = '';
+    $totalActus= totalActus(); 
+    $actualites = triActus($tri, $ordre, $pagination);
+}
+
+$paginationMax = ceil($totalActus / 10);
+//Au cas où il n'y a aucune actu, pour éviter d'avoir une pagination à 0
+($paginationMax==0) ? $paginationMax=1 : $paginationMax=$paginationMax;     
 include(VUES . 'pages/admin.php');
 ?>

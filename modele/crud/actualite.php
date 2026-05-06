@@ -57,6 +57,35 @@ function dernieresActus() {
 }
 
 /**
+ * Récupère les actualités de la base de données en fonction de la pagination.
+ *
+ * @param int $pagination Le numéro de la page à récupérer
+ *
+ * @return array Un tableau des actualités de la page spécifiée
+ *
+ * @throws PDOException En cas d'erreur sql
+ */
+function actualitePagination($pagination) {
+	global $connexionBdd;
+	$offset = ($pagination - 1) * 10;
+	$requete = $connexionBdd->prepare("SELECT * FROM actualite ORDER BY `date` DESC, id DESC LIMIT 10 OFFSET :offset");
+	$requete->execute([':offset' => $offset]);
+	return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Calcule le nombre total d'actualités présentes dans la bdd.
+ * @return int Le nombre total d'actualités en bdd
+ * @throws PDOException En cas d'erreur sql
+ */
+function totalActus() {
+	global $connexionBdd;
+	$requete = $connexionBdd->query("SELECT COUNT(*) AS total FROM actualite");
+	$total = $requete->fetch(PDO::FETCH_ASSOC)['total'];
+	return $total;
+}
+
+/**
  * Récupère les données d'une actualité à partir de son ID.
  *
  * @param int $id L'ID de l'actualité
@@ -89,43 +118,95 @@ function actualiteTitre($titre) {
 }
 
 /**
- * Recherche des actualités dont le titre contient un mot-clé donné.
+ * Récupère les 10 actualités de la bdd en fonction du tri, de l'ordre et de la pagination spécifiés.
+ * @param string $tri Le champ par lequel trier les actualités (titre ou date). Par défaut, tri par date.
+ * @param string $ordre L'ordre de tri (ASC ou DESC). Par défaut, tri descendant (DESC).
+ * @param int $pagination Le numéro de la page à récupérer pour la pagination (par défaut 1)
+ * @return array Un tableau des actualités triées selon les critères spécifiés
+ * @throws PDOException En cas d'erreur sql
+ */
+function triActus($tri='date', $ordre='DESC', $pagination=1) {
+	global $connexionBdd;
+	$offset = ($pagination - 1) * 10;
+	$requete = $connexionBdd->prepare("SELECT * FROM actualite ORDER BY `$tri` $ordre LIMIT 10 OFFSET $offset");
+	$requete->execute();
+	return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Recherche des 10 actualités si elles existent dont le titre contient le ou les mots-clés donnés. Donne aussi le nombre total d'actualités correspondantes à cette recherche.
  *
- * @param string $mot Le mot-clé à rechercher dans les titres des actualités
+ * @param string $mots Les mots-clés à rechercher dans les titres des actualités
+ * @param string $tri Le champ par lequel trier les résultats (titre ou date). Par défaut, tri par date.
+ * @param string $ordre L'ordre de tri (ASC ou DESC). Par défaut, tri descendant (DESC).
+ * @param int $pagination Le numéro de la page à récupérer pour la pagination (par défaut 1)
  *
- * @return array Un tableau des actualités correspondantes triées de la plus récente à la plus ancienne
+ * @return array Un tableau contenant le nombre total d'actualités correspondantes et les 10 actualités triées selon les critères spécifiés
  *
  * @throws PDOException En cas d'erreur sql
  */
-function rechercheActus($mot) {
+function rechercheActusMots($mots, $tri='date', $ordre='DESC', $pagination=1) {
     global $connexionBdd;
-    $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE titre LIKE :mot ORDER BY `date` DESC, id DESC");
-    $requete->execute([':mot' => '%' . $mot . '%']);
-    return $requete->fetchAll(PDO::FETCH_ASSOC);
+	$countRequete = $connexionBdd->prepare("SELECT COUNT(*) AS total FROM actualite WHERE MATCH(titre) AGAINST(:mots)");
+	$countRequete->execute([':mots' => $mots]);
+	$total = $countRequete->fetch(PDO::FETCH_ASSOC)['total'];
+
+	$offset = ($pagination - 1) * 10;
+    $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots) ORDER BY `$tri` $ordre LIMIT 10 OFFSET $offset");
+    $requete->execute([':mots' => $mots]);
+    return ['total' => $total, 'actualites' => $requete->fetchAll(PDO::FETCH_ASSOC)];
 }
 
 //Update
 
 /**
- * Modifie une actualité dans la base de données.
+ * Modifie le titre d'une actualité dans la base de données.
  *
- * @param int $id L'ID de l'actualité à modifier
- * @param array $modfifications Un tableau associatif des champs à modifier avec leurs nouvelles valeurs (ex: ['titre' => 'Nouveau titre', 'contenu' => 'Nouveau contenu'])
+ * @param int $id L'ID de l'actualité
+ * @param string $nouveauTitre Le nouveau titre de l'actualité
+ *
+ * @return bool true si une modification a été effectuée, false sinon
+ *
+ * @throws PDOException En cas d'erreur sql, notamment si le nouveau titre n'est pas unique
+ */
+function modifierTitre($id, $nouveauTitre) {
+	global $connexionBdd;
+	$requete = $connexionBdd->prepare("UPDATE actualite SET titre = :titre WHERE id = :id");
+	$requete->execute([':titre' => $nouveauTitre, ':id' => $id]);
+	return ($requete->rowCount() > 0);
+}
+
+/**
+ * Modifie le contenu d'une actualité dans la base de données.
+ *
+ * @param int $id L'ID de l'actualité
+ * @param string $nouveauContenu Le nouveau contenu de l'actualité
  *
  * @return bool true si une modification a été effectuée, false sinon
  *
  * @throws PDOException En cas d'erreur sql
  */
-function modifierActualite($id, $modfifications) {
+function modifierContenu($id, $nouveauContenu) {
 	global $connexionBdd;
-    $attributs = [];
-    $params = [':id' => $id];
-    foreach ($modfifications as $champ => $valeur) {
-        $attributs[] = "$champ = :$champ";
-        $params[":$champ"] = $valeur;
-    }
-	$requete = $connexionBdd->prepare("UPDATE actualite SET " . implode(', ', $attributs) . " WHERE id = :id");
-	$requete->execute($params);
+	$requete = $connexionBdd->prepare("UPDATE actualite SET contenu = :contenu WHERE id = :id");
+	$requete->execute([':contenu' => $nouveauContenu, ':id' => $id]);
+	return ($requete->rowCount() > 0);
+}
+
+/**
+ * Modifie l'image d'une actualité dans la base de données.
+ *
+ * @param int $id L'ID de l'actualité à modifier
+ * @param string $nouvelleImage Le nouveau chemin de l'image de l'actualité
+ *
+ * @return bool true si une modification a été effectuée, false sinon
+ *
+ * @throws PDOException En cas d'erreur sql
+ */
+function modifierImage($id, $nouvelleImage) {
+	global $connexionBdd;
+	$requete = $connexionBdd->prepare("UPDATE actualite SET image = :image WHERE id = :id");
+	$requete->execute([':image' => $nouvelleImage, ':id' => $id]);
 	return ($requete->rowCount() > 0);
 }
 

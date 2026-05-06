@@ -89,3 +89,18 @@ function stockerImage($image) {
     }
     return $chemin;
 }
+
+/**
+ * Génère une URL pour trier les actualités en fonction du champ de tri, de l'ordre et de la recherche actuelle.
+ * @param string $tri Le champ par lequel trier les actualités (titre ou date)
+ * @param string $ordre L'ordre de tri (ASC ou DESC)
+ * @param string $recherche La recherche actuelle pour inclure dans l'URL si elle existe
+ * @return string L'URL générée pour le tri des actualités
+ */
+function genererUrlTri($tri, $ordre, $recherche) {
+    $url = 'admin?tri=' . $tri . '&ordre=' . $ordre;
+    if (!empty($recherche)) {
+        $url .= '&recherche=' . urlencode($recherche);
+    }
+    return $url;
+}
