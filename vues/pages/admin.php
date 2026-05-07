@@ -42,12 +42,12 @@
 					<?php (isset($_GET['recherche'])) ? $valeur_recherche = trim(htmlspecialchars($_GET['recherche'])) : $valeur_recherche = ''; ?>
 					<input type="text" name="recherche" placeholder="Rechercher une actualité..." value="<?= $valeur_recherche ?>">
 					<select name="tri">
-						<option checked value="date">Trier par date</option>
-						<option value="titre">Trier par titre</option>
+						<option <?= ($tri === 'date') ? 'selected' : '' ?> value="date">Trier par date</option>
+						<option <?= ($tri === 'titre') ? 'selected' : '' ?> value="titre">Trier par titre</option>
 					</select>
 					<select name="ordre">
-						<option checked value="DESC">Ordre décroissant</option>
-						<option value="ASC">Ordre croissant</option>
+						<option <?= ($ordre === 'DESC') ? 'selected' : '' ?> value="DESC">Ordre décroissant</option>
+						<option <?= ($ordre === 'ASC') ? 'selected' : '' ?> value="ASC">Ordre croissant</option>
 					</select>
 					<button type="submit">Rechercher</button>
 					<a href="admin">Réinitialiser</a>

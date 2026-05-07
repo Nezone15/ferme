@@ -15,36 +15,61 @@
 				<h1>Actualités</h1>
 		</section>
 
-		<section>
-			<div>
-				<search>
-					<form action="recherche" method="GET">
-						<label for="site-search">Rechercher une actualité :</label>
-						<input type="search" id="site-search" name="q" placeholder="Ex: pommes de terre...">
-						<button type="submit">Rechercher</button>
-					</form>
-				</search>
-			</div>
-			<div class="actualites-container">
-				<!-- Ici, tu peux utiliser une boucle PHP pour afficher les actualités depuis ta base de données -->
-				<!-- Exemple d'actualité -->
-				<div class="actualite">
-					<h2>Titre de l'actualité</h2>
-					<p>Contenu de l'actualité...</p>
-					<a href="actualites/1">Lire la suite</a>
-					<span class="date">Publié le 01/01/2024</span>
-				</div>
-				<!-- Répète ce bloc pour chaque actualité -->
+		<section>			
+			<search>
+				<form action="actualites" method="get">
+					<?php (isset($_GET['recherche'])) ? $valeur_recherche = trim(htmlspecialchars($_GET['recherche'])) : $valeur_recherche = ''; ?>
+					<input type="text" name="recherche" placeholder="Rechercher une actualité..." value="<?= $valeur_recherche ?>">
+					<select name="tri">
+						<option <?= ($tri === 'date') ? 'selected' : '' ?> value="date">Trier par date</option>
+						<option <?= ($tri === 'titre') ? 'selected' : '' ?> value="titre">Trier par titre</option>
+					</select>
+					<select name="ordre">
+						<option <?= ($ordre === 'DESC') ? 'selected' : '' ?> value="DESC">Ordre décroissant</option>
+						<option <?= ($ordre === 'ASC') ? 'selected' : '' ?> value="ASC">Ordre croissant</option>
+					</select>
+					<button type="submit">Rechercher</button>
+					<a href="actualites">Réinitialiser</a>
+				</form>
+			</search>
+			<p><?= $totalActus ?> Actualité(s) trouvée(s).</p>
+			
+			<div class="grille-actualites">
+				<?php
+				if (empty($actualites)) {
+					echo '<p>Aucune actualité trouvée.</p>';
+				} else {
+					foreach ($actualites as $actu) {
+						?>
+						<div class="actualite">
+							<img src="<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
+							<h3><?= htmlspecialchars($actu['titre']) ?></h3>
+							<p>Publié le <?= date('d/m/Y', strtotime($actu['date'])) ?></p>
+							<p><?= nl2br(htmlspecialchars(substr($actu['contenu'], 0, 200))) ?>...</p>
+							<a href="actualite/<?= $actu['id'] ?>">Lire la suite</a>
+						</div>
+						<?php
+					}
+				}
+				?>
 			</div>
 			<div class="pagination">
-				<!-- Pagination à implémenter.
-				Le paramètre "page" est déjà utilisé pour le routage principal.
-				Utiliser un autre paramètre pour la pagination (ex: p).
-				Exemples:
-				<a href="actualites?p=1">&larr; Précédent</a>
-				<span>Page 2</span>
-				<a href="actualites?p=3">Suivant &rarr;</a>
-				-->
+				<!-- Ici, ajouter les liens pour la pagination. -->
+				<?php
+				for ($i = 1; $i <= $paginationMax; $i++) {
+					$parametres = "?pagination=$i";
+					if (isset($_GET['tri'])) {
+						$parametres .= "&tri=" . urlencode($_GET['tri']);
+					}
+					if (isset($_GET['ordre'])) {
+						$parametres .= "&ordre=" . urlencode($_GET['ordre']);
+					}
+					if (isset($_GET['recherche'])) {
+						$parametres .= "&recherche=" . urlencode($_GET['recherche']);
+					}
+					echo '<a href="actualites' . $parametres . '">' . $i . '</a> ';
+				}
+				?>
 			</div>
 		</section>
 	</main>
