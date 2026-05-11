@@ -11,10 +11,12 @@ $actu = actualiteId($_GET['id']);
     
 //Si l'actu n'existe pas on redirige vers la page des actualités
 if (!$actu) {
-    $_SESSION['erreur_actu_introuvable'] = "L'actualité que vous recherchez n'existe pas ou n'est plus disponible.";
+    $_SESSION['erreur_actu_introuvable'] = "L'actualité que vous essayer de consulter n'existe pas ou n'est plus disponible.";
     header('Location: actualites');
     exit();
 } else {
+    require_once(MODELE . 'crud/commentaire.php');
+    $commentaires = commentaireActualite($_GET['id']);
     include(VUES . 'pages/actualite.php');
 }
 ?>

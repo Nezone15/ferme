@@ -2,26 +2,26 @@
     <a href="accueil"><img src="#" alt="Accueil"></a>
     <nav>
         <ul>
-            <li><a href="accueil">Accueil</a></li>
-            <li><a href="maison">Maison de vie communautaire</a></li>
-            <li><a href="bois">Bois de chauffage</a></li>
-            <li><a href="actualites">Actualités</a></li>
-            <li><a href="tn">Terre Nouvelle</a></li>
-            <li><a href="contact">Contact</a></li>
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/maison">Maison de vie communautaire</a></li>
+            <li><a href="/bois">Bois de chauffage</a></li>
+            <li><a href="/actualites">Actualités</a></li>
+            <li><a href="/tn">Terre Nouvelle</a></li>
+            <li><a href="/contact">Contact</a></li>
              <?php if (isset($_SESSION['utilisateur']) && $_SESSION['utilisateur']['admin'] === 1): ?>
-            <li><a href="admin">Espace Admin</a></li>
+            <li><a href="/admin">Espace Admin</a></li>
             <?php endif; ?>   
         </ul>
     </nav>
 
      <?php if (isset($_SESSION['utilisateur'])): ?>
         <!-- Si l'utilisateur est connecté -->
-        <a href="profil">Mon Profil</a>
-        <form action="deconnexion" id="deconnexion" method="POST">
+        <a href="/profil">Mon Profil</a>
+        <form action="/deconnexion" id="deconnexion" method="POST">
             <button type="submit" name="bDeconnexion">Déconnexion</button>
         </form>
     <?php else: ?>
         <!-- Si l'utilisateur est un visiteur -->
-        <a href="connexion">Nous rejoindre</a>
+        <a href="/connexion">Nous rejoindre</a>
     <?php endif; ?>    
 </header>
