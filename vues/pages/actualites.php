@@ -15,7 +15,11 @@
 				<h1>Actualités</h1>
 		</section>
 
-		<section>			
+		<section>
+			<?php if (isset($_SESSION['erreur_actu_introuvable'])): ?>
+				<p style="color: red;"><?php echo $_SESSION['erreur_actu_introuvable']; ?></p>
+				<?php unset($_SESSION['erreur_actu_introuvable']); ?>
+			<?php endif; ?>
 			<search>
 				<form action="actualites" method="get">
 					<?php (isset($_GET['recherche'])) ? $valeur_recherche = trim(htmlspecialchars($_GET['recherche'])) : $valeur_recherche = ''; ?>

@@ -19,6 +19,10 @@
 			<span><?php echo $actu['date']; ?></span>
 			<!--Si c'est l'admin qui est co, il devrait pouvoir modifier le titre et son contenu-->
 			<?php if (isset($_SESSION['utilisateur']) && $_SESSION['utilisateur']['admin'] === 1): ?>
+				<?php if (isset($_SESSION['modification_actu'])) {
+					echo '<p>' . $_SESSION['modification_actu'] . '</p>';
+					unset($_SESSION['modification_actu']);
+				}?>
 				<form action="/actualite/<?php echo $actu['id']; ?>" method="POST">
 					<h1><input type="text" name="titre" value="<?php echo $actu['titre']; ?>"></h1>
 					<textarea name="contenu"><?php echo $actu['contenu']; ?></textarea>
@@ -33,11 +37,18 @@
 				<form action="/actualite/<?php echo $actu['id']; ?>" method="post">
 					<button type="submit" name="bLiker">J'aime</button>
 				</form>
+				<span><?php echo $actu['likes']; ?> J'aime(s)</span>
 			</div>
 		</section>
 
 		<section>
 			<h2>Commentaires</h2>
+			<!--Afficher le message d'erreur ou réussite si l'utilisateur a déjà tenté de commenter-->
+			 <?php if (isset($_SESSION['commentaire'])): ?>
+				<p><?php echo $_SESSION['commentaire']; ?></p>
+				<?php unset($_SESSION['commentaire']); ?>
+			<?php endif; ?>
+
 			<!-- Si utilisateur connecté, afficher le formulaire de commentaire -->
 			 <?php if (isset($_SESSION['utilisateur'])): ?>
 			<form action="/actualite/<?php echo $actu['id']; ?>" method="post">
@@ -53,11 +64,11 @@
 			    echo '<div>';
 				$utilisateur = utilisateurId($commentaire['utilisateur_id']);
 				if ($utilisateur) {
-			    	echo '<span>' . htmlspecialchars(utilisateurId($commentaire['utilisateur_id'])['nom']) . ' ' . htmlspecialchars(utilisateurId($commentaire['utilisateur_id'])['prenom']) . '</span>';
+			    	echo '<p>' . htmlspecialchars($utilisateur['nom']) . ' ' . htmlspecialchars($utilisateur['prenom']) . '</p>';
 				} else {
-					echo '<span>Utilisateur supprimé</span>';
+					echo '<p>Utilisateur supprimé</p>';
 				}
-				echo '<span>' . htmlspecialchars($commentaire['date']) . '</span>';
+				echo '<span>Posté le ' . htmlspecialchars($commentaire['date']) . '</span>';
 			    echo '<p>' . nl2br(htmlspecialchars($commentaire['message'])) . '</p>';
 			    echo '</div>';
 			} ?>

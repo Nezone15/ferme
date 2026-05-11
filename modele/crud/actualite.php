@@ -212,6 +212,22 @@ function modifierImage($id, $nouvelleImage) {
 	return ($requete->rowCount() > 0);
 }
 
+/**
+ * Ajoute un like à une actualité.
+ *
+ * @param int $id L'ID de l'actualité à liker
+ *
+ * @return bool true si un like a été ajouté, false sinon
+ *
+ * @throws PDOException En cas d'erreur sql
+ */
+function ajouterLike($id) {
+	global $connexionBdd;
+	$requete = $connexionBdd->prepare("UPDATE actualite SET likes = likes + 1 WHERE id = :id");
+	$requete->execute([':id' => $id]);
+	return ($requete->rowCount() > 0);
+}
+
 //Delete
 
 /**
