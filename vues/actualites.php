@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Actualites</title>
-	<script defer src="<?=PUBLIC_PATH ?>/js/actualites.js"></script>
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/actualites.css">
+	<script defer src="/public/js/actualites.js"></script>
+	<link rel="stylesheet" href="/public/style/style.css">
+	<link rel="stylesheet" href="/public/style/actualites.css">
 </head>
 <body>
 	<?php include VUES . 'header_footer/header.php'; ?>
@@ -46,7 +46,7 @@
 					foreach ($actualites as $actu) {
 						?>
 						<div class="actualite">
-							<img src="<?= PUBLIC_PATH . htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
+							<img src="/public/images/<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
 							<h3><?= htmlspecialchars($actu['titre']) ?></h3>
 							<p>Publié le <?= date('d/m/Y', strtotime($actu['date'])) ?></p>
 							<p><?= nl2br(htmlspecialchars(substr($actu['contenu'], 0, 200))) ?>...</p>

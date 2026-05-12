@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Maison de vie communautaire</title>
-	<script src="<?=PUBLIC_PATH ?>/js/maison.js" defer></script>	
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/maison.css">
+	<script src="/public/js/maison.js" defer></script>	
+	<link rel="stylesheet" href="/public/style/style.css">
+	<link rel="stylesheet" href="/public/style/maison.css">
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>

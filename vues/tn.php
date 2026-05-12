@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Terre Nouvelle</title>
-	<script defer src="<?=PUBLIC_PATH ?>/js/tn.js"></script>
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/tn.css">
+	<script defer src="/public/js/tn.js"></script>
+	<link rel="stylesheet" href="/public/style/style.css">
+	<link rel="stylesheet" href="/public/style/tn.css">
 </head>
 <body>    
     <?php include VUES . 'header_footer/header.php'; ?>

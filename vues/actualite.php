@@ -4,16 +4,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Actualite</title>
-	<script defer src="<?=PUBLIC_PATH ?>/js/actualite.js"></script>
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/actualite.css">
+	<script defer src="/public/js/actualite.js"></script>
+	<link rel="stylesheet" href="/public/style/style.css">
+	<link rel="stylesheet" href="/public/style/actualite.css">
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>
 	<main>
 		<!--Premiere section pour l'image, la deuxieme pour le titre et le contenu, la troisième pour les commentaires-->
 		<section>
-			<img src="<?= PUBLIC_PATH . htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
+			<img src="/public/images/<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
 		</section>
 
 		<section>

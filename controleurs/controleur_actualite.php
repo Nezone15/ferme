@@ -66,7 +66,7 @@ if (isset($_POST['bLiker']) && isset($_SESSION['utilisateur'])) {
 
 //Form de commentaire d'un utilisateur connecté
 if (isset($_POST['bCommenter']) && isset($_SESSION['utilisateur'])) {
-    $commentaire = trim(htmlspecialchars($_POST['commentaire']));
+    $commentaire = trim(($_POST['commentaire']));
     require_once(MODELE . 'utilisateur/commenter.php');
     try {
         verifierCommentaire($commentaire);

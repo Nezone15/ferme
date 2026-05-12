@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espace Administrateur</title>
-	<script defer src="<?=PUBLIC_PATH ?>/js/admin.js"></script>
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/admin.css">
+	<script defer src="/public/js/admin.js"></script>
+	<link rel="stylesheet" href="/public/style/style.css">
+	<link rel="stylesheet" href="/public/style/admin.css">
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>

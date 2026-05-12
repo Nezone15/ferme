@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Contact</title>
-	<script defer src="<?=PUBLIC_PATH ?>/js/contact.js"></script>
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
-	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/contact.css">
+	<script defer src="/public/js/contact.js"></script>
+	<link rel="stylesheet" href="/public/style/style.css">
+	<link rel="stylesheet" href="/public/style/contact.css">
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>

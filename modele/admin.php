@@ -58,12 +58,12 @@ function verificationExtensionImage($image) {
 }
 
 /**
- * Stocke l'image sur le serveur et retourne le chemin de l'image
+ * Stocke l'image sur le serveur et retourne le nom du fichier de l'image
  * @param array $image Les données de l'image
- * @return string Le chemin de l'image stockée
+ * @return string Le nom du fichier de l'image stockée
  */
 function stockerImage($image) {
-    /*Pour l'image, on va devoir l'enregistrer sur le serveur et stocker son chemin dans la base de données.
+    /*Pour l'image, on va devoir l'enregistrer sur le serveur et stocker le nom du fichier dans la base de données.
     J'ai demandé à l'ia plusieurs façons de faire. J'ai opté pour celle qui va hasher l'image
     pour éviter les doublons. Je me dis que c'est le plus pro pour éviter de prendre plus de place que
     nécessaire sur le serveur. Ainsi si l'image est déjà utilisé pour une autre actu, on a juste 
@@ -78,16 +78,13 @@ function stockerImage($image) {
     // 3. Créer le nom final basé sur le contenu
     $nom_fichier_image = $hash . '.' . $extension;
 
-    //Le chemin de l'image. Ce qui sera stocké en bdd pour cette actu
-    $chemin = 'images/' . $nom_fichier_image;
-
     // 4. Vérifier si le fichier existe déjà pour éviter les doublons
     //On oublie pas le public_path parce que sinon php va être duper
-    if (!file_exists(PUBLIC_PATH . $chemin)) {
+    if (!file_exists(PUBLIC_PATH . 'images/' . $nom_fichier_image)) {
         // Si le fichier n'existe pas, on peut le télécharger vers le dossier images
-        move_uploaded_file($image['tmp_name'], PUBLIC_PATH . $chemin);
+        move_uploaded_file($image['tmp_name'], PUBLIC_PATH . 'images/' . $nom_fichier_image);
     }
-    return $chemin;
+    return $nom_fichier_image;
 }
 
 /**
