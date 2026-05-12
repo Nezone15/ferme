@@ -6,7 +6,7 @@
     <title>S'inscrire</title>
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
     <main>
         <h1>Inscription</h1>
         <?php if (isset($erreur_inscription)) {

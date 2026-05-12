@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Profil</title>
-	<script defer src="/vues/js/profil.js"></script>
-	<link rel="stylesheet" href="/vues/style/style.css">
-	<link rel="stylesheet" href="/vues/style/profil.css">
+	<script defer src="<?=PUBLIC_PATH ?>/js/profil.js"></script>
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/profil.css">
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
 	<main>
 		<section class="banniere">
 			<h1>Profil</h1>
@@ -89,6 +89,6 @@
 			</div>
 		</section>
 	</main>
-	<?php include VUES . 'pages/header_footer/footer.php'; ?>
+	<?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>

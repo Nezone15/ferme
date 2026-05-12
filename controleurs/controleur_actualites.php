@@ -20,7 +20,7 @@ if (isset($_GET['pagination'])) {
 
 //Là si l'utilisateur a fait une recherche via mots-clés ou pas
 if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
-    $recherche = trim(htmlspecialchars($_GET['recherche']));
+    $recherche = trim(($_GET['recherche']));
     $resultat_recherche = rechercheActusMots($recherche, 9, $tri, $ordre, $pagination);
     $totalActus = $resultat_recherche['total'];
     $actualites = $resultat_recherche['actualites'];
@@ -34,5 +34,4 @@ if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
 $paginationMax = ceil($totalActus / 9);
 //Au cas où il n'y a aucune actu, pour éviter d'avoir une pagination à 0
 ($paginationMax==0) ? $paginationMax=1 : $paginationMax=$paginationMax;     
-include(VUES . 'pages/actualites.php');
-?>
+include(VUES . 'actualites.php');

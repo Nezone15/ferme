@@ -9,5 +9,5 @@ if (isset($_POST['bDeconnexion'])) {
         setcookie('token_connexion', '', time() - 3600, "/", '', false, true);
     }
 }
-include(VUES . 'pages/accueil.php');
+include(VUES . 'accueil.php');
 ?>

@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Actualite</title>
-	<script defer src="/vues/js/actualite.js"></script>
-	<link rel="stylesheet" href="/vues/style/style.css">
-	<link rel="stylesheet" href="/vues/style/actualite.css">
+	<script defer src="<?=PUBLIC_PATH ?>/js/actualite.js"></script>
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/actualite.css">
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
 	<main>
 		<section>
 			<!-- Faudra récupérer les données de l'actualité depuis la base de données et les afficher ici -->
@@ -74,6 +74,6 @@
 			} ?>
 		</section>
 	</main>
-	<?php include VUES . 'pages/header_footer/footer.php'; ?>
+	<?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>

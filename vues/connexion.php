@@ -6,7 +6,7 @@
     <title>Se connecter</title>
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
     <main>
         <h1>Connexion</h1>
         <?php if (isset($_SESSION['inscription_succes'])) {

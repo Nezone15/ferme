@@ -1,3 +1,3 @@
 <?php
-include(VUES . 'pages/mentions.php');
+include(VUES . 'mentions.php');
 ?>

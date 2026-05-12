@@ -1,3 +1,3 @@
 <?php
-include(VUES . 'pages/tn.php');
+include(VUES . 'tn.php');
 ?>

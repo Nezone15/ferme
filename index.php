@@ -5,6 +5,7 @@ define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
 define('MODELE', ROOT . 'modele' . DIRECTORY_SEPARATOR);
 define('VUES', ROOT . 'vues' . DIRECTORY_SEPARATOR);
 define('CONTROLEURS', ROOT . 'controleurs' . DIRECTORY_SEPARATOR);
+define('PUBLIC_PATH', ROOT . 'public' . DIRECTORY_SEPARATOR);
 
 //On regarde s'il y a un cookie de connexion et si oui si on a pas déjà l'utilisateur en $_SESSION
 if (isset($_COOKIE['token_connexion']) && !isset($_SESSION['utilisateur'])) {

@@ -10,8 +10,8 @@ require_once(MODELE . 'crud/actualite.php');
 
 //Création d'une actualité
 if (isset($_POST['bCreerActu'])) {
-    $titre = trim(htmlspecialchars($_POST['titre']));
-    $contenu = trim(htmlspecialchars($_POST['contenu']));
+    $titre = trim(($_POST['titre']));
+    $contenu = trim($_POST['contenu']);
     $image = $_FILES['image'];
     $verification = verificationActu($titre, $contenu, $image);
     switch ($verification) {
@@ -85,7 +85,7 @@ if (isset($_GET['pagination'])) {
 
 //Là si l'admin a fait une recherche via mots-clés ou pas
 if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
-    $recherche = trim(htmlspecialchars($_GET['recherche']));
+    $recherche = trim(($_GET['recherche']));
     $resultat_recherche = rechercheActusMots($recherche, 10, $tri, $ordre, $pagination);
     $totalActus = $resultat_recherche['total'];
     $actualites = $resultat_recherche['actualites'];
@@ -99,5 +99,5 @@ if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
 $paginationMax = ceil($totalActus / 10);
 //Au cas où il n'y a aucune actu, pour éviter d'avoir une pagination à 0
 ($paginationMax==0) ? $paginationMax=1 : $paginationMax=$paginationMax;     
-include(VUES . 'pages/admin.php');
+include(VUES . 'admin.php');
 ?>

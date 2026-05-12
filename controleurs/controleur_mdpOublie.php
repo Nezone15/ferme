@@ -68,5 +68,5 @@ if (isset($_POST['bEmail'])) {
         $erreur_mdp_non_conforme = "Les mots de passe ne correspondent pas.";
     }
 }
-include VUES . "pages/mdpOublie.php";
+include VUES . "mdpOublie.php";
 ?>

@@ -73,5 +73,5 @@ if (!isset($_SESSION['utilisateur'])) {
             break;
     }
 }
-include(VUES . 'pages/profil.php');
+include(VUES . 'profil.php');
 ?>

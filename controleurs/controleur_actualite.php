@@ -22,8 +22,10 @@ if (!$actu) {
 if (isset($_POST['bModifierActu'])&& isset($_SESSION['utilisateur']) && $_SESSION['utilisateur']['admin'] === 1) {
     require_once(MODELE . 'admin.php');
 
-    $titre = trim(htmlspecialchars($_POST['titre']));
-    $contenu = trim(htmlspecialchars($_POST['contenu']));
+    //Pour l'insertion bdd on utilise pas htmlspecialchars sinon ça fait de la merde
+    //On l'utilise au contraire quand on va l'afficher
+    $titre = trim(($_POST['titre']));
+    $contenu = trim($_POST['contenu']);
     if (!verificationTitre($_POST['titre'])) {
         $_SESSION['modification_actu'] = "Le titre de l'actualité n'est pas valide.";
     } elseif (!verificationContenu($_POST['contenu'])) {
@@ -81,5 +83,5 @@ if (isset($_POST['bCommenter']) && isset($_SESSION['utilisateur'])) {
 }
 
 $commentaires = commentaireActualite($actu['id']);
-include(VUES . 'pages/actualite.php');
+include(VUES . 'actualite.php');
 ?>

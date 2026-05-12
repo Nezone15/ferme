@@ -1,3 +1,3 @@
 <?php
-include(VUES . 'pages/politique.php');
+include(VUES . 'politique.php');
 ?>

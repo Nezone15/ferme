@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <script defer src="/vues/js/accueil.js"></script>
-    <link rel="stylesheet" href="/vues/style/style.css">
-    <link rel="stylesheet" href="/vues/style/accueil.css">
+    <script defer src="<?=PUBLIC_PATH ?>/js/accueil.js"></script>
+    <link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
+    <link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/accueil.css">
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
     <main>
         <!--Section carousel -->
         <section class="carousel">

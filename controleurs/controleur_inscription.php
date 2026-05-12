@@ -88,6 +88,6 @@ if (isset($_POST['bInscription'])) {
 } else {
     require_once MODELE . 'crud/question.php';
     $questions = question();
-    include(VUES . 'pages/inscription.php');
+    include(VUES . 'inscription.php');
 }
 ?>

@@ -6,7 +6,7 @@
     <title>Mentions légales</title>
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
     <main>
         <h1>Mentions légales</h1>
         <h2>Informations légales : Ferme Saint Achaire</h2>
@@ -22,6 +22,6 @@
         <p>Le présent site est hébergé par la société OVH SAS, dont le siège social est situé au 2 rue Kellermann, 59100 Roubaix, France.</p>
         <p>Contact téléphonique : <a href="tel:+33972101007">+33 9 72 10 10 07</a>.</p>
     </main>
-    <?php include VUES . 'pages/header_footer/footer.php'; ?>
+    <?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>

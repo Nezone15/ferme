@@ -1,3 +1,3 @@
 <?php
-include(VUES . 'pages/bois.php');
+include(VUES . 'bois.php');
 ?>

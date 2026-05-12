@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Actualites</title>
-	<script defer src="/vues/js/actualites.js"></script>
-	<link rel="stylesheet" href="/vues/style/style.css">
-	<link rel="stylesheet" href="/vues/style/actualites.css">
+	<script defer src="<?=PUBLIC_PATH ?>/js/actualites.js"></script>
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/actualites.css">
 </head>
 <body>
-	<?php include VUES . 'pages/header_footer/header.php'; ?>
+	<?php include VUES . 'header_footer/header.php'; ?>
 	<main>		
 		<section class="banniere">
 				<h1>Actualités</h1>
@@ -77,6 +77,6 @@
 			</div>
 		</section>
 	</main>
-	<?php include VUES . 'pages/header_footer/footer.php'; ?>
+	<?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>

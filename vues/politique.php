@@ -6,7 +6,7 @@
     <title>Mentions légales</title>
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
     <main>
         <h1>Politique de Confidentialité</h1>
         <p>Dernière mise à jour : 27 Avril 2026</p>
@@ -48,6 +48,6 @@
 <h2>6. Destinataires des données</h2>
 <p>Vos données sont strictement réservées à notre usage interne. Aucune information personnelle n'est vendue ou cédée à des tiers pour des raisons commerciales.</p>
     </main>
-    <?php include VUES . 'pages/header_footer/footer.php'; ?>
+    <?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>

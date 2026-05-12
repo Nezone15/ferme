@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Contact</title>
-	<script defer src="/vues/js/contact.js"></script>
-	<link rel="stylesheet" href="/vues/style/style.css">
-	<link rel="stylesheet" href="/vues/style/contact.css">
+	<script defer src="<?=PUBLIC_PATH ?>/js/contact.js"></script>
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/style.css">
+	<link rel="stylesheet" href="<?=PUBLIC_PATH ?>/css/contact.css">
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
     <main>
         <section class="banniere">
 			<h1>Contact</h1>
@@ -36,6 +36,6 @@
 			</div>
 		</section>
     </main>
-	<?php include VUES . 'pages/header_footer/footer.php'; ?>
+	<?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>

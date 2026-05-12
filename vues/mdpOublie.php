@@ -6,7 +6,7 @@
     <title>Mot de passe oublié</title>
 </head>
 <body>
-    <?php include VUES . 'pages/header_footer/header.php'; ?>
+    <?php include VUES . 'header_footer/header.php'; ?>
     <main>
         <h1>Mot de passe oublié</h1>
         <!--Le processus de réinitialisation du mot de passe se fait en plusieurs étapes :
@@ -71,6 +71,6 @@
             </form>
         <?php endif; ?>
     </main>
-    <?php include VUES . 'pages/header_footer/footer.php'; ?>    
+    <?php include VUES . 'header_footer/footer.php'; ?>    
 </body>
 </html>

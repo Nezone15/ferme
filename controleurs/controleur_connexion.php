@@ -17,6 +17,6 @@ if (isset($_POST['bConnexion'])) {
         $erreur_connexion = "Nous avons rencontré un problème lors de la connexion. Veuillez réessayer plus tard.";
     }
 }
-include(VUES . 'pages/connexion.php');
+include(VUES . 'connexion.php');
 
 ?>

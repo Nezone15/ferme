@@ -1,3 +1,3 @@
 <?php
-include(VUES . 'pages/contact.php');
+include(VUES . 'contact.php');
 ?>
