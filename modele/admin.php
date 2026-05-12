@@ -82,10 +82,10 @@ function stockerImage($image) {
     $chemin = 'images/' . $nom_fichier_image;
 
     // 4. Vérifier si le fichier existe déjà pour éviter les doublons
-    //On oublie pas le root parce que sinon php va être duper
-    if (!file_exists(ROOT . $chemin)) {
+    //On oublie pas le public_path parce que sinon php va être duper
+    if (!file_exists(PUBLIC_PATH . $chemin)) {
         // Si le fichier n'existe pas, on peut le télécharger vers le dossier images
-        move_uploaded_file($image['tmp_name'], ROOT . $chemin);
+        move_uploaded_file($image['tmp_name'], PUBLIC_PATH . $chemin);
     }
     return $chemin;
 }

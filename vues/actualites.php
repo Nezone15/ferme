@@ -46,7 +46,7 @@
 					foreach ($actualites as $actu) {
 						?>
 						<div class="actualite">
-							<img src="<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
+							<img src="<?= PUBLIC_PATH . htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
 							<h3><?= htmlspecialchars($actu['titre']) ?></h3>
 							<p>Publié le <?= date('d/m/Y', strtotime($actu['date'])) ?></p>
 							<p><?= nl2br(htmlspecialchars(substr($actu['contenu'], 0, 200))) ?>...</p>

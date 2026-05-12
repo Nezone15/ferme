@@ -11,13 +11,15 @@
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>
 	<main>
+		<!--Premiere section pour l'image, la deuxieme pour le titre et le contenu, la troisième pour les commentaires-->
 		<section>
-			<!-- Faudra récupérer les données de l'actualité depuis la base de données et les afficher ici -->
-			<img src="#" alt="Photo de l'actualité">
+			<img src="<?= PUBLIC_PATH . htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
 		</section>
+
 		<section>
 			<span><?php echo $actu['date']; ?></span>
-			<!--Si c'est l'admin qui est co, il devrait pouvoir modifier le titre et son contenu-->
+			<!--Si c'est l'admin qui est co, il devrait pouvoir modifier le titre et son contenu
+			J'envisage d'utiliser des modales avec un bouton pour les faire pop. A REFLECHIR-->
 			<?php if (isset($_SESSION['utilisateur']) && $_SESSION['utilisateur']['admin'] === 1): ?>
 				<?php if (isset($_SESSION['modification_actu'])) {
 					echo '<p>' . $_SESSION['modification_actu'] . '</p>';
