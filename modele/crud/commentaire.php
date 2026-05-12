@@ -91,6 +91,19 @@ function commentaireUtilisateur($utilisateur_id) {
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Récupère le nombre de commentaires d'un utilisateur à partir de son ID.
+ * @param int $utilisateur_id L'ID de l'utilisateur
+ * @return int|false Le nombre de commentaires de l'utilisateur ou false s'il n'existe pas
+ * @throws PDOException En cas d'erreur sql
+ */
+function nombreCommentairesUtilisateur($utilisateur_id) {
+    global $connexionBdd;
+    $requete = $connexionBdd->prepare("SELECT COUNT(*) FROM commentaire WHERE utilisateur_id = :utilisateur_id");
+    $requete->execute([':utilisateur_id' => $utilisateur_id]);
+    return $requete->fetchColumn();
+}
+
 //Update
 
 /**

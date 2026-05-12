@@ -70,6 +70,9 @@ switch($page) {
     case 'admin':
         include CONTROLEURS . 'controleur_admin.php';
         break;
+    case 'admin/utilisateurs':
+        include CONTROLEURS . 'controleur_admin_utilisateurs.php';
+        break;
     case 'tn':
         include CONTROLEURS . 'controleur_tn.php';
         break;

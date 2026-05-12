@@ -7,9 +7,12 @@ Options -Indexes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# 3. Pour les actualités avec ID (ex: /actualite/12)
-RewriteRule ^actualite/([0-9]+)$ index.php?page=actualite&id=$1 [L,QSA]
-
-# 4. Sinon, on renvoie tout vers index.php en créant la variable "page"
+# 3. Sinon, on renvoie tout vers index.php en créant la variable "page"
 # Exemple : actus devient index.php?page=actus
 RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?page=$1 [L,QSA]
+
+# 4. Pour les actualités avec ID (ex: actualite/12)
+RewriteRule ^actualite/([0-9]+)$ index.php?page=actualite&id=$1 [L,QSA]
+
+# 5. Pour accéder au panel de gestion des utilisateurs par l'admin. Parce que le / qui permet de séparer les actualités du reste sépare aussi cette page
+RewriteRule ^(admin/utilisateurs)$ index.php?page=$1 [L,QSA]

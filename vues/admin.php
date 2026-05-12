@@ -122,24 +122,12 @@
 			</div>
 			
 		</section>
-
+		
+		<!--plutot que de faire une section utilisateur je fais faire une autre page pour ça. Parce que sinon je sens que ça va être chiant-->
 		<section>
-			<h2>Gérer les utilisateurs</h2>
-			<search>
-				<form action="admin" method="post">
-					<input type="text" name="recherche_utilisateur" placeholder="Rechercher un utilisateur...">
-					<button type="submit" name="bRechercherUtilisateur">Rechercher</button>
-				</form>
-			</search>
-			<!-- Ici, utiliser une boucle PHP pour afficher les utilisateurs depuis la base de données -->
-			<!-- Exemple d'utilisateur -->
-			<div class="utilisateur">
-				<span class="date">Inscrit le 01/01/2024</span>
-				<h3>Nom de l'utilisateur</h3>
-				<p>Email : utilisateur@example.com</p>
-			</div>
+			<a href="admin/utilisateurs">Gérer les utilisateurs</a>
 		</section>
 	</main>
-	<?php include VUES . 'pages/header_footer/footer.php'; ?>
+	<?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>

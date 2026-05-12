@@ -67,6 +67,6 @@
             <a href="connexion">Déjà inscrit ?</a>
         </form>
     </main>
-    <?php include VUES . 'pages/header_footer/footer.php'; ?>
+    <?php include VUES . 'header_footer/footer.php'; ?>
 </body>
 </html>
