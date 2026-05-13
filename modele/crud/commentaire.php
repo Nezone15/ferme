@@ -80,28 +80,58 @@ function commentaireActualite($actualite_id) {
 
 /**
  * Récupère les commentaires d'un utilisateur à partir de son ID.
- * @param int $utilisateur_id L'ID de l'utilisateur
+ * @param int|null $utilisateur_id L'ID de l'utilisateur ou null pour les commentaires anonymes
  * @return array Un tableau de tous les commentaires de l'utilisateur triés par date décroissante
  * @throws PDOException En cas d'erreur sql
  */
 function commentaireUtilisateur($utilisateur_id) {
     global $connexionBdd;
-    $requete = $connexionBdd->prepare("SELECT * FROM commentaire WHERE utilisateur_id = :utilisateur_id ORDER BY date DESC");
-    $requete->execute([':utilisateur_id' => $utilisateur_id]);
+    $condition = ($utilisateur_id === null) ? "utilisateur_id IS NULL" : "utilisateur_id = :utilisateur_id";
+    $param = ($utilisateur_id === null) ? [] : [':utilisateur_id' => $utilisateur_id];
+    $requete = $connexionBdd->prepare("SELECT * FROM commentaire WHERE $condition ORDER BY date DESC");
+    $requete->execute($param);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
  * Récupère le nombre de commentaires d'un utilisateur à partir de son ID.
- * @param int $utilisateur_id L'ID de l'utilisateur
+ * @param int|null $utilisateur_id L'ID de l'utilisateur ou null pour les commentaires anonymes
  * @return int|false Le nombre de commentaires de l'utilisateur ou false s'il n'existe pas
  * @throws PDOException En cas d'erreur sql
  */
 function nombreCommentairesUtilisateur($utilisateur_id) {
     global $connexionBdd;
-    $requete = $connexionBdd->prepare("SELECT COUNT(*) FROM commentaire WHERE utilisateur_id = :utilisateur_id");
-    $requete->execute([':utilisateur_id' => $utilisateur_id]);
+    $condition = ($utilisateur_id === null) ? "utilisateur_id IS NULL" : "utilisateur_id = :utilisateur_id";
+    $param = ($utilisateur_id === null) ? [] : [':utilisateur_id' => $utilisateur_id];
+    $requete = $connexionBdd->prepare("SELECT COUNT(*) FROM commentaire WHERE $condition");
+    $requete->execute($param);
     return $requete->fetchColumn();
+}
+
+/**
+ * Fait une jointure entre les tables commentaire et actualite pour récupérer les commentaires d'un utilisateur avec le titre de l'actualité associée.
+ * @param int|null $utilisateur_id L'ID de l'utilisateur ou null pour les commentaires anonymes
+ * @return array Un tableau de tous les commentaires de l'utilisateur avec les actualités associées, triés par date décroissante
+ * @throws PDOException En cas d'erreur sql
+ */
+function jointureCommentaireActualiteParUtilisateur($utilisateur_id) {
+    global $connexionBdd;
+    $condition = ($utilisateur_id === null) ? "c.utilisateur_id IS NULL" : "c.utilisateur_id = :utilisateur_id";
+    $param = ($utilisateur_id === null) ? [] : [':utilisateur_id' => $utilisateur_id];
+    $requete = $connexionBdd->prepare("SELECT c.*, a.titre FROM commentaire c JOIN actualite a ON c.actualite_id = a.id WHERE $condition ORDER BY c.date DESC");
+    $requete->execute($param);
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Fait une jointure entre les tables commentaire et actualite pour récupérer tous les commentaires avec le titre de l'actualité associée.
+ * @return array Un tableau de tous les commentaires avec les actualités associées, triés par date décroissante
+ * @throws PDOException En cas d'erreur sql
+ */
+function jointureCommentaireActualite() {
+    global $connexionBdd;
+    $requete = $connexionBdd->query("SELECT c.*, a.titre FROM commentaire c JOIN actualite a ON c.actualite_id = a.id ORDER BY c.date DESC");
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //Update

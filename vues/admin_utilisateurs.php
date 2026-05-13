@@ -11,8 +11,24 @@
         <section>
             <h1>Gestion des utilisateurs</h1>
         </section>
+		
+		<!-- La section ci-dessous est pour avoir tous les utilisateurs. Faut faire une autre section dans le cas où on a déjà choisi un utilisateur
+		 Avec cette façon de faire on changera la section affichée en fonction de si on a choisi un utilisateur ou pas-->
 
-        <section>
+		 <!-- Message de suppression d'utilisateur -->
+		<?php if (isset($_SESSION['utilisateur_suppression'])): ?>
+			<p><?= $_SESSION['utilisateur_suppression'] ?></p>
+			<?php unset($_SESSION['utilisateur_suppression']); ?>
+		<?php endif; ?>
+
+		<!-- Message dans le cas où l'admin essaie de consulter un utilisateur inexistant -->
+		<?php if (isset($_SESSION['utilisateur_inexistant'])): ?>
+			<p><?= $_SESSION['utilisateur_inexistant'] ?></p>
+			<?php unset($_SESSION['utilisateur_inexistant']); ?>
+		<?php endif; ?>
+
+        <?php if (!isset($_GET['utilisateur_id'])): ?>
+		 <section>
             <section>
 			<h2>Gérer les utilisateurs</h2>
 
@@ -43,14 +59,14 @@
 				<!-- Ici, utiliser une boucle PHP pour afficher les utilisateurs depuis la base de données s'il y en a.
 				 On va en afficher 10 à la fois. Donc faut mettre en place une pagination.
 				 Il faut aussi ajouter des fonctions dans le crud alors pour gérer la pagination en utilisant OFFSET -->
-					 <?php if (empty($utilisateurs)): ?>
+				<?php if (empty($utilisateurs)): ?>
 					<tr>
 						<td colspan="4">Aucun utilisateur trouvé.</td>
 					</tr>
-				<?php endif ?>
+				<?php else: ?>
 			 	<?php foreach ($utilisateurs as $utilisateur): ?>
 					<tr>
-						<td><a href="/admin/utilisateur?id=<?php echo $utilisateur['id']; ?>" target="_blank">Voir l'utilisateur</a></td>
+						<td><a href="/admin/utilisateurs/<?php echo $utilisateur['id']; ?>" target="_blank">Voir l'utilisateur</a></td>
 						<td><?php echo $utilisateur['nom']; ?></td>
 						<td><?php echo $utilisateur['prenom']; ?></td>
                         <!--On pourrait se dire aie l'utilisateur existe peut etre pas mais en fait on vient de le récupérer de la base de données.
@@ -66,11 +82,70 @@
 							</form>
 						</td>
 					</tr>
-			 	<?php endforeach ?>
+			 	<?php endforeach; ?>
+				<?php endif; ?>
 				</tbody>
 			</table>
         </section>
+		<?php endif; ?>
 
+		<!-- Section pour gérer un utilisateur en particulier. On affiche cette section que si on a un utilisateur dans le get-->
+		<?php if (isset($_GET['utilisateur_id'])): ?>
+		<section>
+			<?php if ($utilisateur === null): ?>
+				<h2>Gérer les commentaires anonymes</h2>
+			<?php else: ?>
+				<h2>Gérer l'utilisateur : <?= htmlspecialchars($utilisateur['nom'] . ' ' . $utilisateur['prenom']) ?></h2>
+				<p>ID : <?= htmlspecialchars($utilisateur['id']) ?></p>
+				<p>Email : <?= htmlspecialchars($utilisateur['email']) ?></p>
+				<p>Membre depuis : <?= htmlspecialchars($utilisateur['date_creation']) ?></p>
+				<p>Dernière connexion : <?= htmlspecialchars($utilisateur['derniere_activite']) ?></p>
+			<?php endif; ?>
+			<p>Nombre de commentaires : <?= $nbCommentaires ?></p>
+			<h4>Commentaires de l'utilisateur</h4>
+
+			<!-- Message de suppression de commentaire -->
+			<?php if (isset($commentaire_suppression)): ?>
+				<p><?= $commentaire_suppression ?></p>
+				<?php unset($commentaire_suppression); ?>
+			<?php endif; ?>
+			
+			<?php if (empty($commentaires)): ?>
+				<p>Aucun commentaire trouvé pour cet utilisateur.</p>
+			<?php else: ?>
+				<table>
+					<thead>
+						<tr>
+							<th>Date de publication</th>
+							<th>Actualité associée</th>						
+							<th>Commentaire</th>						
+							<th>Supprimer le commentaire</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ($commentaires as $commentaire): ?>
+							<tr>						
+								<td><?= htmlspecialchars($commentaire['date']) ?></td>
+								<td><a href="/actualite/<?= $commentaire['actualite_id'] ?>" target="_blank"><?= htmlspecialchars($commentaire['titre']) ?></a></td>
+								<td><?= htmlspecialchars($commentaire['message']) ?></td>
+								<td>
+									<form action="/admin/utilisateurs/<?= $_GET['utilisateur_id'] ?>" method="post">
+										<input type="hidden" name="commentaire_id" value="<?= $commentaire['id'] ?>">
+										<button type="submit" name="bSupprimerCommentaire">Supprimer</button>
+									</form>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			<?php endif; ?>
+			
+			<form action="/admin/utilisateurs/<?= $_GET['utilisateur_id'] ?>" method="post">
+					<button type="submit" name="bSupprimerUtilisateur">Supprimer l'utilisateur</button>
+			</form>
+			<a href="/admin/utilisateurs">Revenir à la liste des utilisateurs</a>
+		</section>
+		<?php endif; ?>
         <section>
             <a href="/admin">Revenir à la gestion des actualités</a>
         </section>

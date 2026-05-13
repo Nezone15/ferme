@@ -175,14 +175,16 @@ function modifierUtilisateur($id, $modifications) {
 /**
  * Supprime un utilisateur de la base de données.
  * 
- * @param int $id L'ID de l'utilisateur à supprimer
+ * @param int|null $id L'ID de l'utilisateur à supprimer ou null pour supprimer l'utilisateur anonyme
  * @return bool true si une suppression a bien été effectuée, false sinon
  * @throws PDOException En cas d'erreur sql
  */
 function supprimerUtilisateur($id) {
     global $connexionBdd;
-    $requete = $connexionBdd->prepare("DELETE FROM utilisateur WHERE id = :id");
-    $requete->execute([':id' => $id]);
+    $condition = ($id === null) ? "id IS NULL" : "id = :id";
+    $param = ($id === null) ? [] : [':id' => $id];
+    $requete = $connexionBdd->prepare("DELETE FROM utilisateur WHERE " . $condition);
+    $requete->execute($param);
     return ($requete->rowCount() > 0);
 }
 ?>
