@@ -101,3 +101,15 @@ function genererUrlTri($tri, $ordre, $recherche) {
     }
     return $url;
 }
+
+/**
+ * Génère une URL pour trier les commentaires d'un utilisateur en fonction du champ de tri et de l'ordre
+ * @param string $utilisateur_id L'ID de l'utilisateur
+ * @param string $triCommentaire Le champ par lequel trier les commentaires (date ou titre)
+ * @param string $ordreCommentaire L'ordre de tri (ASC ou DESC)
+ * @return string L'URL générée pour le tri des commentaires
+ */
+function genererUrlTriCommentaire($utilisateur_id, $triCommentaire, $ordreCommentaire) {
+    $url = '/admin/utilisateurs/' . $utilisateur_id . '?triCommentaire=' . $triCommentaire . '&ordreCommentaire=' . $ordreCommentaire;
+    return $url;
+}

@@ -109,16 +109,27 @@ function nombreCommentairesUtilisateur($utilisateur_id) {
 }
 
 /**
- * Fait une jointure entre les tables commentaire et actualite pour récupérer les commentaires d'un utilisateur avec le titre de l'actualité associée.
+ * Fait une jointure entre les tables commentaire et actualite pour récupérer les commentaires d'un utilisateur avec le titre de l'actualité associée et le tri demandé
  * @param int|null $utilisateur_id L'ID de l'utilisateur ou null pour les commentaires anonymes
+ * @param string $triCommentaire Le champ par lequel trier les commentaires (date ou titre)
+ * @param string $ordreCommentaire L'ordre de tri (ASC ou DESC)
  * @return array Un tableau de tous les commentaires de l'utilisateur avec les actualités associées, triés par date décroissante
  * @throws PDOException En cas d'erreur sql
  */
-function jointureCommentaireActualiteParUtilisateur($utilisateur_id) {
+function jointureCommentaireActualiteParUtilisateur($utilisateur_id, $triCommentaire, $ordreCommentaire) {
     global $connexionBdd;
     $condition = ($utilisateur_id === null) ? "c.utilisateur_id IS NULL" : "c.utilisateur_id = :utilisateur_id";
+    //On fait attention avec triCommentaire parce qu'il change de table
+    if ($triCommentaire === 'date') {
+        $triCommentaire = "c.date";
+    } elseif ($triCommentaire === 'titre') {
+        $triCommentaire = "a.titre";
+    } else {
+        // Valeur de tri invalide, on peut choisir de trier par date par défaut
+        $triCommentaire = "c.date"; // Tri par date par défaut
+    }
     $param = ($utilisateur_id === null) ? [] : [':utilisateur_id' => $utilisateur_id];
-    $requete = $connexionBdd->prepare("SELECT c.*, a.titre FROM commentaire c JOIN actualite a ON c.actualite_id = a.id WHERE $condition ORDER BY c.date DESC");
+    $requete = $connexionBdd->prepare("SELECT c.*, a.titre FROM commentaire c JOIN actualite a ON c.actualite_id = a.id WHERE $condition ORDER BY $triCommentaire $ordreCommentaire");
     $requete->execute($param);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }

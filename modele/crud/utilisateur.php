@@ -82,6 +82,18 @@ function utilisateurSaufAdmin() {
 }
 
 /**
+ * Récupère le nombre total d'utilisateurs qui ne sont pas administrateurs dans la base de données.
+ * @return int Le nombre total d'utilisateurs non administrateurs
+ * @throws PDOException En cas d'erreur sql
+ */
+function nbUtilisateursSaufAdmin() {
+    global $connexionBdd;
+    $requete = $connexionBdd->query("SELECT COUNT(*) AS total FROM utilisateur WHERE admin = 0");
+    $resultat = $requete->fetchColumn();
+    return $resultat;
+}
+
+/**
  * Récupère les données d'un utilisateur à partir de son ID.
  * 
  *  @param int $id L'ID de l'utilisateur
@@ -111,6 +123,30 @@ function utilisateurEmail($email) {
     $requete = $connexionBdd->prepare("SELECT * FROM utilisateur WHERE email = :email");
     $requete->execute([':email' => $email]);
     return $requete->fetch(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Fait une jointure entre la table utilisateur et la table commentaire pour récupérer le nombre de commentaires postés par chaque utilisateur. L'utilisateur anonyme (id null) est également comptabilisé. Tout en prenant les paramètres de tri et de filtreen compte.
+ * @return array Un tableau associatif contenant l'id, le nom, le prénom et le nombre de commentaires de chaque utilisateur
+ * @throws PDOException En cas d'erreur sql
+ */
+function jointureUtilisateurCommentaire($triUtilisateur = 'nom', $ordreUtilisateur = 'ASC', $recherche = '', $nb_resultats = 10, $pagination=1) {
+    global $connexionBdd;
+    $nb_resultats = (int)$nb_resultats;
+    $offset = ($pagination - 1) * $nb_resultats;
+    $clauseRecherche = '';
+    if (!empty($recherche)) {
+        $clauseRecherche = "AND (CONCAT(u.prenom, ' ', u.nom) LIKE '%$recherche%' OR CONCAT(u.nom, ' ', u.prenom) LIKE '%$recherche%')";
+    }
+
+    $requete = $connexionBdd->query(
+    "((SELECT u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite, COUNT(c.id) AS nb_commentaires FROM utilisateur u LEFT JOIN commentaire c ON u.id = c.utilisateur_id WHERE u.admin = 0 $clauseRecherche GROUP BY u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite)
+    UNION ALL
+    (SELECT NULL AS id, 'Anonyme' AS nom, '' AS prenom, NULL AS date_creation, NULL AS derniere_activite, COUNT(id) AS nb_commentaires FROM commentaire WHERE utilisateur_id IS NULL HAVING nb_commentaires > 0))
+    ORDER BY $triUtilisateur $ordreUtilisateur
+    LIMIT $nb_resultats OFFSET $offset"
+    );
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //UPDATE

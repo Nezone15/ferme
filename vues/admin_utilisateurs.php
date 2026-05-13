@@ -33,50 +33,69 @@
 			<h2>Gérer les utilisateurs</h2>
 
 			<search>
-				<form action="admin_utilisateurs" method="get">
+				<form action="/admin/utilisateurs" method="get">
 					<?php (isset($_GET['recherche'])) ? $valeur_recherche = trim(htmlspecialchars($_GET['recherche'])) : $valeur_recherche = ''; ?>
 					<input type="text" name="recherche" placeholder="Rechercher un utilisateur..." value="<?= $valeur_recherche ?>">
 					<button type="submit">Rechercher</button>
-					<a href="admin_utilisateurs">Réinitialiser</a>
+					<a href="/admin/utilisateurs">Réinitialiser</a>
 				</form>
 			</search>
+
+			<form action="/admin/utilisateurs" method="post">
+				<select name="triUtilisateur">
+					<option value="nom" <?= ($triUtilisateur === 'nom') ? 'selected' : '' ?>>Nom</option>
+					<option value="prenom" <?= ($triUtilisateur === 'prenom') ? 'selected' : '' ?>>Prénom</option>
+					<option value="date_creation" <?= ($triUtilisateur === 'date_creation') ? 'selected' : '' ?>>Date de création</option>
+					<option value="derniere_activite" <?= ($triUtilisateur === 'derniere_activite') ? 'selected' : '' ?>>Dernière activité</option>
+					<option value="nb_commentaires" <?= ($triUtilisateur === 'nb_commentaires') ? 'selected' : '' ?>>Nombre de commentaires</option>
+				</select>
+				<select name="ordreUtilisateur">
+					<option value="ASC" <?= ($ordreUtilisateur === 'ASC') ? 'selected' : '' ?>>Ordre croissant</option>
+					<option value="DESC" <?= ($ordreUtilisateur === 'DESC') ? 'selected' : '' ?>>Ordre décroissant</option>
+				</select>
+				<button type="submit" name="bTrierUtilisateurs">Trier</button>
+			</form>
 			
 			<h3>Liste des utilisateurs</h3>
 			<p><?= $totalUtilisateurs ?> utilisateur(s) trouvée(s).</p>
 			<table>
 				<thead>
-					<!--A FAIRE PLUS TARD Rendre nom et prénom cliquable pour trier par nom ou prénom. 
+					<!--A FAIRE PLUS TARD Rendre nom et prénom cliquable pour trier par nom ou prénom. Tri par nb commentaires ? 
 					Faudra surement changer les ↑ avec css pour que ce soit plus joli-->
                     <tr>
                         <th>Lien</th>
                         <th>Nom</th>
                         <th>Prénom</th>
+						<th>Membre depuis</th>
+						<th>Dernière activité</th>
                         <th>Nombre de commentaires</th>
+						<th>Supprimer l'utilisateur</th>
                     </tr>
 					
 				</thead>
 				<tbody>
 				<!-- Ici, utiliser une boucle PHP pour afficher les utilisateurs depuis la base de données s'il y en a.
-				 On va en afficher 10 à la fois. Donc faut mettre en place une pagination.
+				 A FAIRE On va en afficher 10 à la fois. Donc faut mettre en place une pagination.
 				 Il faut aussi ajouter des fonctions dans le crud alors pour gérer la pagination en utilisant OFFSET -->
 				<?php if (empty($utilisateurs)): ?>
 					<tr>
-						<td colspan="4">Aucun utilisateur trouvé.</td>
+						<td colspan="6">Aucun utilisateur trouvé.</td>
 					</tr>
 				<?php else: ?>
 			 	<?php foreach ($utilisateurs as $utilisateur): ?>
 					<tr>
-						<td><a href="/admin/utilisateurs/<?php echo $utilisateur['id']; ?>" target="_blank">Voir l'utilisateur</a></td>
-						<td><?php echo $utilisateur['nom']; ?></td>
-						<td><?php echo $utilisateur['prenom']; ?></td>
-                        <!--On pourrait se dire aie l'utilisateur existe peut etre pas mais en fait on vient de le récupérer de la base de données.
-                        Par contre ATTENTION qu'en est-il des utilisateurs anonymes càd ces commentaires dont l'utilisateur n'existe plus.
-                        Problème également si sql plante il va se passer quoi ? Je dois mettre un try catch dans ma vue, bizarre
-                        SOLUTION POTENTIEL : assigner avant dans le controleur qui s'occupera des éventuels erreurs. A REFLECHIR
-                        -->
-                        <td><?php echo nombreCommentairesUtilisateur($utilisateur['id']); ?></td>
+						<?php if ($utilisateur['id'] === null): ?>
+							<td><a href="/admin/utilisateurs/null" target="_blank">Voir les commentaires anonymes</a></td>
+						<?php else: ?>
+							<td><a href="/admin/utilisateurs/<?php echo $utilisateur['id']; ?>" target="_blank">Voir l'utilisateur</a></td>
+						<?php endif; ?>
+						<td><?php echo trim(htmlspecialchars($utilisateur['nom'])); ?></td>
+						<td><?php echo trim(htmlspecialchars($utilisateur['prenom'])); ?></td>
+						<td><?php echo trim(htmlspecialchars($utilisateur['date_creation'])); ?></td>
+						<td><?php echo trim(htmlspecialchars($utilisateur['derniere_activite'])); ?></td>
+                        <td><?php echo $utilisateur['nb_commentaires']; ?></td>
 						<td>
-							<form method="post">
+							<form action="/admin/utilisateurs" method="post">
 								<input type="hidden" name="utilisateur_id" value="<?php echo $utilisateur['id']; ?>">
 								<button type="submit" name="bSupprimerUtilisateur">Supprimer</button>
 							</form>
@@ -86,6 +105,7 @@
 				<?php endif; ?>
 				</tbody>
 			</table>
+			<!--A FAIRE Ajouter une pagination en bas de tableau pour naviguer entre les pages d'utilisateurs-->
         </section>
 		<?php endif; ?>
 
@@ -113,12 +133,26 @@
 			<?php if (empty($commentaires)): ?>
 				<p>Aucun commentaire trouvé pour cet utilisateur.</p>
 			<?php else: ?>
+				<!-- On va permettre de trier par date de publication du commentaire et par le titre de l'actualité -->
+				 <form action="/admin/utilisateurs" method="post">
+					<select name="triCommentaire">
+							<option <?= ($triCommentaire === 'date') ? 'selected' : '' ?> value="date">Trier par date</option>
+							<option <?= ($triCommentaire === 'titre') ? 'selected' : '' ?> value="titre">Trier par titre de l'actualité</option>
+						</select>
+					<select name="ordreCommentaire">
+						<option <?= ($ordreCommentaire === 'DESC') ? 'selected' : '' ?> value="DESC">Ordre décroissant</option>
+						<option <?= ($ordreCommentaire === 'ASC') ? 'selected' : '' ?> value="ASC">Ordre croissant</option>
+					</select>
+					<button type="submit" name="bTrierCommentaires">Appliquer le tri</button>
+				</form>
 				<table>
 					<thead>
 						<tr>
-							<th>Date de publication</th>
-							<th>Actualité associée</th>						
-							<th>Commentaire</th>						
+							<th><a href="<?= genererUrlTriCommentaire($_GET['utilisateur_id'], 'date', $prochainOrdreCommentaire) ?>">
+								Date de publication<?= ($triCommentaire === 'date') ? ($ordreCommentaire === 'ASC' ? '↑' : '↓') : '' ?></a></th>
+							<th><a href="<?= genererUrlTriCommentaire($_GET['utilisateur_id'], 'titre', $prochainOrdreCommentaire) ?>">
+								Actualité associée<?= ($triCommentaire === 'titre') ? ($ordreCommentaire === 'ASC' ? '↑' : '↓') : '' ?></a></th>
+							<th>Commentaire</th>
 							<th>Supprimer le commentaire</th>
 						</tr>
 					</thead>
@@ -140,7 +174,8 @@
 				</table>
 			<?php endif; ?>
 			
-			<form action="/admin/utilisateurs/<?= $_GET['utilisateur_id'] ?>" method="post">
+			<form action="/admin/utilisateurs" method="post">
+					<input type="hidden" name="utilisateur_id" value="<?= $_GET['utilisateur_id'] ?>">
 					<button type="submit" name="bSupprimerUtilisateur">Supprimer l'utilisateur</button>
 			</form>
 			<a href="/admin/utilisateurs">Revenir à la liste des utilisateurs</a>
