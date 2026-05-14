@@ -133,3 +133,22 @@ function genererUrlTriUtilisateur($triUtilisateur, $ordreUtilisateur, $recherche
     }
     return $url;
 }
+
+/**
+ * Fonction qui nettoye la saisie de l'admin pour passer la recherche à la bdd avec les opérateurs de recherche booléens.
+ * @param string $recherche La recherche saisie par l'admin
+ * @return string La recherche nettoyée pour la bdd
+ */
+function prepareRechercheMots($recherche) {
+    $recherche = trim($recherche);
+    //On remplace tout ce qui n'est pas une lettre, un chiffre ou un espace par un espace. Cela permet de supprimer les caractères spéciaux qui pourraient poser problème dans la recherche.
+    $recherche = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $recherche);
+    $mots = preg_split('/\s+/', $recherche);
+    $motsFormattes = [];
+    foreach ($mots as &$mot) {
+        if (strlen($mot) > 2) {
+            $motsFormattes[] = '+' . $mot . '*';
+        }
+    }
+    return implode(' ', $motsFormattes);
+}

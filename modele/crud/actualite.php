@@ -147,8 +147,9 @@ function triActus($nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
  * @throws PDOException En cas d'erreur sql
  */
 function rechercheActusMots($mots, $nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
+	global $connexionBdd;
    	$offset = ($pagination - 1) * $nombre_actus;
-    $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots) ORDER BY `$tri` $ordre LIMIT $nombre_actus OFFSET $offset");
+    $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots IN BOOLEAN MODE) ORDER BY `$tri` $ordre LIMIT $nombre_actus OFFSET $offset");
     $requete->execute([':mots' => $mots]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -161,7 +162,7 @@ function rechercheActusMots($mots, $nombre_actus, $tri='date', $ordre='DESC', $p
  */
 function nombreRechercheActusMots($mots) {
 	global $connexionBdd;
-	$requeteTotal = $connexionBdd->prepare("SELECT COUNT(*) AS total FROM actualite WHERE MATCH(titre) AGAINST(:mots)");
+	$requeteTotal = $connexionBdd->prepare("SELECT COUNT(*) AS total FROM actualite WHERE MATCH(titre) AGAINST(:mots IN BOOLEAN MODE)");
 	$requeteTotal->execute([':mots' => $mots]);
 	$total = $requeteTotal->fetch(PDO::FETCH_ASSOC)['total'];
 	return $total;

@@ -86,9 +86,10 @@ if (isset($_GET['pagination'])) {
 //Là si l'admin a fait une recherche via mots-clés ou pas
 try {
     if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
-        $recherche = trim(($_GET['recherche']));
-        $actualites = rechercheActusMots($recherche, 10, $tri, $ordre, $pagination);
-        $totalActus = nombreRechercheActusMots($recherche);
+        $recherche = trim($_GET['recherche']);
+        $rechercheNettoye = prepareRechercheMots($_GET['recherche']);
+        $actualites = rechercheActusMots($rechercheNettoye, 10, $tri, $ordre, $pagination);
+        $totalActus = nombreRechercheActusMots($rechercheNettoye);
     } else {
         //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
         $recherche = '';

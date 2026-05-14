@@ -55,7 +55,7 @@
 			</search>
 			
 			<h3>Liste des actualités</h3>
-			<p><?= $totalActus ?> actualité(s) trouvée(s).</p>
+			<p><?php echo $totalActus . (($totalActus > 1) ? ' actualités trouvées.' : ' actualité trouvée.'); ?></p>
 			<table>
 				<thead>
 					<!-- Rendre titre et date cliquable pour trier par titre ou date.
