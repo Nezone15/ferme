@@ -145,6 +145,17 @@ function jointureCommentaireActualite() {
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Fonction pour vérifier s'il existe au moins un commentaire anonyme dans la base de données.
+ * @return bool true s'il existe au moins un commentaire anonyme, false sinon
+ */
+function anonymeCommentaire() {
+    global $connexionBdd;
+    $requete = $connexionBdd->query("SELECT COUNT(*) FROM commentaire WHERE utilisateur_id IS NULL");
+    $requete->execute();
+    return (($requete->fetchColumn())>0);
+}
+
 //Update
 
 /**

@@ -86,13 +86,10 @@
 				<?php endif ?>
 			 	<?php foreach ($actualites as $actu): ?>
 					<tr>
-						<td><a href="actu?id=<?php echo $actu['id']; ?>" target="_blank">Voir l'actualité</a></td>
+						<td><a href="/actualite/<?php echo $actu['id']; ?>" target="_blank">Voir l'actualité</a></td>
 						<td><?php echo $actu['titre']; ?></td>
 						<td><?php echo $actu['date']; ?></td>
 						<td>
-							<form action="actualite/?id=<?php echo $actu['id']; ?>" method="post">
-								<button type="submit" name="bModifierActu">Modifier</button>
-							</form>
 							<form method="post">
 								<input type="hidden" name="id_actu" value="<?php echo $actu['id']; ?>">
 								<button type="submit" name="bSupprimerActu">Supprimer</button>

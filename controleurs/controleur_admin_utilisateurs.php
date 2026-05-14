@@ -72,7 +72,12 @@ if (isset($_GET['utilisateur_id'])) {
 } else {
     $triUtilisateur = $_GET['triUtilisateur'] ?? 'nom';
     $ordreUtilisateur = $_GET['ordreUtilisateur'] ?? 'ASC';
+    $prochainOrdreUtilisateur = ($ordreUtilisateur === 'ASC') ? 'DESC' : 'ASC';
     $recherche = $_GET['recherche'] ?? '';
+    //L'admin aime peut être fortement la barre espace. On va être sympa et nettoyer pour lui
+    $recherche = strtolower(trim($recherche));
+    $recherche = preg_replace('/\s+/', ' ', $recherche);
+    $pagination = $_GET['pagination'] ?? 1;
 
     if (isset($_POST['bTrierUtilisateurs'])) {
         $triUtilisateur = $_POST['triUtilisateur'] ?? 'nom';
@@ -80,20 +85,21 @@ if (isset($_GET['utilisateur_id'])) {
     }
     try {
         //A FAIRE Il faudra modif la fonction pour gérer la recherche et la pagination. En soit ma variable $utilisateurs ne devrait avoir max que 10 utilisateurs.
-        $utilisateurs = jointureUtilisateurCommentaire($triUtilisateur, $ordreUtilisateur, $recherche);
-        $totalUtilisateurs = count($utilisateurs);
+        $utilisateurs = jointureUtilisateurCommentaire($triUtilisateur, $ordreUtilisateur, $recherche, 10, $pagination);
+        $totalUtilisateurs = nombreUtilisateurRecherche($recherche);
+        if ($recherche === '' || str_contains('anonyme', $recherche)) {
+            if (anonymeCommentaire()) {
+                $totalUtilisateurs++;
+            }
+        }       
     } catch (Exception $e) {
-        //Erreur sql lors de la récupération des utilisateurs
-        var_dump($e->getMessage());
+        //Erreur sql lors de la récupération des utilisateurs ou de leur comptage
         error_log("Erreur SQL lors de la récupération des utilisateurs : " . $e->getMessage());
         $utilisateurs = [];
         $totalUtilisateurs = 0;
     }
+    $paginationMax = ceil($totalUtilisateurs / 10);
+    ($paginationMax == 0) ? $paginationMax = 1 : $paginationMax = $paginationMax;
 }
-
-
-/*A REFLECHIR. J'envisage de faire un group_by utilisateur_id sur la table commentaire et de join le resultat avec la table utilisateur pour éviter de faire 
-une requete par utilisateur pour compter le nombre de commentaires. ça a l'avantage également de compter les commentaires pour l'utilisateur null
-Cependant, il faudrait adapter le crud en conséquence*/
 include VUES . 'admin_utilisateurs.php';
 ?>

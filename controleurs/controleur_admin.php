@@ -84,16 +84,21 @@ if (isset($_GET['pagination'])) {
 }
 
 //Là si l'admin a fait une recherche via mots-clés ou pas
-if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
-    $recherche = trim(($_GET['recherche']));
-    $resultat_recherche = rechercheActusMots($recherche, 10, $tri, $ordre, $pagination);
-    $totalActus = $resultat_recherche['total'];
-    $actualites = $resultat_recherche['actualites'];
-} else {
-    //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
-    $recherche = '';
-    $totalActus= totalActus(); 
-    $actualites = triActus(10, $tri, $ordre, $pagination);
+try {
+    if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
+        $recherche = trim(($_GET['recherche']));
+        $actualites = rechercheActusMots($recherche, 10, $tri, $ordre, $pagination);
+        $totalActus = nombreRechercheActusMots($recherche);
+    } else {
+        //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
+        $recherche = '';
+        $totalActus= totalActus(); 
+        $actualites = triActus(10, $tri, $ordre, $pagination);
+    }
+} catch (Exception $e) {
+    error_log('Erreur lors de la récupération des actualités : ' . $e->getMessage());
+    $actualites = [];
+    $totalActus = 0;
 }
 
 $paginationMax = ceil($totalActus / 10);

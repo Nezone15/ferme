@@ -113,3 +113,23 @@ function genererUrlTriCommentaire($utilisateur_id, $triCommentaire, $ordreCommen
     $url = '/admin/utilisateurs/' . $utilisateur_id . '?triCommentaire=' . $triCommentaire . '&ordreCommentaire=' . $ordreCommentaire;
     return $url;
 }
+
+/**
+ * Génère une URL pour trier les utilisateurs en fonction du champ de tri et de l'ordre
+ * @param string $triUtilisateur Le champ par lequel trier les utilisateurs (nom, prenom, date_creation, derniere_activite, nb_commentaires)
+ * @param string $ordreUtilisateur L'ordre de tri (ASC ou DESC)
+ * @param string $recherche La recherche actuelle pour inclure dans l'URL si elle existe
+ * @param int $pagination Le numéro de la page à inclure dans l'URL
+ * @return string L'URL générée pour le tri des utilisateurs
+ * 
+ */
+function genererUrlTriUtilisateur($triUtilisateur, $ordreUtilisateur, $recherche, $pagination=1) {
+    $url = '/admin/utilisateurs?triUtilisateur=' . $triUtilisateur . '&ordreUtilisateur=' . $ordreUtilisateur;
+    if (!empty($recherche)) {
+        $url .= '&recherche=' . urlencode($recherche);
+    }
+    if ($pagination > 1) {
+        $url .= '&pagination=' . $pagination;
+    }
+    return $url;
+}

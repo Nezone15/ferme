@@ -28,7 +28,6 @@
 		<?php endif; ?>
 
         <?php if (!isset($_GET['utilisateur_id'])): ?>
-		 <section>
             <section>
 			<h2>Gérer les utilisateurs</h2>
 
@@ -57,18 +56,22 @@
 			</form>
 			
 			<h3>Liste des utilisateurs</h3>
-			<p><?= $totalUtilisateurs ?> utilisateur(s) trouvée(s).</p>
+			<p><?= $totalUtilisateurs ?> <?= ($totalUtilisateurs > 1) ? 'utilisateurs' : 'utilisateur' ?> <?= ($totalUtilisateurs > 1) ? 'trouvés' : 'trouvé' ?>.</p>
 			<table>
 				<thead>
-					<!--A FAIRE PLUS TARD Rendre nom et prénom cliquable pour trier par nom ou prénom. Tri par nb commentaires ? 
-					Faudra surement changer les ↑ avec css pour que ce soit plus joli-->
+					<!--Faudra surement changer les ↑ avec css pour que ce soit plus joli-->
                     <tr>
                         <th>Lien</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-						<th>Membre depuis</th>
-						<th>Dernière activité</th>
-                        <th>Nombre de commentaires</th>
+                        <th><a href="<?= genererUrlTriUtilisateur('nom', $prochainOrdreUtilisateur, $recherche) ?>">
+							Nom<?= ($triUtilisateur === 'nom') ? ($ordreUtilisateur === 'ASC' ? '↑' : '↓') : '' ?></a></th>
+                        <th><a href="<?= genererUrlTriUtilisateur('prenom', $prochainOrdreUtilisateur, $recherche) ?>">
+							Prénom<?= ($triUtilisateur === 'prenom') ? ($ordreUtilisateur === 'ASC' ? '↑' : '↓') : '' ?></a></th>
+						<th><a href="<?= genererUrlTriUtilisateur('date_creation', $prochainOrdreUtilisateur, $recherche) ?>">
+							Membre depuis<?= ($triUtilisateur === 'date_creation') ? ($ordreUtilisateur === 'ASC' ? '↑' : '↓') : '' ?></a></th>
+						<th><a href="<?= genererUrlTriUtilisateur('derniere_activite', $prochainOrdreUtilisateur, $recherche) ?>">
+							Dernière activité<?= ($triUtilisateur === 'derniere_activite') ? ($ordreUtilisateur === 'ASC' ? '↑' : '↓') : '' ?></a></th>
+                        <th><a href="<?= genererUrlTriUtilisateur('nb_commentaires', $prochainOrdreUtilisateur, $recherche) ?>">
+							Nombre de commentaires<?= ($triUtilisateur === 'nb_commentaires') ? ($ordreUtilisateur === 'ASC' ? '↑' : '↓') : '' ?></a></th>
 						<th>Supprimer l'utilisateur</th>
                     </tr>
 					
@@ -79,7 +82,7 @@
 				 Il faut aussi ajouter des fonctions dans le crud alors pour gérer la pagination en utilisant OFFSET -->
 				<?php if (empty($utilisateurs)): ?>
 					<tr>
-						<td colspan="6">Aucun utilisateur trouvé.</td>
+						<td colspan="7">Aucun utilisateur trouvé.</td>
 					</tr>
 				<?php else: ?>
 			 	<?php foreach ($utilisateurs as $utilisateur): ?>
@@ -105,7 +108,14 @@
 				<?php endif; ?>
 				</tbody>
 			</table>
-			<!--A FAIRE Ajouter une pagination en bas de tableau pour naviguer entre les pages d'utilisateurs-->
+
+			<!-- Pagination -->
+			<div>
+				<?php for ($i = 1; $i <= $paginationMax; $i++): ?>
+					<a href="<?= genererUrlTriUtilisateur($triUtilisateur, $ordreUtilisateur, $recherche, $i) ?>"><?= $i ?></a>
+				<?php endfor; ?>
+			</div>
+
         </section>
 		<?php endif; ?>
 

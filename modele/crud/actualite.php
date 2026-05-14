@@ -135,8 +135,7 @@ function triActus($nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
 }
 
 /**
- * Recherche des $nombre_actus actualités si elles existent dont le titre contient le ou les mots-clés donnés. Donne aussi le nombre total d'actualités correspondantes à cette recherche.
- *
+ * Recherche des $nombre_actus actualités si elles existent dont le titre contient le ou les mots-clés donnés.
  * @param string $mots Les mots-clés à rechercher dans les titres des actualités
  * @param int $nombre_actus Le nombre d'actualités à récupérer
  * @param string $tri Le champ par lequel trier les résultats (titre ou date). Par défaut, tri par date.
@@ -148,15 +147,24 @@ function triActus($nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
  * @throws PDOException En cas d'erreur sql
  */
 function rechercheActusMots($mots, $nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
-    global $connexionBdd;
+   	$offset = ($pagination - 1) * $nombre_actus;
+    $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots) ORDER BY `$tri` $ordre LIMIT $nombre_actus OFFSET $offset");
+    $requete->execute([':mots' => $mots]);
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Calcule le nombre total d'actualités correspondant à une recherche par mots-clés.
+ * @param string $mots Les mots-clés à rechercher dans les titres des actualités
+ * @return int Le nombre total d'actualités correspondant à la recherche
+ * @throws PDOException En cas d'erreur sql
+ */
+function nombreRechercheActusMots($mots) {
+	global $connexionBdd;
 	$requeteTotal = $connexionBdd->prepare("SELECT COUNT(*) AS total FROM actualite WHERE MATCH(titre) AGAINST(:mots)");
 	$requeteTotal->execute([':mots' => $mots]);
 	$total = $requeteTotal->fetch(PDO::FETCH_ASSOC)['total'];
-
-	$offset = ($pagination - 1) * $nombre_actus;
-    $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots) ORDER BY `$tri` $ordre LIMIT $nombre_actus OFFSET $offset");
-    $requete->execute([':mots' => $mots]);
-    return ['total' => $total, 'actualites' => $requete->fetchAll(PDO::FETCH_ASSOC)];
+	return $total;
 }
 
 //Update

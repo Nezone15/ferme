@@ -126,8 +126,13 @@ function utilisateurEmail($email) {
 }
 
 /**
- * Fait une jointure entre la table utilisateur et la table commentaire pour récupérer le nombre de commentaires postés par chaque utilisateur. L'utilisateur anonyme (id null) est également comptabilisé. Tout en prenant les paramètres de tri et de filtreen compte.
- * @return array Un tableau associatif contenant l'id, le nom, le prénom et le nombre de commentaires de chaque utilisateur
+ * Fait une jointure entre la table utilisateur et la table commentaire pour récupérer le nombre de commentaires postés par chaque utilisateur. L'utilisateur anonyme peut également être inclus. Tout en prenant les paramètres de tri et de filtre en compte.
+ * @param string $triUtilisateur Le champ par lequel trier les utilisateurs (nom, prenom, date_creation, derniere_activite, nb_commentaires)
+ * @param string $ordreUtilisateur L'ordre de tri (ASC ou DESC)
+ * @param string $recherche La recherche à effectuer sur le nom et le prénom de l'utilisateur
+ * @param int $nb_resultats Le nombre de résultats à retourner
+ * @param int $pagination Le numéro de la page à afficher
+ * @return array Un tableau associatif contenant les infos basiques de chaque utilisateur
  * @throws PDOException En cas d'erreur sql
  */
 function jointureUtilisateurCommentaire($triUtilisateur = 'nom', $ordreUtilisateur = 'ASC', $recherche = '', $nb_resultats = 10, $pagination=1) {
@@ -138,15 +143,48 @@ function jointureUtilisateurCommentaire($triUtilisateur = 'nom', $ordreUtilisate
     if (!empty($recherche)) {
         $clauseRecherche = "AND (CONCAT(u.prenom, ' ', u.nom) LIKE '%$recherche%' OR CONCAT(u.nom, ' ', u.prenom) LIKE '%$recherche%')";
     }
+    if (str_contains('anonyme', $recherche) || $recherche === '') {
+        $requete = $connexionBdd->query(
+            "(SELECT u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite, COUNT(c.id) AS nb_commentaires 
+            FROM utilisateur u 
+            LEFT JOIN commentaire c ON u.id = c.utilisateur_id 
+            WHERE u.admin = 0 
+            $clauseRecherche
+            GROUP BY u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite)
+            UNION ALL
+            (SELECT NULL AS id, 'Anonyme' AS nom, '' AS prenom, NULL AS date_creation, NULL AS derniere_activite, COUNT(id) AS nb_commentaires 
+            FROM commentaire 
+            WHERE utilisateur_id IS NULL HAVING nb_commentaires > 0)
+            ORDER BY $triUtilisateur $ordreUtilisateur
+            LIMIT $nb_resultats OFFSET $offset"
+        );
 
-    $requete = $connexionBdd->query(
-    "((SELECT u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite, COUNT(c.id) AS nb_commentaires FROM utilisateur u LEFT JOIN commentaire c ON u.id = c.utilisateur_id WHERE u.admin = 0 $clauseRecherche GROUP BY u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite)
-    UNION ALL
-    (SELECT NULL AS id, 'Anonyme' AS nom, '' AS prenom, NULL AS date_creation, NULL AS derniere_activite, COUNT(id) AS nb_commentaires FROM commentaire WHERE utilisateur_id IS NULL HAVING nb_commentaires > 0))
-    ORDER BY $triUtilisateur $ordreUtilisateur
-    LIMIT $nb_resultats OFFSET $offset"
-    );
+    } else {         
+        $requete = $connexionBdd->query(
+        "SELECT u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite, COUNT(c.id) AS nb_commentaires 
+        FROM utilisateur u 
+        LEFT JOIN commentaire c ON u.id = c.utilisateur_id 
+        WHERE u.admin = 0 $clauseRecherche 
+        GROUP BY u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite
+        LIMIT $nb_resultats OFFSET $offset"
+        );
+    }
     return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
+ * Compte le nombre total d'utilisateurs correspondant à une recherche. L'anonyme n'est pas comptabilisé dans ce total.
+ * @param string $recherche La recherche à effectuer sur le nom et le prénom de l'utilisateur
+ * @return int Le nombre total d'utilisateurs correspondant à la recherche
+ */
+function nombreUtilisateurRecherche($recherche = '') {
+    global $connexionBdd;
+    $clauseRecherche = '';
+    if (!empty($recherche)) {
+        $clauseRecherche = "AND (CONCAT(nom, ' ', prenom) LIKE '%$recherche%' OR CONCAT(prenom, ' ', nom) LIKE '%$recherche%')";
+    }
+    $requete = $connexionBdd->query("SELECT COUNT(*) FROM utilisateur WHERE admin = 0 $clauseRecherche");
+    return $requete->fetchColumn();
 }
 
 //UPDATE
