@@ -148,9 +148,13 @@ function triActus($nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
  */
 function rechercheActusMots($mots, $nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
 	global $connexionBdd;
+	var_dump($mots);
+
    	$offset = ($pagination - 1) * $nombre_actus;
-    $requete = $connexionBdd->prepare("SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots IN BOOLEAN MODE) ORDER BY `$tri` $ordre LIMIT $nombre_actus OFFSET $offset");
-    $requete->execute([':mots' => $mots]);
+    $requete ="SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots IN BOOLEAN MODE) ORDER BY $tri $ordre LIMIT $nombre_actus OFFSET $offset";
+	var_dump($requete);
+    $requete = $connexionBdd->prepare($requete);
+	$requete->execute([':mots' => $mots]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 

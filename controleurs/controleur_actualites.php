@@ -21,9 +21,8 @@ if (isset($_GET['pagination'])) {
 //Là si l'utilisateur a fait une recherche via mots-clés ou pas
 if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
     $recherche = trim(($_GET['recherche']));
-    $resultat_recherche = rechercheActusMots($recherche, 9, $tri, $ordre, $pagination);
-    $totalActus = $resultat_recherche['total'];
-    $actualites = $resultat_recherche['actualites'];
+    $actualites = rechercheActusMots($recherche, 9, $tri, $ordre, $pagination);
+    $totalActus = nombreRechercheActusMots($recherche);
 } else {
     //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
     $recherche = '';

@@ -6,6 +6,7 @@ if (isset($_POST['bConnexion'])) {
     
     try {
         $utilisateur = connexion($email, $mdp);
+        var_dump($utilisateur);
         if ($utilisateur) {
             connexionReussie($utilisateur);
         } else {

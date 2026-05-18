@@ -36,7 +36,8 @@
 					<a href="actualites">Réinitialiser</a>
 				</form>
 			</search>
-			<p><?= $totalActus ?> Actualité(s) trouvée(s).</p>
+			<p><?php echo $totalActus; 
+					echo ($totalActus > 1 ? ' Actualités trouvées' : ' Actualité trouvée'); ?>.</p>
 			
 			<div class="grille-actualites">
 				<?php

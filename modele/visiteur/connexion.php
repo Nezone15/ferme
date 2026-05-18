@@ -24,18 +24,18 @@ function connexion($email, $mdp) {
  * 
  * @param array $utilisateur Les données de l'utilisateur connecté
  */
-function connexionReussie($utilisateur) {
-    $_SESSION['utilisateur'] = $utilisateur;
+function connexionReussie($utilisateur) {    
     modifierDerniereActivite($utilisateur['id']);
-
+    
     //Maintenant on lui fait sa session de connexion
     //On supprime une ancienne si elle existe et on lui met son cookie de 13 mois.
     require_once MODELE . 'crud/session.php';
     supprimerSessionUtilisateur($utilisateur['id']);
     $token = creerSession($utilisateur['id']);
     setcookie('token_connexion', $token, time() + (86400 * 30 * 13), "/", '', false, true);
-         
+    
     // Redirection vers la page d'accueil après connexion
+    $_SESSION['utilisateur'] = $utilisateur;
     header('Location: accueil');
     exit();
 }
