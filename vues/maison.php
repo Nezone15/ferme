@@ -4,6 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Maison de vie communautaire</title>
+	<!-- Liens vers les polices-->  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+  
 	<script src="/public/js/maison.js" defer></script>	
 	<link rel="stylesheet" href="/public/style/style.css">
 	<link rel="stylesheet" href="/public/style/maison.css">
@@ -11,13 +16,13 @@
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>
     <main>
-        <section class="banniere">
+        <section class="banniere maison">
 				<h1>Maison de vie communautaire</h1>
 		</section>
 
-		<section>
-            <div>
-                <div>
+		<section class="contenu">
+			<section class="histoire">
+				<div>
 					<h2>Son passé</h2>
 					<p>La ferme Saint Achaire est en premier lieu une maison de vie communautaire. Fondé en 1970 par l’abbé Paulet, elle accueille depuis des personnes en situation de détresse pour leur offrir une nouvelle perspective de vie. Notamment en leur offrant une occupation grâce à son activité de production de bois de chauffage.</p>
 				</div>
@@ -28,9 +33,12 @@
 				<div>
 					<h2>Et demain ?</h2>
 					<p>Malheureusement, la vie peut être dure par moment. Ici à la ferme nous y sommes souvent confrontés. On continuera d’accueillir et de venir en aide aux personnes dans la détresse.</p>
-                <hr>
-            <div>
-                <h3>Envie de nous contacter directement ?</h3>
+				
+				</div>
+			</section>
+			<hr>
+            <div class="contact">
+                <p>Envie de nous contacter directement ?</p>
                 <a href="contact">Prendre contact</a>
             </div>
 		</section>

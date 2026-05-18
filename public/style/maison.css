@@ -1,1 +1,21 @@
 /* Style dedie a la page maison. */
+section.maison {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("/public/images/site/maison_banniere.png");
+}
+
+section.histoire {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+section.histoire div {
+  width: 60%;
+}
+section.histoire div:nth-child(2) {
+  align-self: flex-end;
+}

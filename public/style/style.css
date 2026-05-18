@@ -1,3 +1,108 @@
+:root {
+  --couleur-fond: #fff8ef;
+  --couleur-texte-vert: #485422;
+  --couleur-brun: #924c00;
+  --font-titre: "Tinos", serif;
+  --font-texte: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+  background-color: color-mix(in srgb, var(--couleur-fond) 80%, transparent);
+  font-family: var(--font-texte);
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+/*Style du header et de la navigation.*/
+header {
+  display: flex;
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+header nav ul a:hover {
+  color: var(--couleur-texte-vert);
+  border-bottom: 2px solid var(--couleur-brun);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style-type: none;
+}
+
+/*Style des titres*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-titre);
+  color: var(--couleur-texte-vert);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
 h2 {
-  color: green;
+  font-size: 2rem;
+}
+
+/*Style général de mes hero section. L'image serait fournie dans le style spécifique de chaque page*/
+section.banniere {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+/*Cette section différencie le contenu de la hero section. Comme ça la hero section peut prendre toute  la
+largeur avec une image de fond mais le contenu est centré*/
+section.contenu {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/*Style du div de contact qui dit : Envie de nous contacter directement ? */
+div.contact {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+div.contact p {
+  color: var(--couleur-texte-vert);
+  font-size: 1.1rem;
+}
+
+div.contact a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--couleur-brun);
+  color: white;
+  border-radius: 4px;
+}
+div.contact a:hover {
+  background-color: #7a3b00;
 }
