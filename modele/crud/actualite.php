@@ -148,13 +148,22 @@ function triActus($nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
  */
 function rechercheActusMots($mots, $nombre_actus, $tri='date', $ordre='DESC', $pagination=1) {
 	global $connexionBdd;
-	var_dump($mots);
+	$mots = preg_replace('/\s+/', ' ', trim($mots));
+	$tableau_mots = explode(' ', $mots);
 
+	//On ajoute les opérateurs "+" devant et le "*" derrière CHAQUE mot du tableau
+	//+ oblige à considérer chaque terme
+	//'*' permet de faire comme like sur le bout de chaque mot
+    $tableau_operateurs = [];
+	foreach ($tableau_mots as $mot) {
+		$tableau_operateurs[] = '+' . $mot . '*';
+	}
+    //On rassemble le tout avec un espace entre chaque bloc
+    $mots_final = implode(' ', $tableau_operateurs);
    	$offset = ($pagination - 1) * $nombre_actus;
     $requete ="SELECT * FROM actualite WHERE MATCH(titre) AGAINST(:mots IN BOOLEAN MODE) ORDER BY $tri $ordre LIMIT $nombre_actus OFFSET $offset";
-	var_dump($requete);
     $requete = $connexionBdd->prepare($requete);
-	$requete->execute([':mots' => $mots]);
+	$requete->execute([':mots' => $mots_final]);
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -166,9 +175,19 @@ function rechercheActusMots($mots, $nombre_actus, $tri='date', $ordre='DESC', $p
  */
 function nombreRechercheActusMots($mots) {
 	global $connexionBdd;
-	$requeteTotal = $connexionBdd->prepare("SELECT COUNT(*) AS total FROM actualite WHERE MATCH(titre) AGAINST(:mots IN BOOLEAN MODE)");
-	$requeteTotal->execute([':mots' => $mots]);
-	$total = $requeteTotal->fetch(PDO::FETCH_ASSOC)['total'];
+	$mots = preg_replace('/\s+/', ' ', trim($mots));
+	$tableau_mots = explode(' ', $mots);
+	$tableau_operateurs = [];
+	foreach ($tableau_mots as $mot) {
+		$tableau_operateurs[] = '+' . $mot . '*';
+	}
+    //On rassemble le tout avec un espace entre chaque bloc
+    $mots_final = implode(' ', $tableau_operateurs);
+
+	$requeteTotal = $connexionBdd->prepare("SELECT COUNT(id) FROM actualite WHERE MATCH(titre) AGAINST(:mots IN BOOLEAN MODE)");
+	$requeteTotal->execute([':mots' => $mots_final]);
+	$total = $requeteTotal->fetchColumn();
+	var_dump($total);
 	return $total;
 }
 

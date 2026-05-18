@@ -41,8 +41,6 @@ if (isset($_POST['bSupprimerUtilisateur'])) {
 
 //Commme on a fait 2 sections dans la vue en fonction de si on a choisi un utilisateur ou pas, on va gérer les 2 cas de figure ici
 
-
-
 //On commence avec le cas où un utilisateur est dans le get
 if (isset($_GET['utilisateur_id'])) {
     //On initialise les filtres
@@ -84,7 +82,6 @@ if (isset($_GET['utilisateur_id'])) {
         $ordreUtilisateur = $_POST['ordreUtilisateur'] ?? 'ASC';
     }
     try {
-        //A FAIRE Il faudra modif la fonction pour gérer la recherche et la pagination. En soit ma variable $utilisateurs ne devrait avoir max que 10 utilisateurs.
         $utilisateurs = jointureUtilisateurCommentaire($triUtilisateur, $ordreUtilisateur, $recherche, 10, $pagination);
         $totalUtilisateurs = nombreUtilisateurRecherche($recherche);
         if ($recherche === '' || str_contains('anonyme', $recherche)) {

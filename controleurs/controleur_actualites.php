@@ -23,6 +23,7 @@ if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
     $recherche = trim(($_GET['recherche']));
     $actualites = rechercheActusMots($recherche, 9, $tri, $ordre, $pagination);
     $totalActus = nombreRechercheActusMots($recherche);
+    var_dump($totalActus);
 } else {
     //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
     $recherche = '';
