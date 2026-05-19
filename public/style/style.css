@@ -94,12 +94,6 @@ h6 {
   font-weight: 400;
 }
 
-h1 {
-  font-size: 3rem;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
 h2 {
   font-size: 2rem;
 }
@@ -113,6 +107,12 @@ section.hero {
   width: 100%;
   background-size: cover;
   background-position: center;
+}
+
+section.hero h1 {
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 /*Section contenu. C'est tout sauf la hero section*/
