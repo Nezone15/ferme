@@ -1,1 +1,6 @@
 /* Style dedie a la page tn. */
+section.tn {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("/public/images/site/terre_nouvelle.JPG");
+}

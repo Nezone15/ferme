@@ -28,10 +28,13 @@ body {
   background-color: var(--couleur-brun);
   color: white;
   border-radius: 10px;
+  border: none;
 }
 
 .btn-primaire:hover {
   background-color: #7a3b00;
+  text-decoration: none;
+  color: white;
 }
 
 /*Bouton secondaire*/
@@ -47,6 +50,8 @@ body {
 
 .btn-secondaire:hover {
   background-color: #3a441a;
+  text-decoration: none;
+  color: white;
 }
 
 /*Style basique des liens. A override si nécessaire */

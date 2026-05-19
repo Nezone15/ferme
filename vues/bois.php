@@ -47,7 +47,7 @@
                 </article>
             </section>
             <aside class="contact">
-                <h3>Envie de nous contacter directement ?</h3>
+                <p>Envie de nous contacter directement ?</p>
                 <a href="contact" class="btn-primaire">Prendre contact</a>
             </aside>
 		</section>
