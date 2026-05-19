@@ -49,6 +49,17 @@ body {
   background-color: #3a441a;
 }
 
+/*Style basique des liens. A override si nécessaire */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: var(--couleur-vert);
+  text-decoration: underline;
+}
+
 /*Style du header et de la navigation.*/
 header {
   display: flex;
@@ -69,16 +80,7 @@ header img.logo {
 header nav ul a:hover {
   color: var(--couleur-vert);
   border-bottom: 2px solid var(--couleur-brun);
-}
-
-a {
   text-decoration: none;
-  color: black;
-}
-
-a.tel:hover {
-  color: var(--couleur-vert);
-  text-decoration: underline;
 }
 
 header nav ul {
@@ -182,7 +184,6 @@ footer a {
 
 footer a:hover {
   color: white;
-  text-decoration: underline;
 }
 
 footer ul {

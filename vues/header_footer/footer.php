@@ -2,19 +2,19 @@
     <div>
         <p>La ferme Saint Achaire</p>
         <ul>
-            <li><a href="mentions">Mentions légales</a></li>
-            <li><a href="politique">Politique de confidentialité</a></li>
+            <li><a href="/mentions">Mentions légales</a></li>
+            <li><a href="/politique">Politique de confidentialité</a></li>
         </ul>
     </div>
     <!--<nav>
         <p>Navigation</p>
         <ul>
-            <li><a href="accueil">Accueil</a></li>
-            <li><a href="actualites">Actualités</a></li>
-            <li><a href="bois">Bois de chauffage</a></li>
-            <li><a href="maison">Maison de vie communautaire</a></li>
-            <li><a href="tn">Terre Nouvelle</a></li>
-            <li><a href="contact">Contact</a></li>
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/actualites">Actualités</a></li>
+            <li><a href="/bois">Bois de chauffage</a></li>
+            <li><a href="/maison">Maison de vie communautaire</a></li>
+            <li><a href="/tn">Terre Nouvelle</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
 -->
@@ -32,5 +32,5 @@
  <!-- Barre de copyright et signature-->
 <aside class="copyright">
     <p>&copy; <?php echo date('Y'); ?> Ferme Saint Achaire. Tous droits réservés.</p>
-    <p>Réalisé par Loïc Jacques</a></p>
+    <p>Réalisé par Loïc Jacques</p>
 </aside>
