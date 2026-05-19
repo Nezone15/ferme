@@ -2,5 +2,5 @@
 section.maison {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("/public/images/site/maison_hero.png");
+    url("/public/images/site/maison_hero.webp");
 }

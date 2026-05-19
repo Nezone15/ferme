@@ -1,5 +1,5 @@
 <header>
-    <a href="accueil"><img class="logo" src="/public/images/site/logo_fsa.jpeg" alt="Accueil"></a>
+    <a href="accueil"><img class="logo" src="/public/images/site/logo_fsa.webp" alt="Accueil"></a>
     <nav>
         <ul>
             <li><a href="/accueil">Accueil</a></li>
