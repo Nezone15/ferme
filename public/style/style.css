@@ -19,6 +19,36 @@ body {
   font-size: 1rem;
 }
 
+/*Bouton primaire*/
+.btn-primaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--couleur-brun);
+  color: white;
+  border-radius: 10px;
+}
+
+.btn-primaire:hover {
+  background-color: #7a3b00;
+}
+
+/*Bouton secondaire*/
+.btn-secondaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--couleur-vert);
+  color: white;
+  border-radius: 10px;
+}
+
+.btn-secondaire:hover {
+  background-color: #3a441a;
+}
+
 /*Style du header et de la navigation.*/
 header {
   display: flex;
@@ -85,42 +115,43 @@ section.hero {
   background-position: center;
 }
 
-/*Cette section différencie le contenu de la hero section. Comme ça la hero section peut prendre toute  la
-largeur avec une image de fond mais le contenu est centré*/
+/*Section contenu. C'est tout sauf la hero section*/
 section.contenu {
   width: 80%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/*Bouton primaire*/
-.btn-primaire {
-  display: inline-flex;
-  align-items: center;
+/*Section zigzag*/
+section.zigzag {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+section.zigzag article {
+  width: 60%;
+}
+
+section.zigzag article:nth-child(even) {
+  align-self: flex-end;
+}
+
+/*Style du aside de contact qui dit : Envie de nous contacter directement ? */
+aside.contact {
+  display: flex;
   justify-content: center;
-  padding: 0.5rem 1rem;
-  background-color: var(--couleur-brun);
-  color: white;
-  border-radius: 10px;
+  gap: 2rem;
+  margin: 2rem 0;
+  border-top: 1px solid var(--couleur-vert);
+  padding-top: 2rem;
 }
 
-.btn-primaire:hover {
-  background-color: #7a3b00;
-}
-
-/*Bouton secondaire*/
-.btn-secondaire {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  background-color: var(--couleur-vert);
-  color: white;
-  border-radius: 10px;
-}
-
-.btn-secondaire:hover {
-  background-color: #3a441a;
+aside.contact p {
+  color: var(--couleur-vert);
+  font-size: 1.1rem;
 }
 
 /*Style du footer*/
@@ -152,17 +183,4 @@ footer a:hover {
 footer ul {
   list-style-type: none;
   padding: 0;
-}
-
-/*Style du div de contact qui dit : Envie de nous contacter directement ? */
-div.contact {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-div.contact p {
-  color: var(--couleur-vert);
-  font-size: 1.1rem;
 }
