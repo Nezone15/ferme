@@ -76,6 +76,11 @@ a {
   color: black;
 }
 
+a.tel:hover {
+  color: var(--couleur-vert);
+  text-decoration: underline;
+}
+
 header nav ul {
   display: flex;
   gap: 2rem;
@@ -164,7 +169,7 @@ footer {
   font-size: 0.9rem;
 }
 
-footer h5 {
+footer p {
   color: white;
   font-size: 1rem;
   margin: 0;
@@ -183,4 +188,21 @@ footer a:hover {
 footer ul {
   list-style-type: none;
   padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 0.75rem;
+}
+
+/*On agrandit la zone invisible mais cliquable autour du texte du lien */
+footer ul li a {
+  display: inline-block;
+  padding: 0.4rem 0;
+}
+
+aside.copyright {
+  display: flex;
+  justify-content: space-around;
+  color: black;
+  font-size: 0.8rem;
 }

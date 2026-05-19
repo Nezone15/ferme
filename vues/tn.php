@@ -11,7 +11,7 @@
 <body>    
     <?php include VUES . 'header_footer/header.php'; ?>
     <main>
-        <section class="banniere">
+        <section class="hero tn">
 				<h1>Terre Nouvelle</h1>
 		</section>
 

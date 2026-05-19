@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bois de chauffage</title>
+    <title>Ferme Saint Achaire | Bois de chauffage</title>
+	<meta name="description" content="Achetez votre bois de chauffage à la Ferme Saint Achaire. Tailles sur mesure (30, 40, 50cm) et livraison avec rangement.">
+   
     <!-- Liens vers les polices-->  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,16 +33,17 @@
             <section class="zigzag">
                 <article>
                     <h2>Essences, tailles et origine</h2>
-                    <p>Le  bois fourni est en provenance des Ardennes. Il arrive à la ferme pour y être fendu et scié en 3 tailles différent pour s’adapter à votre poêle à bois. Les 3 tailles sont 30cm, 40cm ou 50cm.  Le bois est composé d’un mélange de plusieurs essecnces : bouleau, hêtre,  chêne et frêne.</p>
+                    <p>Le  bois fourni est en provenance des Ardennes. Il arrive à la ferme pour y être fendu et scié en 3 tailles différentes pour s’adapter à votre poêle à bois. Les 3 tailles sont 30cm, 40cm ou 50cm.  Le bois est composé d’un mélange de plusieurs essences : bouleau, hêtre,  chêne et frêne.</p>
                 </article>
                 <article>
                     <h2>Commande et tarifs</h2>
                     <p>La ferme Saint Achaire applique un tarif au mètre cube plutôt qu’à la stère. Ce dernier s’élève à 120€/mètre cube.</p>
-                    <p>Pour passer commande, appelez le 056/80.75.98. Nous sommes disponible du lundi au vendredi entre 8h00 et 15h30.</p>
+                    <p>Pour passer commande, appelez le <a class="tel" href="tel:+3256807598">056/80.75.98</a>. Nous sommes disponibles du lundi au vendredi entre 8h00 et 15h30.</p>
                 </article>
                 <article>
                     <h2>Livraison</h2>
-                    <p>La livraison est gratuite tant que la distance est en dessous de 10km.  Passé ce cap, nous appliquons un tarif supplémentaire qui s’élève à 0.50€/km.</p>
+                    <p>La livraison est gratuite tant que la distance reste en dessous de 10km. Passé ce cap, nous appliquons un tarif supplémentaire qui s’élève à 0.50€/km.</p>
+                    <p>L'un des gros atouts de la ferme est que nous rangeons le bois directement chez vous.</p>
                 </article>
             </section>
             <aside class="contact">
