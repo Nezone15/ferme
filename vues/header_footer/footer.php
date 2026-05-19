@@ -1,7 +1,6 @@
 <footer>
     <div>
         <h5>La ferme Saint Achaire</h5>
-        <p>Un projet de vie communautaire</p>
         <ul>
             <li><a href="mentions">Mentions légales</a></li>
             <li><a href="politique">Politique de confidentialité</a></li>
@@ -21,11 +20,11 @@
     <div class="footer_liens">
         <h5>Liens utiles</h5>
         <ul>
-            <li><a href="https://www.ama.be/">Fédération des Maisons d’Accueil et des services d’aide aux sans-abris</a></li>
-            <li><a href="https://www.rapel.be/">Rassemblement des Associations de Promotion du Logement</a></li>
-            <li><a href="https://www.flw.be/">Fonds du Logement des familles nombreuses de Wallonie</a></li>
-            <li><a href="https://www.mouscron.be/fr/cpas/">CPAS Mouscron</a></li>
-            <li><a href="https://arca-asbl.org/">Site de l’Arca</a></li>
+            <li><a href="https://www.ama.be/" target="_blank">Fédération des Maisons d’Accueil et des services d’aide aux sans-abris</a></li>
+            <li><a href="https://www.rapel.be/" target="_blank">Rassemblement des Associations de Promotion du Logement</a></li>
+            <li><a href="https://www.flw.be/" target="_blank">Fonds du Logement des familles nombreuses de Wallonie</a></li>
+            <li><a href="https://www.mouscron.be/fr/cpas/" target="_blank">CPAS Mouscron</a></li>
+            <li><a href="https://arca-asbl.org/" target="_blank">Site de l’Arca</a></li>
         </ul>
     </div>
 </footer>

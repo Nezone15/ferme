@@ -1,5 +1,5 @@
 <header>
-    <a href="accueil"><img src="#" alt="Accueil"></a>
+    <a href="accueil"><img class="logo" src="/public/images/site/logo_fsa.jpeg" alt="Accueil"></a>
     <nav>
         <ul>
             <li><a href="/accueil">Accueil</a></li>
@@ -16,12 +16,12 @@
 
      <?php if (isset($_SESSION['utilisateur'])): ?>
         <!-- Si l'utilisateur est connecté -->
-        <a href="/profil">Mon Profil</a>
+        <a class="btn-secondaire" href="/profil">Mon Profil</a>
         <form action="/deconnexion" id="deconnexion" method="POST">
             <button type="submit" name="bDeconnexion">Déconnexion</button>
         </form>
     <?php else: ?>
         <!-- Si l'utilisateur est un visiteur -->
-        <a href="/connexion">Nous rejoindre</a>
+        <a class="btn-secondaire" href="/connexion">Nous rejoindre</a>
     <?php endif; ?>    
 </header>

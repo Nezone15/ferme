@@ -1,13 +1,18 @@
 :root {
-  --couleur-fond: #fff8ef;
-  --couleur-texte-vert: #485422;
+  --couleur-blanc-mat: #fff8ef;
+  --couleur-vert: #485422;
   --couleur-brun: #924c00;
+  --fond-footer: #606c38;
   --font-titre: "Tinos", serif;
   --font-texte: "Plus Jakarta Sans", sans-serif;
 }
 
 body {
-  background-color: color-mix(in srgb, var(--couleur-fond) 80%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--couleur-blanc-mat) 80%,
+    transparent
+  );
   font-family: var(--font-texte);
   margin: 0;
   padding: 0;
@@ -24,8 +29,15 @@ header {
   align-items: center;
 }
 
+header img.logo {
+  height: auto; /* Conserve les proportions d'origine (pas d'écrasement) */
+  width: 100%; /* Permet au logo d'être fluide */
+  max-width: 70px; /* Fixe la taille maximale idéale sur grand écran */
+  min-width: 30px; /* Empêche le logo de devenir trop minuscule sur mobile */
+}
+
 header nav ul a:hover {
-  color: var(--couleur-texte-vert);
+  color: var(--couleur-vert);
   border-bottom: 2px solid var(--couleur-brun);
 }
 
@@ -48,7 +60,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-titre);
-  color: var(--couleur-texte-vert);
+  color: var(--couleur-vert);
   font-weight: 400;
 }
 
@@ -63,11 +75,11 @@ h2 {
 }
 
 /*Style général de mes hero section. L'image serait fournie dans le style spécifique de chaque page*/
-section.banniere {
+section.hero {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
+  height: 50vh;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -81,6 +93,67 @@ section.contenu {
   margin: 0 auto;
 }
 
+/*Bouton primaire*/
+.btn-primaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--couleur-brun);
+  color: white;
+  border-radius: 10px;
+}
+
+.btn-primaire:hover {
+  background-color: #7a3b00;
+}
+
+/*Bouton secondaire*/
+.btn-secondaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--couleur-vert);
+  color: white;
+  border-radius: 10px;
+}
+
+.btn-secondaire:hover {
+  background-color: #3a441a;
+}
+
+/*Style du footer*/
+footer {
+  display: flex;
+  background-color: var(--fond-footer);
+  color: var(--couleur-blanc-mat);
+  padding: 2rem 0;
+  justify-content: space-around;
+  font-size: 0.9rem;
+}
+
+footer h5 {
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+footer a {
+  color: inherit;
+}
+
+footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 /*Style du div de contact qui dit : Envie de nous contacter directement ? */
 div.contact {
   display: flex;
@@ -90,19 +163,6 @@ div.contact {
 }
 
 div.contact p {
-  color: var(--couleur-texte-vert);
+  color: var(--couleur-vert);
   font-size: 1.1rem;
-}
-
-div.contact a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  background-color: var(--couleur-brun);
-  color: white;
-  border-radius: 4px;
-}
-div.contact a:hover {
-  background-color: #7a3b00;
 }
