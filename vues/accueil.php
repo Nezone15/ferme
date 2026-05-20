@@ -3,33 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
+    <title>Ferme Saint Achaire | Accueil</title>
+    <meta name="description" content="Découvrez la ferme Saint Achaire, une maison de vie communautaire engagée dans l'insertion sociale et professionnelle. Explorez nos projets sociaux : maison de vie, bois de chauffage et Terre Nouvelle.">
+   
     <!-- Liens vers les polices-->  
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+	
+	<!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/public/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
+	<link rel="manifest" href="/public/favicon_io/site.webmanifest">
     
     <script defer src="/public/js/accueil.js"></script>
     <link rel="stylesheet" href="/public/style/style.css">
     <link rel="stylesheet" href="/public/style/accueil.css">
 </head>
 <body>
+    <div class="boite-accueil">
     <?php include VUES . 'header_footer/header.php'; ?>
-    <main>
+    
         <!--Section carousel -->
-        <section class="carousel">
-            <div class="carousel-container">
+        <section class="carrousel"  aria-roledescription="carrousel" aria-label="Présentation de la ferme Saint Achaire">
                 <!-- Flèche gauche -->
-                <button aria-label="Image précédente">
-                    &#10094;
+                <button id="btn-precedent" type="button" class="btn-carrousel gauche" aria-label="Image précédente" aria-controls="carrousel-slides">
+                    <span></span>
+                </button>
+
+                <!-- Flèche droite -->
+                <button id="btn-suivant" type="button" class="btn-carrousel droite" aria-label="Image suivante" aria-controls="carrousel-slides">
+                    <span></span>
                 </button>
 
                 <!-- Slides -->
-                <div class="carousel-slides">
+                <div id="carrousel-slides" class="carrousel-slides" aria-live="polite">
                     <!-- Slide 1 -->
-                    <div class="carousel-slide">
-                        <img src="#" alt="Photo de la ferme Saint Achaire">
-                        <div class="carousel-content">
+                    <div class="carrousel-slide affiche" role="group" aria-roledescription="diapositive" aria-label="1 sur 3" aria-hidden="false">
+                        <img src="/public/images/site/ferme.jpg" alt="La ferme Saint Achaire">
+                        <div class="carrousel-contenu">
                             <h2>Maison de vie communautaire</h2>
                             <p>La ferme Saint Achaire est avant tout une maison de vie communautaire qui offre une solution d'accueil aux personnes en difficulté.</p>
                             <a href="maison">Découvrir le projet</a>
@@ -37,9 +50,9 @@
                     </div>
 
                     <!-- Slide 2 -->
-                    <div class="carousel-slide">
-                        <img src="#" alt="Photo de l'activité de bois de chauffage">
-                        <div class="carousel-content">
+                    <div class="carrousel-slide cache" role="group" aria-roledescription="diapositive" aria-label="2 sur 3" aria-hidden="true">
+                        <img src="/public/images/site/bois.jpeg" alt="Notre activité de bois de chauffage">
+                        <div class="carrousel-contenu">
                             <h2>Bois de chauffage</h2>
                             <p>La ferme Saint Achaire a une activité de production de bois de chauffage pour fournir une occupation à sa communauté.</p>
                             <a href="bois">Découvrir l'activité</a>
@@ -47,77 +60,74 @@
                     </div>
 
                     <!-- Slide 3 -->
-                    <div class="carousel-slide">
-                        <img src="#" alt="Photo de Terre Nouvelle">
-                        <div class="carousel-content">
+                    <div class="carrousel-slide cache" role="group" aria-roledescription="diapositive" aria-label="3 sur 3" aria-hidden="true">
+                        <img src="/public/images/site/terre_nouvelle.JPG" alt="Terre Nouvelle">
+                        <div class="carrousel-contenu">
                             <h2>Terre Nouvelle</h2>
                             <p>Terre Nouvelle est une maison d'accueil d'urgence qui est liée à la ferme Saint Achaire.</p>
                             <a href="tn">En savoir plus</a>
                         </div>
                     </div>
-                </div>
-
-                <!-- Flèche droite -->
-                <button aria-label="Image suivante">
-                    &#10095;
-                </button>
-            </div>
+                </div>       
+            
 
             <!-- Indicateur de position -->
-            <div class="carousel-counter">
-                <span id="current-slide">1/3</span>
+            <div class="carrousel-compteur" aria-live="polite" aria-atomic="true">
+                <span id="slide-actuel"></span>
             </div>
         </section>
+        </div>
+        <main>
         <!-- Section présentation -->
-        <section class="presentation">
+        <section>
             <h1>Bienvenue à la ferme Saint Achaire</h1>
             <p>L'engagement social est au cœur de notre mission. Nous agissons
             quotidiennement pour soutenir ceux qui en ont le plus besoin à travers trois
             projets sociaux.</p>
             <div class="projets">
-                <div class="projet">
+                <article class="projet">
                     <h3>Maison de vie communautaire</h3>
                     <p>Un espace bienveillant pour poser ses bagages
                     et retrouver le calme nécessaire à une
                     reconstruction personnelle durable au sein de
                     notre communauté.</p>
                     <a href="maison">En savoir plus</a>
-                </div>
+                </article>
 
-                <div class="projet">
+                <article class="projet">
                     <h3>Bois de chauffage</h3>
                     <p>Une activité d'insertion professionnelle par la
                     production et la livraison de bois de chauffage.</p>
                     <a href="bois">En savoir plus</a>
-                </div>
+                </article>
 
-                <div class="projet">
+                <article class="projet">
                     <h3>Terre Nouvelle</h3>
                     <p>Terre Nouvelle est une maison d'accueil d'urgence prête à accueillir les personnes sans-abris dans l'urgence sur deux sites distincts. L'un pour les hommes, l'autre pour les femmes et les enfants.</p>
                     <a href="tn">En savoir plus</a>
-                </div>
+                </article>
             </div>
-            <hr>
-            <div class="contact">
-                <h3>Envie de nous contacter directement ?</h3>
-                <a href="contact">Prendre contact</a>
-            </div>
+
+            <aside class="contact">
+                <p>Envie de nous contacter directement ?</p>
+                <a class="btn-primaire" href="contact">Prendre contact</a>
+            </aside>
         </section>
         
 
         <!-- Section bannière de chiffres -->
-        <section class="section_chiffres">
+        <section>
             <h3>En 2025</h3>
-            <div class="chiffres">                
-                <div class="chiffre">
+            <div >                
+                <div>
                     <h3>150+</h3>
                     <p>Personnes accompagnées</p>
                 </div>
-                <div class="chiffre">
+                <div >
                     <h3>50+</h3>
                     <p>Personnes relogées</p>
                 </div>
-                <div class="chiffre">
+                <div>
                     <h3>1000+</h3>
                     <p>Stères livrées</p>
                 </div>
@@ -125,9 +135,9 @@
         </section>
 
         <!-- Section actus -->
-        <section class="actus">
+        <section>
             <h2>Les dernières actualités</h2>
-            <div class="actualites">
+            <div>
                 <!-- <?php /*foreach ($actus as $actu): ?>
                 <article>
                     <img src="<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
@@ -141,6 +151,7 @@
         </section>
 
     </main>
+    
     <?php include VUES . 'header_footer/footer.php'; ?>
     
 </body>
