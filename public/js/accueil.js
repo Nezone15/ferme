@@ -13,7 +13,6 @@ slide_actuel.textContent = `${index}/3`;
  */
 function afficherSlide(n) {
   const deplacement = (n - 1) * -100; // Calcul du déplacement en pourcentage
-  const carrousel = document.querySelector(".carrousel");
   carrousel.style.transform = `translateX(${deplacement}%)`; // Appliquer la transformation CSS
   slides.forEach((slide, i) => {
     if (i === n - 1) {

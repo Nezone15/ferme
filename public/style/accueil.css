@@ -15,11 +15,11 @@
   transition: background-color 0.3s ease;
 }
 
-.gauche {
+#btn-precedent {
   left: 10px; /* Positionné à gauche */
 }
 
-.droite {
+#btn-suivant {
   right: 10px; /* Positionné à droite */
 }
 
@@ -49,24 +49,11 @@
   margin-right: 4px;
 }
 
-/*Boite accueil contient le header et le caroussel pour pouvoir prendre tout la page avec flex*/
-.boite-accueil {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-/*Flex-grow 0, on veut pas qu'il prenne plus de place que nécessaire
-flex-shrink: 0, faut qu'il s'affiche en entier correctement
-flex-basis: auto; Il s'adapte selon la taille de son contenu */
-header {
-  flex: 0 0 auto;
-}
-
 .carrousel {
   position: relative;
   overflow: hidden;
-  flex: 1 1 100%;
+  height: calc(100vh - 80px);
+  width: 100%;
 }
 
 /*Les slides seront en fait une bande déroulantante*/
@@ -126,8 +113,4 @@ En effet, le problème est que object-position ne fonctionne pas vu que mon carr
 
 .cache {
   visibility: hidden;
-}
-
-main {
-  margin-top: 2rem;
 }
