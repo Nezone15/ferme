@@ -39,9 +39,9 @@
                 </button>
 
                 <!-- Slides -->
-                <div id="carrousel-slides" class="carrousel-slides" aria-live="polite">
+                <div id="carrousel-slides" aria-live="polite">
                     <!-- Slide 1 -->
-                    <div class="carrousel-slide affiche" role="group" aria-roledescription="diapositive" aria-label="1 sur 3" aria-hidden="false">
+                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 3" aria-hidden="false">
                         <img src="/public/images/site/ferme.jpg" alt="La ferme Saint Achaire">
                         <div class="carrousel-contenu">
                             <h2>Maison de vie communautaire</h2>
@@ -51,7 +51,7 @@
                     </div>
 
                     <!-- Slide 2 -->
-                    <div class="carrousel-slide cache" role="group" aria-roledescription="diapositive" aria-label="2 sur 3" aria-hidden="true">
+                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="2 sur 3" aria-hidden="true">
                         <img src="/public/images/site/bois.jpeg" alt="Notre activité de bois de chauffage">
                         <div class="carrousel-contenu">
                             <h2>Bois de chauffage</h2>
@@ -61,7 +61,7 @@
                     </div>
 
                     <!-- Slide 3 -->
-                    <div class="carrousel-slide cache" role="group" aria-roledescription="diapositive" aria-label="3 sur 3" aria-hidden="true">
+                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="3 sur 3" aria-hidden="true">
                         <img src="/public/images/site/terre_nouvelle.JPG" alt="Terre Nouvelle">
                         <div class="carrousel-contenu">
                             <h2>Terre Nouvelle</h2>

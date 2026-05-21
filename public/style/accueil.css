@@ -60,15 +60,17 @@
 .carrousel-slides {
   display: flex;
   overflow: hidden;
-  flex-wrap: nowrap;
   height: 100%;
   width: 100%;
+  transition:
+    transform 0.5s ease-in-out,
+    visibility 0.5s ease-in-out;
+  will-change: transform;
 }
 
 .carrousel-slide {
   flex: 0 0 100%;
   overflow: hidden;
-  visibility: hidden;
   transition:
     transform 0.5s ease-in-out,
     visibility 0.5s ease-in-out;
@@ -105,12 +107,4 @@ En effet, le problème est que object-position ne fonctionne pas vu que mon carr
   font-size: 3rem;
   margin-bottom: 0.5rem;
   color: white;
-}
-
-.affiche {
-  visibility: visible;
-}
-
-.cache {
-  visibility: hidden;
 }
