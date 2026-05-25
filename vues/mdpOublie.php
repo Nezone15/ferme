@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mot de passe oublié</title>
+    <meta name="description" content="Processus de réinitialisation du mot de passe pour les utilisateurs ayant oublié leur mot de passe.">
+    <!-- Liens vers les polices-->  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+	
+	<!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/public/favicon_io/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/public/favicon_io/site.webmanifest">
+
+    <link rel="stylesheet" href="/public/style/style.css">
+    <link rel="stylesheet" href="/public/style/mdpOublie.css">
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>
     <main>
-        <h1>Mot de passe oublié</h1>
+        <section class="hero mdpOublie">
+            <h1>Mot de passe oublié</h1>
+        </section>
         <!--Le processus de réinitialisation du mot de passe se fait en plusieurs étapes :
         1. Entrer l'adresse email
         2. Répondre à la question secrète qu'on vient de recevoir grâce à l'email fourni
@@ -37,8 +53,7 @@
                 <label for="email">Email :</label>
                 <input type="text" id="email" name="email" required>
 
-                <button type="submit" name="bEmail">Envoyer</button>
-                <button type="reset">Annuler</button>
+                <button class="btn-primaire" type="submit" name="bEmail">Envoyer</button>
             </form>
 
         <!-- Etape 2 : Afficher la question et demander la réponse secrète -->
@@ -47,7 +62,7 @@
             <form action="mdpOublie" method="post">
                 <label for="reponse_secrete">Réponse secrète :</label>
                 <input type="text" id="reponse_secrete" name="reponse_secrete" required>
-                <button type="submit" name="bReponse">Valider</button>
+                <button class="btn-primaire" type="submit" name="bReponse">Valider</button>
             </form>
 
         <!-- Etape 3 : Si la réponse est correcte, afficher le formulaire de réinitialisation du mot de passe.-->    
@@ -66,8 +81,8 @@
                 <input type="password" id="nouveauMdp" name="nouveauMdp" required>
                 <label for="confirmeMdp">Confirmer le nouveau mot de passe :</label>
                 <input type="password" id="confirmeMdp" name="confirmeMdp" required>
-                <button type="submit" name="bNouveauMdp">Réinitialiser</button>
-                <button type="reset">Annuler</button>
+                <button class="btn-primaire" type="submit" name="bNouveauMdp">Réinitialiser</button>
+                <button class="btn-secondaire" type="reset">Annuler</button>
             </form>
         <?php endif; ?>
     </main>
