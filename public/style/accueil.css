@@ -1,10 +1,8 @@
-.carrousel-contenu {
-  display: none;
-}
-.carousel-compteur {
-  display: none;
-}
-
+/*
+---------
+CARROUSEL
+---------
+*/
 .carrousel {
   width: 100%;
   height: calc(100vh - 80px);
@@ -16,29 +14,21 @@
   display: flex;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out; /* Anime le glissement */
-  height: calc(100vh - 80px);
+  height: 100%;
 }
 
 .carrousel-slide {
   flex: 0 0 100%;
   width: 100vw;
-  height: calc(100vh - 80px);
+  height: 100%;
+  position: relative;
 }
 
 .carrousel-slide img {
-  /* 1. Force l'image à faire EXACTEMENT la taille de la boîte */
-  width: 100% !important;
-  height: 100% !important;
-
-  /* 2. Annule les resets CSS (ex: Tailwind) qui cassent le calcul du ratio */
-  max-width: none !important;
-  max-height: none !important;
-
-  /* 3. Le cœur du système : remplit la boîte et rogne les bords */
-  object-fit: cover !important;
-
-  /* 4. Aligne le point de départ du rognage pile au milieu (horizontal + vertical) */
-  object-position: center center !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .btn-carrousel {
@@ -49,7 +39,7 @@
   /* Dimensions et forme */
   width: 46px;
   height: 46px;
-  border-radius: 50%; /* Donne un cercle parfait */
+  border-radius: 50%;
 
   /* Alignement de la flèche au centre */
   display: flex;
@@ -90,4 +80,146 @@
 
 #btn-suivant {
   right: 10px;
+}
+
+/*calque noir */
+.carrousel-slide::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /*Opacité faut changer le dernier chiffre  */
+  background: rgba(0, 0, 0, 0.3);
+
+  z-index: 2; /* Par-dessus l'image, mais sous le texte */
+  pointer-events: none; /* Permet de cliquer à travers le calque sans bloquer l'interface */
+}
+
+.carrousel-contenu {
+  z-index: 3; /* Par-dessus le calque noir */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.carrousel-contenu h2 {
+  color: #fff;
+  font-size: 3rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carrousel-contenu p {
+  color: #fff;
+  text-align: center;
+  font-size: 1.25rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.carrousel-contenu a {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  background-color: white;
+  color: #000;
+  text-decoration: none;
+  padding: 10px 24px; /* Plus large sur les côtés (24px) que haut/bas (10px) */
+  border-radius: 9999px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.carrousel-contenu a:hover {
+  background-color: #f0f0f0;
+}
+
+.carrousel-compteur {
+  display: none;
+}
+
+/*
+------------
+PRESENTATION
+------------
+*/
+.presentation {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.presentation p {
+  max-width: 800px;
+}
+
+.projets {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.projet {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.projet h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.projet a {
+  margin-top: auto;
+}
+
+/*----------------
+Bannière
+----------------*/
+.banniere-chiffres {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 500px;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/public/images/site/banniere.jpeg");
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  color: #fff;
+}
+
+.banniere-chiffres h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+  font-style: italic;
+}
+
+.chiffres {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 20px;
+}
+
+.chiffres h3 {
+  font-size: 2rem;
+  margin: 0;
+  color: #fff;
+}
+
+.chiffres div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }

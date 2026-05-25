@@ -27,20 +27,20 @@
 
         <main>
             <!-- Section carousel -->
-            <section class="carrousel" aria-roledescription="carrousel" aria-label="Présentation de la ferme Saint Achaire">
+            <section class="carrousel">
                 <!-- Flèche gauche -->
-                        <button id="btn-precedent" type="button" class="btn-carrousel" aria-label="Image précédente" aria-controls="carrousel-conteneur">
+                        <button id="btn-precedent" type="button" class="btn-carrousel">
                             &#10216;
                         </button>
 
                         <!-- Flèche droite -->
-                        <button id="btn-suivant" type="button" class="btn-carrousel" aria-label="Image suivante" aria-controls="carrousel-slides">
+                        <button id="btn-suivant" type="button" class="btn-carrousel">
                             &#10217;
                         </button>    
                 <!-- Slides -->
                 <div id="carrousel-conteneur" aria-live="polite">
                     <!-- CLONE Slide 3 -->
-                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="3 sur 3" aria-hidden="true">
+                    <div class="carrousel-slide">
                         <img src="/public/images/site/terre_nouvelle.JPG" alt="Terre Nouvelle">
                         <div class="carrousel-contenu">
                             <h2>Terre Nouvelle</h2>
@@ -50,7 +50,7 @@
                     </div>
 
                     <!-- Slide 1 -->
-                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 3" aria-hidden="false">
+                    <div class="carrousel-slide">
                         <img src="/public/images/site/ferme.webp" alt="La ferme Saint Achaire">
                         <div class="carrousel-contenu">
                             <h2>Maison de vie communautaire</h2>
@@ -61,18 +61,18 @@
                     </div>
 
                     <!-- Slide 2 -->
-                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="2 sur 3" aria-hidden="true">
+                    <div class="carrousel-slide">
                         <img src="/public/images/site/bois.jpeg" alt="Notre activité de bois de chauffage">
                         <div class="carrousel-contenu">
                             <h2>Bois de chauffage</h2>
                             <p>La ferme Saint Achaire a une activité de production de bois de chauffage pour fournir une occupation à sa communauté.</p>
-                            <a href="bois">Découvrir l'activité</a>
+                            <a  href="bois">Découvrir l'activité</a>
                         </div>
                         
                     </div>
 
                     <!-- Slide 3 -->
-                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="3 sur 3" aria-hidden="true">
+                    <div class="carrousel-slide">
                         <img src="/public/images/site/terre_nouvelle.JPG" alt="Terre Nouvelle">
                         <div class="carrousel-contenu">
                             <h2>Terre Nouvelle</h2>
@@ -82,7 +82,8 @@
                     </div>
 
                      <!-- CLONE Slide 1 -->
-                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 3" aria-hidden="false">
+                    <div class="carrousel-slide">
+
                         <img src="/public/images/site/ferme.webp" alt="La ferme Saint Achaire">
                         <div class="carrousel-contenu">
                             <h2>Maison de vie communautaire</h2>
@@ -90,19 +91,17 @@
                             <a href="maison">Découvrir le projet</a>
                         </div>                        
                     </div>
-
-
                 </div>
 
                
                 <!-- Indicateur de position -->
-                <div class="carrousel-compteur" aria-live="polite" aria-atomic="true">
+                <div class="carrousel-compteur">
                     <span id="slide-actuel"></span>
                 </div>
             </section>
 
             <!-- Section présentation -->
-            <section>
+            <section class="presentation">
                 <h1>Bienvenue à la ferme Saint Achaire</h1>
                 <p>
                     L'engagement social est au cœur de notre mission. Nous agissons quotidiennement
@@ -116,7 +115,7 @@
                             Un espace bienveillant pour poser ses bagages et retrouver le calme nécessaire
                             à une reconstruction personnelle durable au sein de notre communauté.
                         </p>
-                        <a href="maison">En savoir plus</a>
+                        <a href="maison">En savoir plus &longrightarrow;</a>
                     </article>
 
                     <article class="projet">
@@ -125,7 +124,7 @@
                             Une activité d'insertion professionnelle par la production et la livraison
                             de bois de chauffage.
                         </p>
-                        <a href="bois">En savoir plus</a>
+                        <a href="bois">En savoir plus &longrightarrow;</a>
                     </article>
 
                     <article class="projet">
@@ -135,7 +134,7 @@
                             sans-abris dans l'urgence sur deux sites distincts : l'un pour les hommes,
                             l'autre pour les femmes et les enfants.
                         </p>
-                        <a href="tn">En savoir plus</a>
+                        <a href="tn">En savoir plus &longrightarrow;</a>
                     </article>
                 </div>
 
@@ -146,19 +145,19 @@
             </section>
 
             <!-- Section bannière de chiffres -->
-            <section>
-                <h3>En 2025</h3>
-                <div>
+            <section class="banniere-chiffres">
+                <h2>En 2025</h2>
+                <div class="chiffres">
                     <div>
-                        <h3>150+</h3>
+                        <h3>156</h3>
                         <p>Personnes accompagnées</p>
                     </div>
                     <div>
-                        <h3>50+</h3>
+                        <h3>52</h3>
                         <p>Personnes relogées</p>
                     </div>
                     <div>
-                        <h3>1000+</h3>
+                        <h3>987</h3>
                         <p>Stères livrées</p>
                     </div>
                 </div>
