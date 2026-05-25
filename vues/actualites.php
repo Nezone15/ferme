@@ -53,7 +53,7 @@
 				} else {
 					foreach ($actualites as $actu) {
 						?>
-						<div class="actualite">
+						<article class="actualite">
 							<img src="/public/images/actus/<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
 							<div class="contenu-actu">
 								<h2><?= htmlspecialchars($actu['titre']) ?></h2>
@@ -61,7 +61,7 @@
 								<p><?= nl2br(htmlspecialchars(substr($actu['contenu'], 0, 50))) ?>...</p>
 							</div>
 							<a href="actualite/<?= $actu['id'] ?>">Lire la suite &longrightarrow;</a>
-						</div>
+						</article>
 						<?php
 					}
 				}

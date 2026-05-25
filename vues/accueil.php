@@ -164,18 +164,24 @@
             </section>
 
             <!-- Section actus -->
-            <section>
+            <section class="actualites-accueil">
                 <h2>Les dernières actualités</h2>
-                <div>
-                    <!-- <?php /*foreach ($actus as $actu): ?>
-                    <article>
-                        <img src="<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
-                        <p><?= htmlspecialchars($actu['date']) ?></p>
-                        <h3><?= htmlspecialchars($actu['titre']) ?></h3>
-                        <p><?= htmlspecialchars($actu['description']) ?></p>
-                        <a class="lire_suite" href="<?= htmlspecialchars($actu['lien']) ?>">Lire la suite</a>
-                    </article>
-                    <?php endforeach; */?>-->
+                <div class="flex-actualites">
+                    <?php 
+                    if (empty($actus)) {
+                        echo '<p>Aucune actualité pour le moment.</p>';
+                    } else {
+                        foreach ($actus as $actu) { ?>
+                        <article class="actualite">
+                            <img src="/public/images/actus/<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
+							<div class="contenu-actu">
+								<h2><?= htmlspecialchars($actu['titre']) ?></h2>
+								<span>Publié le <?= date('d/m/Y', strtotime($actu['date'])) ?></span>
+								<p><?= nl2br(htmlspecialchars(substr($actu['contenu'], 0, 50))) ?>...</p>
+							</div>
+							<a href="actualite/<?= $actu['id'] ?>">Lire la suite &longrightarrow;</a>
+                        </article>
+                    <?php }} ?>
                 </div>
             </section>
         </main>
