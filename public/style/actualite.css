@@ -1,1 +1,74 @@
 /* Style dedie a la page actualite. */
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#actu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#actu img {
+  max-width: 100%;
+  height: auto;
+}
+
+#actu span {
+  font-size: 0.9em;
+  color: #666;
+}
+
+#likes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-top: 1px solid var(--couleur-vert);
+  border-bottom: 1px solid var(--couleur-vert);
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+
+#likes button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#commentaires {
+  margin-bottom: 2rem;
+}
+
+#boite-commentaires {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.commentaire {
+  background-color: #0000001a; /* Noir avec 10% d'opacité */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.commentaire p {
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.enteteCommentaire {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+.enteteCommentaire p {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.enteteCommentaire span {
+  font-size: 0.8em;
+  color: #666;
+}

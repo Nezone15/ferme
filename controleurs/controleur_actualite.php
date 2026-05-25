@@ -9,6 +9,7 @@ if (!isset($_GET['id'])) {
 require_once(MODELE . 'crud/actualite.php');
 require_once(MODELE . 'crud/utilisateur.php');
 require_once(MODELE . 'crud/commentaire.php');
+require_once(MODELE . 'actu.php');
 $actu = actualiteId($_GET['id']);  
     
 //Si l'actu n'existe pas on redirige vers la page des actualités
