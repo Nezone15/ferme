@@ -80,9 +80,9 @@ function stockerImage($image) {
 
     // 4. Vérifier si le fichier existe déjà pour éviter les doublons
     //On oublie pas le public_path parce que sinon php va être duper
-    if (!file_exists(PUBLIC_PATH . 'images/' . $nom_fichier_image)) {
+    if (!file_exists(PUBLIC_PATH . 'images/actus/' . $nom_fichier_image)) {
         // Si le fichier n'existe pas, on peut le télécharger vers le dossier images
-        move_uploaded_file($image['tmp_name'], PUBLIC_PATH . 'images/' . $nom_fichier_image);
+        move_uploaded_file($image['tmp_name'], PUBLIC_PATH . 'images/actus/' . $nom_fichier_image);
     }
     return $nom_fichier_image;
 }

@@ -13,7 +13,7 @@
 	<main>
 		<!--Premiere section pour l'image, la deuxieme pour le titre et le contenu, la troisième pour les commentaires-->
 		<section>
-			<img src="/public/images/<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
+			<img src="/public/images/actus/<?= htmlspecialchars($actu['image']) ?>" alt="<?= htmlspecialchars($actu['titre']) ?>">
 		</section>
 
 		<section>
