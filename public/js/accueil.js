@@ -1,40 +1,38 @@
-const slide_actuel = document.getElementById("slide-actuel");
-const btn_suivant = document.getElementById("btn-suivant");
-const btn_precedent = document.getElementById("btn-precedent");
-const carrousel = document.getElementById("carrousel-slides");
+const rail = document.getElementById("carrousel-conteneur");
 const slides = document.querySelectorAll(".carrousel-slide");
-// Initialisation
-let index = 0;
-slide_actuel.textContent = `${index}/3`;
+const btnPrecedent = document.getElementById("btn-precedent");
+const btnSuivant = document.getElementById("btn-suivant");
+const totalSlides = slides.length;
 
-/**
- * Faire glisser à la diapo correspondante à l'index donné et met à jour le compteur
- * @param {*} n L'index de la diapo à afficher (1, 2 ou 3)
- */
-function updateSlide() {
-  carrousel.style.transform = `translateX(-${index} * 100%))`;
-  slides.forEach((slide, i) => {
-    if (i === index) {
-      slide.setAttribute("aria-hidden", "false");
-    } else {
-      slide.setAttribute("aria-hidden", "true");
-    }
-  });
-  slide_actuel.textContent = `${index}/3`;
+// On commence à l'index 1, car l'index 0 est le clone de la dernière image
+let index = 1;
+
+function deplacerRail(animation = true) {
+  if (animation) {
+    rail.style.transition = "transform 0.5s ease-in-out";
+  } else {
+    rail.style.transition = "none";
+  }
+  rail.style.transform = `translateX(-${index * 100}%)`;
 }
 
-btn_suivant.addEventListener("click", () => {
-  index++;
-  if (index > 3) {
-    index = 1;
-  }
-  updateSlide();
+btnPrecedent.addEventListener("click", () => {
+  index = (index - 1 + slides.length) % slides.length;
+  deplacerRail();
 });
 
-btn_precedent.addEventListener("click", () => {
-  index--;
-  if (index < 1) {
-    index = 3;
+btnSuivant.addEventListener("click", () => {
+  index = (index + 1) % slides.length;
+  deplacerRail();
+});
+
+rail.addEventListener("transitionend", () => {
+  if (index === totalSlides - 1) {
+    index = 1;
+    deplacerRail(false);
   }
-  updateSlide();
+  if (index === 0) {
+    index = totalSlides - 2;
+    deplacerRail(false);
+  }
 });

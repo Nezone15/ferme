@@ -1,110 +1,93 @@
-/* Style de base des boutons du carrousel */
-.btn-carrousel {
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.5); /* Fond sombre semi-transparent */
-  border: none;
-  /*border-radius: 50%; Rend le bouton rond */
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
+.carrousel-contenu {
+  display: none;
 }
-
-#btn-precedent {
-  left: 10px; /* Positionné à gauche */
-}
-
-#btn-suivant {
-  right: 10px; /* Positionné à droite */
-}
-
-/* Effet de survol sur le bouton */
-.btn-carrousel:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Dessin de la flèche (commun aux deux boutons) */
-.btn-carrousel span {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-top: 3px solid #ffffff; /* Bordure supérieure blanche */
-  border-left: 3px solid #ffffff; /* Bordure gauche blanche */
-}
-
-/* Orientation spécifique pour la flèche GAUCHE */
-#btn-precedent span {
-  transform: rotate(-45deg); /* Tourne le coin vers la gauche */
-  margin-left: 4px; /* Ajustement visuel pour centrer la flèche dans le rond */
-}
-
-/* Orientation spécifique pour la flèche DROITE (au cas où) */
-#btn-suivant span {
-  transform: rotate(135deg); /* Tourne le coin vers la droite */
-  margin-right: 4px;
+.carousel-compteur {
+  display: none;
 }
 
 .carrousel {
+  width: 100%;
+  height: calc(100vh - 80px);
   position: relative;
   overflow: hidden;
-  height: calc(100vh - 80px);
-  width: 100%;
 }
 
-/*Les slides seront en fait une bande déroulantante*/
-.carrousel-slides {
+#carrousel-conteneur {
   display: flex;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  transition:
-    transform 0.5s ease-in-out,
-    visibility 0.5s ease-in-out;
-  will-change: transform;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out; /* Anime le glissement */
+  height: calc(100vh - 80px);
 }
 
 .carrousel-slide {
   flex: 0 0 100%;
-  overflow: hidden;
-  transition:
-    transform 0.5s ease-in-out,
-    visibility 0.5s ease-in-out;
+  width: 100vw;
+  height: calc(100vh - 80px);
 }
 
-/*On utilise position plutot que object-position pour centre l'image
-En effet, le problème est que object-position ne fonctionne pas vu que mon carrousel est une bande déroulantante */
 .carrousel-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  /* Empêche la déformation en coupant intelligemment les bords si nécessaire */
-  object-fit: cover;
-  object-position: center; /* Centre l'image dans son conteneur */
+  /* 1. Force l'image à faire EXACTEMENT la taille de la boîte */
+  width: 100% !important;
+  height: 100% !important;
+
+  /* 2. Annule les resets CSS (ex: Tailwind) qui cassent le calcul du ratio */
+  max-width: none !important;
+  max-height: none !important;
+
+  /* 3. Le cœur du système : remplit la boîte et rogne les bords */
+  object-fit: cover !important;
+
+  /* 4. Aligne le point de départ du rognage pile au milieu (horizontal + vertical) */
+  object-position: center center !important;
 }
 
-.carrousel-contenu {
-  display: none;
-}
-
-.carrousel-compteur {
-  display: none;
-}
-/*.carrousel-contenu {
+.btn-carrousel {
   position: absolute;
   top: 50%;
-  left: 50%;
-  z-index: 1;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%); /* Centre verticalement pile au milieu */
+
+  /* Dimensions et forme */
+  width: 46px;
+  height: 46px;
+  border-radius: 50%; /* Donne un cercle parfait */
+
+  /* Alignement de la flèche au centre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Look moderne : fond blanc semi-transparent et flouté (effet verre) */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(
+    4px
+  ); /* Floute l'image située juste derrière le bouton */
+  color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  /* Interaction */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10; /* S'assure que le bouton reste au-dessus des images */
+
+  /* Animations fluides pour le survol */
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-*/
-.carrousel-contenu h2 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  color: white;
+
+.btn-carrousel:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-50%) scale(1.1); /* Légère mise à l'échelle au survol */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+#btn-precedent {
+  left: 10px;
+}
+
+#btn-suivant {
+  right: 10px;
 }

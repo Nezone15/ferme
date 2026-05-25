@@ -29,25 +29,35 @@
             <!-- Section carousel -->
             <section class="carrousel" aria-roledescription="carrousel" aria-label="Présentation de la ferme Saint Achaire">
                 <!-- Flèche gauche -->
-                <button id="btn-precedent" type="button" class="btn-carrousel" aria-label="Image précédente" aria-controls="carrousel-slides">
-                    <span></span>
-                </button>
+                        <button id="btn-precedent" type="button" class="btn-carrousel" aria-label="Image précédente" aria-controls="carrousel-conteneur">
+                            &#10216;
+                        </button>
 
-                <!-- Flèche droite -->
-                <button id="btn-suivant" type="button" class="btn-carrousel" aria-label="Image suivante" aria-controls="carrousel-slides">
-                    <span></span>
-                </button>
-
+                        <!-- Flèche droite -->
+                        <button id="btn-suivant" type="button" class="btn-carrousel" aria-label="Image suivante" aria-controls="carrousel-slides">
+                            &#10217;
+                        </button>    
                 <!-- Slides -->
-                <div id="carrousel-slides" aria-live="polite">
+                <div id="carrousel-conteneur" aria-live="polite">
+                    <!-- CLONE Slide 3 -->
+                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="3 sur 3" aria-hidden="true">
+                        <img src="/public/images/site/terre_nouvelle.JPG" alt="Terre Nouvelle">
+                        <div class="carrousel-contenu">
+                            <h2>Terre Nouvelle</h2>
+                            <p>Terre Nouvelle est une maison d'accueil d'urgence qui est liée à la ferme Saint Achaire.</p>
+                            <a href="tn">En savoir plus</a>
+                        </div>
+                    </div>
+
                     <!-- Slide 1 -->
                     <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 3" aria-hidden="false">
-                        <img src="/public/images/site/ferme.jpg" alt="La ferme Saint Achaire">
+                        <img src="/public/images/site/ferme.webp" alt="La ferme Saint Achaire">
                         <div class="carrousel-contenu">
                             <h2>Maison de vie communautaire</h2>
                             <p>La ferme Saint Achaire est avant tout une maison de vie communautaire qui offre une solution d'accueil aux personnes en difficulté.</p>
                             <a href="maison">Découvrir le projet</a>
                         </div>
+                        
                     </div>
 
                     <!-- Slide 2 -->
@@ -58,6 +68,7 @@
                             <p>La ferme Saint Achaire a une activité de production de bois de chauffage pour fournir une occupation à sa communauté.</p>
                             <a href="bois">Découvrir l'activité</a>
                         </div>
+                        
                     </div>
 
                     <!-- Slide 3 -->
@@ -69,8 +80,21 @@
                             <a href="tn">En savoir plus</a>
                         </div>
                     </div>
+
+                     <!-- CLONE Slide 1 -->
+                    <div class="carrousel-slide" role="group" aria-roledescription="diapositive" aria-label="1 sur 3" aria-hidden="false">
+                        <img src="/public/images/site/ferme.webp" alt="La ferme Saint Achaire">
+                        <div class="carrousel-contenu">
+                            <h2>Maison de vie communautaire</h2>
+                            <p>La ferme Saint Achaire est avant tout une maison de vie communautaire qui offre une solution d'accueil aux personnes en difficulté.</p>
+                            <a href="maison">Découvrir le projet</a>
+                        </div>                        
+                    </div>
+
+
                 </div>
 
+               
                 <!-- Indicateur de position -->
                 <div class="carrousel-compteur" aria-live="polite" aria-atomic="true">
                     <span id="slide-actuel"></span>
