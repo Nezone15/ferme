@@ -67,11 +67,24 @@ if (!isset($_SESSION['utilisateur'])) {
                     $succes = "Profil modifié avec succès.";
                     //On met à jour les données de l'utilisateur en session
                     $_SESSION['utilisateur'] = utilisateurId($_SESSION['utilisateur']['id']); 
-                    var_dump($_SESSION['utilisateur']);
                     break;
             }                
             break;
     }
+} elseif (isset($_POST['supprimer_commentaire'])) {
+    $id_commentaire = $_POST['id_commentaire'];
+    try {
+        require_once MODELE . 'crud/commentaire.php';
+        if(supprimerCommentaire($id_commentaire)) {
+            $succes_suppression = "Commentaire supprimé avec succès.";
+        } else {
+            $erreur_suppression = "Nous n'avons pas pu supprimer le commentaire.";
+        };
+    } catch (PDOException $e) {
+        $erreur_suppression = "Une erreur est survenue lors de la suppression du commentaire.";
+    }
 }
+require_once MODELE . 'crud/commentaire.php';
+$commentaires = commentaireUtilisateur($_SESSION['utilisateur']['id']);
 include(VUES . 'profil.php');
 ?>

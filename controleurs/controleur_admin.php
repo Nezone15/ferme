@@ -16,33 +16,33 @@ if (isset($_POST['bCreerActu'])) {
     $verification = verificationActu($titre, $contenu, $image);
     switch ($verification) {
         case 'titre':
-            $creation_actu = '<p style="color: red;">Le titre doit être entre 4 et 100 caractères.</p>';
+            $creation_actu = '<p class="message-erreur">Le titre doit être entre 4 et 100 caractères.</p>';
             break;
         case 'contenu':
-            $creation_actu = '<p style="color: red;">Le contenu doit être d\'au moins 20 caractères.</p>';
+            $creation_actu = '<p class="message-erreur">Le contenu doit être d\'au moins 20 caractères.</p>';
             break;
         case 'extension':
-            $creation_actu = '<p style="color: red;">L\'image doit être au format JPEG, PNG, GIF ou WEBP.</p>';
+            $creation_actu = '<p class="message-erreur">L\'image doit être au format JPEG, PNG, GIF ou WEBP.</p>';
             break;
          case 'taille':
-            $creation_actu = '<p style="color: red;">L\'image doit être inférieure à 5 Mo.</p>';
+            $creation_actu = '<p class="message-erreur">L\'image doit être inférieure à 5 Mo.</p>';
             break;
         case 'upload':
-            $creation_actu = '<p style="color: red;">Une erreur est survenue lors du téléchargement de l\'image.</p>';
+            $creation_actu = '<p class="message-erreur">Une erreur est survenue lors du téléchargement de l\'image.</p>';
             break;
         case 'succes':
             $chemin_image = stockerImage($image);
             try {
                 creerActualite($titre, $contenu, $chemin_image);
-                $creation_actu = '<p style="color: green;">L\'actualité a été créée avec succès.</p>';
+                $creation_actu = '<p class="message-succes">L\'actualité a été créée avec succès.</p>';
             } catch (Exception $e) {
                 //On supprime l'image dans ce cas ? Mais elle peut être déjà utilisée par une autre actu ?
                 //D'où ma réfléxion plus haut de cas de figure. A réfléchir. 
                 if ($e->getCode() === 23000) {//Titre doit être unique. Seule contrainte violable
-                    $creation_actu = '<p style="color: red;">Une actualité avec ce titre existe déjà.</p>';
+                    $creation_actu = '<p class="message-erreur">Une actualité avec ce titre existe déjà.</p>';
                 } else {
                     error_log('Erreur lors de la création de l\'actualité : ' . $e->getMessage());
-                    $creation_actu = '<p style="color: red;">Une erreur est survenue lors de la création de l\'actualité.</p>';
+                    $creation_actu = '<p class="message-erreur">Une erreur est survenue lors de la création de l\'actualité.</p>';
                 }
             }
      }
@@ -53,13 +53,13 @@ if (isset($_POST['bSupprimerActu'])) {
     try {
         $suppression = supprimerActualite($id_actu);
         if (!$suppression) {
-            $suppression_message = '<p style="color: red;">L\'actualité n\'a pas été trouvée?? Bizarre hein. J\'espère que vous avez un dev sous le pouce :)</p>';
+            $suppression_message = '<p class="message-erreur">L\'actualité n\'a pas été trouvée?? Bizarre hein. J\'espère que vous avez un dev sous le pouce :)</p>';
         } else {
-            $suppression_message = '<p style="color: green;">L\'actualité a été supprimée avec succès.</p>';
+            $suppression_message = '<p class="message-succes">L\'actualité a été supprimée avec succès.</p>';
         }
     } catch (Exception $e) {
         error_log('Erreur lors de la suppression de l\'actualité : ' . $e->getMessage());
-        $suppression_message = '<p style="color: red;">Une erreur est survenue lors de la suppression de l\'actualité.</p>';
+        $suppression_message = '<p class="message-erreur">Une erreur est survenue lors de la suppression de l\'actualité.</p>';
     }
 }
 

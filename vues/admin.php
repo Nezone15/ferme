@@ -4,6 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Espace Administrateur</title>
+
+	<!-- Liens vers les polices -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Tinos:wght@400;700&display=swap" rel="stylesheet">
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
+
 	<script defer src="/public/js/admin.js"></script>
 	<link rel="stylesheet" href="/public/style/style.css">
 	<link rel="stylesheet" href="/public/style/admin.css">
@@ -11,11 +22,11 @@
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>
 	<main>
-		<section class="banniere">
+		<section class="hero admin-hero">
 			<h1>Espace Administrateur</h1>
 		</section>
 
-		<section>
+		<section class="contenu barre-separation">
 			<h2>Créer une actualité</h2>
 			 <!-- Afficher le message si l'admin a déjà tenté de créer une actualité -->
 			<?php 
@@ -26,15 +37,20 @@
 
 			<!-- Formulaire pour créer une actualité.
 			 Le enctype permet de dire que ce sera pas juste du texte. Comme ça l'admin peut charger une image -->
-			<form action="admin" method="POST" enctype="multipart/form-data">
+			<form class="formulaire-creation" action="admin" method="POST" enctype="multipart/form-data">
 				<input type="text" name="titre" placeholder="Titre de l'actualité" required>
 				<textarea name="contenu" placeholder="Contenu de l'actualité" required></textarea>
-				<input type="file" name="image" accept="image/*" required>
-				<button type="submit" name="bCreerActu">Créer</button>
+				<div>
+					<label for="image" class="btn-primaire">Choisir une image</label>
+					<input type="file" id="image" name="image" accept="image/*" required>
+					<span id="nom-fichier">Aucun fichier choisi</span>
+				</div>
+				
+				<button class="btn-secondaire" type="submit" name="bCreerActu">Créer</button>
 			</form>
 		</section>
 
-		<section>
+		<section class="contenu">
 			<h2>Gérer les actualités</h2>
 
 			<search>
@@ -49,13 +65,16 @@
 						<option <?= ($ordre === 'DESC') ? 'selected' : '' ?> value="DESC">Ordre décroissant</option>
 						<option <?= ($ordre === 'ASC') ? 'selected' : '' ?> value="ASC">Ordre croissant</option>
 					</select>
-					<button type="submit">Rechercher</button>
-					<a href="admin">Réinitialiser</a>
+					<button class="btn-secondaire" type="submit">Rechercher</button>
+					<a class="btn-primaire" href="admin">Réinitialiser</a>
 				</form>
 			</search>
+
+			<?php if (isset($_GET['recherche'])): ?>
+				<p><?php echo $totalActus . (($totalActus > 1) ? ' actualités trouvées.' : ' actualité trouvée.'); ?></p>
+			<?php endif; ?>
 			
-			<h3>Liste des actualités</h3>
-			<p><?php echo $totalActus . (($totalActus > 1) ? ' actualités trouvées.' : ' actualité trouvée.'); ?></p>
+			
 			<table>
 				<thead>
 					<!-- Rendre titre et date cliquable pour trier par titre ou date.
@@ -72,7 +91,7 @@
 								Date de publication <?= ($tri === 'date') ? ($ordre === 'ASC' ? '↑' : '↓') : '' ?>
 							</a>
 						</th>
-						<th>Actions</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -92,7 +111,7 @@
 						<td>
 							<form method="post">
 								<input type="hidden" name="id_actu" value="<?php echo $actu['id']; ?>">
-								<button type="submit" name="bSupprimerActu">Supprimer</button>
+								<button class="btn-primaire" type="submit" name="bSupprimerActu">Supprimer</button>
 							</form>
 						</td>
 					</tr>
@@ -102,28 +121,25 @@
 			<div>
 				<!-- Ici, ajouter les liens pour la pagination. -->
 				<?php
-				for ($i = 1; $i <= $paginationMax; $i++) {
-					$parametres = "?pagination=$i";
-					if (isset($_GET['tri'])) {
-						$parametres .= "&tri=" . urlencode($_GET['tri']);
+				if ($paginationMax > 1) {
+					for ($i = 1; $i <= $paginationMax; $i++) {
+						$parametres = "?pagination=$i";
+						if (isset($_GET['tri'])) {
+							$parametres .= "&tri=" . urlencode($_GET['tri']);
+						}
+						if (isset($_GET['ordre'])) {
+							$parametres .= "&ordre=" . urlencode($_GET['ordre']);
+						}
+						if (isset($_GET['recherche'])) {
+							$parametres .= "&recherche=" . urlencode($_GET['recherche']);
+						}
+						echo '<a href="admin' . $parametres . '">' . $i . '</a> ';
 					}
-					if (isset($_GET['ordre'])) {
-						$parametres .= "&ordre=" . urlencode($_GET['ordre']);
-					}
-					if (isset($_GET['recherche'])) {
-						$parametres .= "&recherche=" . urlencode($_GET['recherche']);
-					}
-					echo '<a href="admin' . $parametres . '">' . $i . '</a> ';
-				}
+				}				
 				?>
-			</div>
-			
+			</div>			
 		</section>
-		
-		<!--plutot que de faire une section utilisateur je fais faire une autre page pour ça. Parce que sinon je sens que ça va être chiant-->
-		<section>
-			<a href="admin/utilisateurs">Gérer les utilisateurs</a>
-		</section>
+		<aside id="gestion-utilisateurs"><a href="admin/utilisateurs">Gérer les utilisateurs&longrightarrow;</a></aside>
 	</main>
 	<?php include VUES . 'header_footer/footer.php'; ?>
 </body>

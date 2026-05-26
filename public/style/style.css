@@ -21,6 +21,26 @@ body {
   color: var(--couleur-texte);
 }
 
+/* Evite les comportements par défaut des éléments interactifs */
+button,
+input,
+select,
+textarea {
+  font-family: inherit; /* Copie la police du parent (body) */
+  font-size: inherit; /* Copie la taille du parent (body) */
+  color: inherit; /* Copie la couleur du texte du parent (body) */
+}
+
+/*Enleve le defaut des boutons*/
+button {
+  /* 1. Supprime l'effet 3D/ombre natif du bouton */
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none; /* Supprime les ombres portées par défaut */
+  background: none; /* Supprime le fond par défaut */
+  border: none; /* Supprime les bordures par défaut */
+}
+
 /*Bouton primaire*/
 .btn-primaire {
   display: inline-flex;
@@ -37,6 +57,7 @@ body {
   background-color: #7a3b00;
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
 
 /*Bouton secondaire*/
@@ -54,6 +75,7 @@ body {
   background-color: #3a441a;
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
 
 /*Style basique des liens. A override si nécessaire */
@@ -86,16 +108,20 @@ header img.logo {
   min-width: 30px; /* Empêche le logo de devenir trop minuscule sur mobile */
 }
 
-header nav ul a:hover {
-  color: var(--couleur-vert);
-  border-bottom: 2px solid var(--couleur-brun);
-  text-decoration: none;
-}
-
 header nav ul {
   display: flex;
   gap: 2rem;
   list-style-type: none;
+}
+
+header .utilisateur-connecte {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.utilisateur-connecte button {
+  font-size: 1.2rem;
 }
 
 /*Messages*/

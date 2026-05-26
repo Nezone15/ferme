@@ -16,10 +16,12 @@
 
      <?php if (isset($_SESSION['utilisateur'])): ?>
         <!-- Si l'utilisateur est connecté -->
-        <a class="btn-secondaire" href="/profil">Mon Profil</a>
-        <form action="/deconnexion" id="deconnexion" method="POST">
-            <button type="submit" name="bDeconnexion">Déconnexion</button>
-        </form>
+         <div class="utilisateur-connecte">
+            <a class="btn-secondaire" href="/profil">Mon Profil</a>
+            <form action="/deconnexion" id="deconnexion" method="POST">
+                <button class="btn-primaire" type="submit" name="bDeconnexion">Déconnexion</button>
+            </form>
+         </div>
     <?php else: ?>
         <!-- Si l'utilisateur est un visiteur -->
         <a class="btn-secondaire" href="/connexion">Nous rejoindre</a>

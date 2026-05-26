@@ -1,1 +1,69 @@
 /* Style dedie a la page vue admin. */
+.admin-hero {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("/public/images/site/banniere.jpeg");
+}
+
+.barre-separation {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--couleur-vert);
+  padding-bottom: 2rem;
+}
+
+.formulaire-creation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formulaire-creation input[type="text"] {
+  padding: 0.5rem;
+  font-size: 1.25rem;
+}
+.formulaire-creation textarea {
+  resize: none;
+  padding: 0.5rem;
+  field-sizing: content;
+}
+.formulaire-creation input[type="file"] {
+  display: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table td,
+table th {
+  border-bottom: 1px solid #ccc; /* Bordure uniquement en bas */
+  padding: 10px;
+}
+
+search {
+  display: flex;
+  justify-content: center; /* Centre le formulaire horizontalement */
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+search form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+search input[type="text"] {
+  min-width: 200px;
+  field-sizing: content;
+  padding: 0.5rem;
+}
+
+#gestion-utilisateurs {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}

@@ -1,1 +1,62 @@
 /* Style dedie a la page profil. */
+.profil-hero {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("/public/images/site/bois.jpeg");
+}
+
+.profil-infos {
+  max-width: 1400px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--couleur-vert);
+  padding-bottom: 2rem;
+}
+
+.profil-infos form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profil-infos button {
+  grid-column: span 2;
+}
+
+/* Version Mobile (Responsive) */
+@media (max-width: 600px) {
+  .form-container {
+    grid-template-columns: 1fr; /* Bascule sur 1 seule colonne */
+  }
+
+  .form-actions {
+    grid-column: span 1;
+  }
+}
+
+.historique {
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table td,
+table th {
+  border-bottom: 1px solid #ccc; /* Bordure uniquement en bas */
+  padding: 10px;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
