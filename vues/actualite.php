@@ -61,16 +61,18 @@
 			<h2>Commentaires</h2>
 			<!--Afficher le message d'erreur ou réussite si l'utilisateur a déjà tenté de commenter-->
 			 <?php if (isset($_SESSION['commentaire'])): ?>
-				<p><?php echo $_SESSION['commentaire']; ?></p>
+				<p class="message-succes"><?php echo $_SESSION['commentaire']; ?></p>
 				<?php unset($_SESSION['commentaire']); ?>
 			<?php endif; ?>
 
 			<!-- Si utilisateur connecté, afficher le formulaire de commentaire -->
 			 <?php if (isset($_SESSION['utilisateur'])): ?>
-			<form action="/actualite/<?php echo $actu['id']; ?>" method="post">
+			<form class="commentaire formulaire-commentaire" action="/actualite/<?php echo $actu['id']; ?>" method="post">
 				<textarea name="commentaire" placeholder="Ajouter un commentaire..." required></textarea>
-				<button type="submit" name="bCommenter">Envoyer</button>
-				<button type="reset">Annuler</button>
+				<div class="boutons-commentaires">
+					<button class="btn-primaire" type="submit" name="bCommenter">Envoyer</button>
+					<button class="btn-secondaire" type="reset">Annuler</button>
+				</div>
 			</form>
 			<?php endif; ?>
 			

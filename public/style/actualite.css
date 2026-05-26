@@ -32,6 +32,10 @@ main {
   padding: 1rem 0;
 }
 
+#likes button {
+  cursor: pointer;
+}
+
 #likes button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -71,4 +75,21 @@ main {
 .enteteCommentaire span {
   font-size: 0.8em;
   color: #666;
+}
+
+.formulaire-commentaire {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.formulaire-commentaire textarea {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  field-sizing: content;
+  min-height: 40px;
+  padding: 0.5rem;
 }

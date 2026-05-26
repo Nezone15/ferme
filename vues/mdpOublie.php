@@ -25,6 +25,8 @@
         <section class="hero mdpOublie">
             <h1>Mot de passe oublié</h1>
         </section>
+
+
         <!--Le processus de réinitialisation du mot de passe se fait en plusieurs étapes :
         1. Entrer l'adresse email
         2. Répondre à la question secrète qu'on vient de recevoir grâce à l'email fourni
@@ -32,17 +34,18 @@
         Donc les ifs vont servir à vérifier à quelle étape on est ou bien s'il y a eu une erreur.
         On peut alors soit afficher l'erreur, soit afficher le formulaire correspondant. 
         -->
+        <section class="formulaire-mdpOublie">
 
         <!-- Ce premier if est si on a échoué à l'étape 1 et que l'email n'est pas trouvé. On peut virer l'erreur de la session, une fois affichée -->
         <?php if (isset($erreur_email_introuvable)): ?>
-                <p style="color: red;"><?php echo $erreur_email_introuvable; ?></p>
+                <p class="message-erreur"><?php echo $erreur_email_introuvable; ?></p>
                 <?php unset($erreur_email_introuvable); ?>
         <?php endif; ?>
 
         <!-- Ce if est si on a échoué à l'étape 3 et que la réponse secrète est incorrecte. 
          Là on fait unset parce qu'on veut enlever l'utilisateur associé à l'email de la session -->
         <?php if (isset($_SESSION['reponse']) && $_SESSION['reponse'] === false): ?>
-                <p style="color: red;">Votre réponse est incorrecte. TU ES SUSPECT.</p>
+                <p class="message-erreur">Votre réponse est incorrecte. TU ES SUSPECT.</p>
             <?php session_unset();?>
         <?php endif; ?>
 
@@ -71,20 +74,21 @@
             <!-- Si le mdp n'est pas conforme, on affiche l'erreur. Comme tout est encore en session, il réatterrit direct ici et peut
              corriger son erreur. On unset l'erreur une fois affichée-->
             <?php if (isset($erreur_mdp_non_conforme)): ?>
-                <p style="color: red;"><?php echo $erreur_mdp_non_conforme; ?></p>
+                <p class="message-erreur"><?php echo $erreur_mdp_non_conforme; ?></p>
                 <?php unset($erreur_mdp_non_conforme); ?>
             <?php endif; ?>
 
-            <p style="color: green;">Votre réponse est correcte. Vous pouvez maintenant réinitialiser votre mot de passe.</p>
+            <p class="message-succes">Votre réponse est correcte. Vous pouvez maintenant réinitialiser votre mot de passe.</p>
             <form action="mdpOublie" method="post">
                 <label for="nouveauMdp">Nouveau mot de passe :</label>
                 <input type="password" id="nouveauMdp" name="nouveauMdp" required>
                 <label for="confirmeMdp">Confirmer le nouveau mot de passe :</label>
                 <input type="password" id="confirmeMdp" name="confirmeMdp" required>
                 <button class="btn-primaire" type="submit" name="bNouveauMdp">Réinitialiser</button>
-                <button class="btn-secondaire" type="reset">Annuler</button>
+                <button class="btn-secondaire" type="reset">Reset</button>
             </form>
         <?php endif; ?>
+        </section>
     </main>
     <?php include VUES . 'header_footer/footer.php'; ?>    
 </body>

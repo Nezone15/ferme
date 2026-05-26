@@ -39,3 +39,8 @@ form p {
   display: flex;
   justify-content: space-between;
 }
+
+section.formulaire-mdpOublie {
+  margin: 0 auto;
+  text-align: center;
+}
