@@ -144,6 +144,10 @@ function prepareRechercheMots($recherche) {
     //On remplace tout ce qui n'est pas une lettre, un chiffre ou un espace par un espace. Cela permet de supprimer les caractères spéciaux qui pourraient poser problème dans la recherche.
     $recherche = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $recherche);
     $mots = preg_split('/\s+/', $recherche);
+    
+    //On ajoute les opérateurs "+" devant et le "*" derrière CHAQUE mot du tableau
+	//+ oblige à considérer chaque terme
+	//'*' permet de faire comme like sur la fin de chaque mot
     $motsFormattes = [];
     foreach ($mots as &$mot) {
         if (strlen($mot) > 2) {

@@ -13,6 +13,11 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/public/favicon_io/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
+
+	
+	<link rel="stylesheet" href="/public/style/style.css">
+	<link rel="stylesheet" href="/public/style/admin_utilisateurs.css">
+	
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>

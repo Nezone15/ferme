@@ -40,7 +40,7 @@ if (isset($_POST['bInscription'])) {
                 header('Location: connexion');
                 exit();
             } catch (PDOException $e) {
-                if ($e->getCode() === '23000') { 
+                if ($e->getCode() == '23000') { 
                     // Code d'erreur pour violation de contrainte. Dans ce cas-ci, je sais que le problème vient de l'email déjà utilisé.
                     //Si jamais je voulais vraiment être précis, je peux regarder si l'errorInfo[1] est 1062. C'est le code spécifique pour l'unicité en mySQL. 
                     $erreur_inscription = "Cette adresse mail est déjà utilisée.";

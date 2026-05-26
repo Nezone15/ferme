@@ -69,11 +69,8 @@
 					<a class="btn-primaire" href="admin">Réinitialiser</a>
 				</form>
 			</search>
-
-			<?php if (isset($_GET['recherche'])): ?>
-				<p><?php echo $totalActus . (($totalActus > 1) ? ' actualités trouvées.' : ' actualité trouvée.'); ?></p>
-			<?php endif; ?>
 			
+			<p><?php echo $totalActus . (($totalActus > 1) ? ' actualités trouvées.' : ' actualité trouvée'); ?></p>
 			
 			<table>
 				<thead>
@@ -106,8 +103,8 @@
 			 	<?php foreach ($actualites as $actu): ?>
 					<tr>
 						<td><a href="/actualite/<?php echo $actu['id']; ?>" target="_blank">Voir l'actualité</a></td>
-						<td><?php echo $actu['titre']; ?></td>
-						<td><?php echo $actu['date']; ?></td>
+						<td><?php echo htmlspecialchars($actu['titre']); ?></td>
+						<td><?php echo date('d/m/Y', strtotime($actu['date'])); ?></td>
 						<td>
 							<form method="post">
 								<input type="hidden" name="id_actu" value="<?php echo $actu['id']; ?>">
@@ -118,10 +115,12 @@
 			 	<?php endforeach ?>
 				</tbody>
 			</table>
-			<div>
+			
 				<!-- Ici, ajouter les liens pour la pagination. -->
 				<?php
 				if ($paginationMax > 1) {
+					echo '<div class="pagination">';
+					echo '<span>Pages : ';
 					for ($i = 1; $i <= $paginationMax; $i++) {
 						$parametres = "?pagination=$i";
 						if (isset($_GET['tri'])) {
@@ -133,11 +132,12 @@
 						if (isset($_GET['recherche'])) {
 							$parametres .= "&recherche=" . urlencode($_GET['recherche']);
 						}
-						echo '<a href="admin' . $parametres . '">' . $i . '</a> ';
+						echo '<a href="admin' . $parametres . '">' . $i . '</a></span>';
 					}
+					echo '</div>';
 				}				
 				?>
-			</div>			
+					
 		</section>
 		<aside id="gestion-utilisateurs"><a href="admin/utilisateurs">Gérer les utilisateurs&longrightarrow;</a></aside>
 	</main>

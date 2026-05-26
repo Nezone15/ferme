@@ -38,7 +38,7 @@ if (isset($_POST['bCreerActu'])) {
             } catch (Exception $e) {
                 //On supprime l'image dans ce cas ? Mais elle peut être déjà utilisée par une autre actu ?
                 //D'où ma réfléxion plus haut de cas de figure. A réfléchir. 
-                if ($e->getCode() === 23000) {//Titre doit être unique. Seule contrainte violable
+                if ($e->getCode() == 23000) {//Titre doit être unique. Seule contrainte violable
                     $creation_actu = '<p class="message-erreur">Une actualité avec ce titre existe déjà.</p>';
                 } else {
                     error_log('Erreur lors de la création de l\'actualité : ' . $e->getMessage());
@@ -87,9 +87,9 @@ if (isset($_GET['pagination'])) {
 try {
     if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
         $recherche = trim($_GET['recherche']);
-        $rechercheNettoye = prepareRechercheMots($_GET['recherche']);
-        $actualites = rechercheActusMots($rechercheNettoye, 10, $tri, $ordre, $pagination);
-        $totalActus = nombreRechercheActusMots($rechercheNettoye);
+        $rechercheFormatte = prepareRechercheMots($_GET['recherche']);
+        $actualites = rechercheActusMots($rechercheFormatte, 10, $tri, $ordre, $pagination);        
+        $totalActus = nombreRechercheActusMots($rechercheFormatte);        
     } else {
         //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
         $recherche = '';
