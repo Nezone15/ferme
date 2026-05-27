@@ -14,7 +14,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
 
-	
+	<script defer src="/public/js/script.js"></script>
 	<link rel="stylesheet" href="/public/style/style.css">
 	<link rel="stylesheet" href="/public/style/admin.css">
 	<link rel="stylesheet" href="/public/style/admin_utilisateurs.css">

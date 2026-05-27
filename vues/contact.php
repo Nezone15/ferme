@@ -18,6 +18,7 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
 	<link rel="manifest" href="/public/favicon_io/site.webmanifest">
 
+	<script defer src="/public/js/script.js"></script>
 	<script defer src="/public/js/contact.js"></script>
 	<link rel="stylesheet" href="/public/style/style.css">
 	<link rel="stylesheet" href="/public/style/contact.css">

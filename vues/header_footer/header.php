@@ -1,5 +1,12 @@
 <header>
     <a href="/accueil"><img class="logo" src="/public/images/site/logo_fsa_svg.svg" alt="Logo de la Ferme Saint Achaire"></a>
+
+    <button class="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
     <nav>
         <ul>
             <li><a href="/accueil">Accueil</a></li>

@@ -250,3 +250,78 @@ aside.copyright {
   color: black;
   font-size: 0.8rem;
 }
+
+/*
+RESPONSIVE DESIGN
+*/
+
+/*HEADER*/
+.burger {
+  display: none;
+  flex-direction: column;
+  width: 30px;
+  height: 25px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.burger span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--couleur-vert); /* Couleur des lignes */
+  border-radius: 2px;
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+/* La ligne du haut tourne à 45 degrés */
+.burger.open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+/* La ligne du bas tourne à -45 degrés */
+.burger.open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+@media screen and (max-width: 800px) {
+  header {
+    position: relative;
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  header img.logo {
+    display: none;
+  }
+  .burger {
+    display: flex;
+    margin-right: auto;
+  }
+
+  header nav {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    font-size: 1rem;
+    z-index: 1000;
+    background-color: var(--couleur-blanc-mat);
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+  }
+  nav a {
+    padding: 1rem;
+  }
+  .actif {
+    display: flex;
+  }
+  .inactif {
+    display: none;
+  }
+}

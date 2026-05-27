@@ -1,11 +1,20 @@
-//Deconnexion avec confirmation
-const formDeconnexion = document.getElementById("deconnexion");
+//menu burger
+const burger = document.querySelector(".burger");
+const nav = document.querySelector("nav");
 
-if (formDeconnexion) {
-  formDeconnexion.addEventListener("submit", function (event) {
-    event.preventDefault();
-    if (confirm("Êtes-vous sûr de vouloir vous déconnecter ?")) {
-      formDeconnexion.submit();
+burger.addEventListener("click", (event) => {
+  event.stopPropagation();
+  nav.classList.toggle("actif");
+  burger.classList.toggle("inactif");
+});
+
+document.addEventListener("click", (event) => {
+  // On vérifie si le menu est actuellement ouvert
+  if (nav.classList.contains("actif")) {
+    // Si le clic N'EST PAS à l'intérieur du menu
+    if (!nav.contains(event.target)) {
+      nav.classList.toggle("actif");
+      burger.classList.toggle("inactif");
     }
-  });
-}
+  }
+});
