@@ -27,6 +27,7 @@ main {
   min-height: 80px;
   width: 100%;
   border: 1px solid #ccc;
+  margin-bottom: 1rem;
 }
 
 #likes {
@@ -130,5 +131,14 @@ RESPONSIVE
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
+  }
+
+  #actu form {
+    width: 100%;
+  }
+
+  #actu input[type="text"] {
+    width: 100%;
+    min-width: 0; /*Casse la taille minimale par défaut du navigateur. ça le fait déborder sur mobile sinon */
   }
 }
