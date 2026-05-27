@@ -17,8 +17,8 @@ RewriteRule ^actualite/([0-9]+)$ index.php?page=actualite&id=$1 [L,QSA]
 # 5. Là on veut gérer le cas où l'admin veut consulter le profil d'un utilisateur spécifique
 RewriteRule ^(admin/utilisateurs)/([0-9]+)$ index.php?page=$1&utilisateur_id=$2 [L,QSA]
 
-# 6. Encore un cas, celui où l'utilisateur qu'il veut consulter est l'utilisateur null
-RewriteRule ^(admin/utilisateurs)/null$ index.php?page=$1&utilisateur_id=null [L,QSA]
+# 6. Encore un cas, celui où l'utilisateur qu'il veut consulter est l'utilisateur anonyme
+RewriteRule ^(admin/utilisateurs)/anonyme$ index.php?page=$1&utilisateur_id=anonyme [L,QSA]
 
 # 7. Pour accéder au panel de gestion des utilisateurs par l'admin.
 RewriteRule ^(admin/utilisateurs)$ index.php?page=$1 [L,QSA]

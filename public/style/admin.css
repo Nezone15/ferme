@@ -60,13 +60,13 @@ search input[type="text"] {
   padding: 0.5rem;
 }
 
-p {
+.nombre-trouve {
   text-align: center;
   font-size: 1.1rem;
   font-weight: bold;
 }
 
-#gestion-utilisateurs {
+.lien-redirection-admin {
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 2rem;

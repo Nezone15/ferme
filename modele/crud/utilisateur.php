@@ -152,7 +152,7 @@ function jointureUtilisateurCommentaire($triUtilisateur = 'nom', $ordreUtilisate
             $clauseRecherche
             GROUP BY u.id, u.nom, u.prenom, u.date_creation, u.derniere_activite)
             UNION ALL
-            (SELECT NULL AS id, 'Anonyme' AS nom, '' AS prenom, NULL AS date_creation, NULL AS derniere_activite, COUNT(id) AS nb_commentaires 
+            (SELECT NULL AS id, 'Anonyme' AS nom, '---' AS prenom, '---' AS date_creation,'---' AS derniere_activite, COUNT(id) AS nb_commentaires 
             FROM commentaire 
             WHERE utilisateur_id IS NULL HAVING nb_commentaires > 0)
             ORDER BY $triUtilisateur $ordreUtilisateur

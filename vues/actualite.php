@@ -39,7 +39,7 @@
 				<form action="/actualite/<?php echo $actu['id']; ?>" method="POST">
 					<h1><input type="text" name="titre" value="<?php echo htmlspecialchars($actu['titre']); ?>"></h1>
 					<textarea name="contenu"><?php echo htmlspecialchars($actu['contenu']); ?></textarea>
-					<button type="submit" name="bModifierActu">Modifier</button>
+					<button class="btn-secondaire" type="submit" name="bModifierActu">Modifier</button>
 				</form>
 			<?php else: ?>
 				<h1><?php echo htmlspecialchars($actu['titre']); ?></h1>

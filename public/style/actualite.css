@@ -21,6 +21,14 @@ main {
   color: #666;
 }
 
+#actu textarea {
+  resize: none;
+  field-sizing: content;
+  min-height: 80px;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
 #likes {
   display: flex;
   align-items: center;

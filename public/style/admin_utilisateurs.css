@@ -1,0 +1,11 @@
+/*Style dédié à la page d'administration des utilisateurs. */
+#supprimer-utilisateur {
+  font-size: 1.1rem;
+}
+
+.lien-redirection-admin {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}

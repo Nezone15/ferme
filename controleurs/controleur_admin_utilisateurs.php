@@ -15,11 +15,14 @@ require_once(MODELE . 'crud/actualite.php');
 if (isset($_POST['bSupprimerCommentaire'])) {
     $commentaire_id = $_POST['commentaire_id'];
     try {
-        supprimerCommentaire($commentaire_id);
-        $commentaire_suppression = "Commentaire supprimé avec succès.";
+        if (supprimerCommentaire($commentaire_id)) {
+            $commentaire_suppression = "<p class='message-succes'>Commentaire supprimé avec succès.</p>";
+        } else {
+            $commentaire_suppression = "<p class='message-erreur'>Pas trouvé le commentaire. T'aurais pas rechargé la page par hasard ?</p>";
+        }
     } catch (Exception $e) {
         error_log("Erreur SQL lors de la suppression du commentaire : " . $commentaire_id . $e->getMessage());
-        $commentaire_suppression = "Une erreur est survenue lors de la suppression du commentaire.";
+        $commentaire_suppression = "<p class='message-erreur'>Une erreur est survenue lors de la suppression du commentaire.</p>";
     }
 }
 
@@ -27,13 +30,16 @@ if (isset($_POST['bSupprimerCommentaire'])) {
 if (isset($_POST['bSupprimerUtilisateur'])) {
     $utilisateur_id = $_POST['utilisateur_id'];
     try {
-        supprimerUtilisateur($utilisateur_id);
-        $_SESSION['utilisateur_suppression'] = "Utilisateur supprimé avec succès.";
+        if (supprimerUtilisateur($utilisateur_id)) {
+            $_SESSION['utilisateur_suppression'] = "<p class='message-succes'>Utilisateur supprimé avec succès.</p>";
+        } else {
+            $_SESSION['utilisateur_suppression'] = "<p class='message-erreur'>Pas trouvé l'utilisateur. T'aurais pas rechargé la page par hasard ?</p>";
+        }
         header('Location: /admin/utilisateurs');
         exit();
     } catch (Exception $e) {
         error_log("Erreur SQL lors de la suppression de l'utilisateur : " . $utilisateur_id . $e->getMessage());
-        $_SESSION['utilisateur_suppression'] = "Une erreur est survenue lors de la suppression de l'utilisateur." . $utilisateur_id;
+        $_SESSION['utilisateur_suppression'] = "<p class='message-erreur'>Une erreur est survenue lors de la suppression de l'utilisateur." . $utilisateur_id . "</p>";
         header('Location: /admin/utilisateurs');
         exit();
     }
@@ -51,13 +57,25 @@ if (isset($_GET['utilisateur_id'])) {
     $utilisateur_id = $_GET['utilisateur_id'];
     try {
         //On fait attention au cas où l'utilisateur_id est null
-        ($utilisateur_id==='null')? $utilisateur = null : $utilisateur = utilisateurId($utilisateur_id) ;
+        $utilisateur = [];
+        if ($utilisateur_id==='anonyme') {
+            $utilisateur['id'] = '---';
+            $utilisateur['nom'] = 'Anonyme';
+            $utilisateur['prenom'] = '---';
+            $utilisateur['email'] = '---';
+            
+            $utilisateur['date_creation'] = '---';
+            $utilisateur['derniere_activite'] = '---';
+        } else {
+            $utilisateur = utilisateurId($utilisateur_id);
+        }
+        var_dump($utilisateur);
         if ($utilisateur!==false) {
             $commentaires = jointureCommentaireActualiteParUtilisateur($utilisateur['id'], $triCommentaire, $ordreCommentaire);
             $nbCommentaires = nombreCommentairesUtilisateur($utilisateur['id']);
         } else {
             //Utilisateur inexistant, on renvoie du coup à la gestion générale des utilisateurs
-            $_SESSION['utilisateur_inexistant'] = "L'utilisateur que vous essayez de consulter n'existe pas.";
+            $_SESSION['utilisateur_inexistant'] = "<p class='message-erreur'>L'utilisateur que vous essayez de consulter n'existe pas.</p>";
             header('Location: /admin/utilisateurs');
             exit();
         }
@@ -77,10 +95,6 @@ if (isset($_GET['utilisateur_id'])) {
     $recherche = preg_replace('/\s+/', ' ', $recherche);
     $pagination = $_GET['pagination'] ?? 1;
 
-    if (isset($_POST['bTrierUtilisateurs'])) {
-        $triUtilisateur = $_POST['triUtilisateur'] ?? 'nom';
-        $ordreUtilisateur = $_POST['ordreUtilisateur'] ?? 'ASC';
-    }
     try {
         $utilisateurs = jointureUtilisateurCommentaire($triUtilisateur, $ordreUtilisateur, $recherche, 10, $pagination);
         $totalUtilisateurs = nombreUtilisateurRecherche($recherche);

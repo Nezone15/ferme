@@ -53,6 +53,13 @@
 		<section class="contenu">
 			<h2>Gérer les actualités</h2>
 
+			<?php
+			if (isset($suppression_message)) {
+				echo $suppression_message;
+				unset($suppression_message);
+			}
+			?>
+
 			<search>
 				<form action="admin" method="get">
 					<?php (isset($_GET['recherche'])) ? $valeur_recherche = trim(htmlspecialchars($_GET['recherche'])) : $valeur_recherche = ''; ?>
@@ -70,7 +77,7 @@
 				</form>
 			</search>
 			
-			<p><?php echo $totalActus . (($totalActus > 1) ? ' actualités trouvées.' : ' actualité trouvée'); ?></p>
+			<p class="nombre-trouve"><?php echo $totalActus . (($totalActus > 1) ? ' actualités trouvées.' : ' actualité trouvée'); ?></p>
 			
 			<table>
 				<thead>
@@ -139,7 +146,7 @@
 				?>
 					
 		</section>
-		<aside id="gestion-utilisateurs"><a href="admin/utilisateurs">Gérer les utilisateurs&longrightarrow;</a></aside>
+		<aside class="lien-redirection-admin"><a href="admin/utilisateurs">Gérer les utilisateurs&longrightarrow;</a></aside>
 	</main>
 	<?php include VUES . 'header_footer/footer.php'; ?>
 </body>
