@@ -26,7 +26,7 @@
 		<section class="hero admin-hero">
 			<h1>Espace Administrateur</h1>
 		</section>
-
+		<p id="fonctionnalite-admin">Les fonctionnalités d'administrateur sont uniquement utilisables sur ordinateur.</p>
 		<section class="contenu barre-separation">
 			<h2>Créer une actualité</h2>
 			 <!-- Afficher le message si l'admin a déjà tenté de créer une actualité -->

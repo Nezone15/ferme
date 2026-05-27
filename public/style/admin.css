@@ -80,3 +80,23 @@ search input[type="text"] {
   gap: 0.5rem;
   margin-top: 1rem;
 }
+
+#fonctionnalite-admin {
+  display: none;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 800px) {
+  #fonctionnalite-admin {
+    display: block;
+  }
+
+  .contenu {
+    display: none;
+  }
+  aside {
+    display: none;
+  }
+}
