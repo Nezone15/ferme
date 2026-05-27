@@ -60,3 +60,41 @@ table th {
 table tr:last-child td {
   border-bottom: none;
 }
+
+#message-mobile {
+  display: none;
+}
+
+/*
+----------
+RESPONSIVE
+----------
+*/
+@media (max-width: 800px) {
+  .profil-infos {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  .historique {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  .profil-infos form {
+    grid-template-columns: 1fr; /* Bascule sur 1 seule colonne */
+  }
+
+  .profil-infos button {
+    grid-column: span 1;
+  }
+
+  table {
+    display: none;
+  }
+
+  #message-mobile {
+    display: block;
+    text-align: center;
+    color: var(--couleur-vert);
+    font-weight: bold;
+  }
+}

@@ -18,6 +18,7 @@
 
     <script defer src="/public/js/script.js"></script>
     <link rel="stylesheet" href="/public/style/style.css">
+    <link rel="stylesheet" href="/public/style/mdpOublie.css">
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>

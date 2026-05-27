@@ -30,7 +30,7 @@
 		</section>
 
 		<section class="contenu">
-            <section class="zigzag">
+            <div class="zigzag">
                 <article>
                     <h2>Essences, tailles et origine</h2>
                     <p>Le  bois fourni est en provenance des Ardennes. Il arrive à la ferme pour y être fendu et scié en 3 tailles différentes pour s’adapter à votre poêle à bois. Les 3 tailles sont 30cm, 40cm ou 50cm.  Le bois est composé d’un mélange de plusieurs essences : bouleau, hêtre,  chêne et frêne.</p>
@@ -45,7 +45,7 @@
                     <p>La livraison est gratuite tant que la distance reste en dessous de 10km. Passé ce cap, nous appliquons un tarif supplémentaire qui s’élève à 0.50€/km.</p>
                     <p>L'un des gros atouts de la ferme est que nous rangeons le bois directement chez vous.</p>
                 </article>
-            </section>
+            </div>
             <aside class="contact">
                 <p>Envie de nous contacter directement ?</p>
                 <a href="contact" class="btn-primaire">Prendre contact</a>

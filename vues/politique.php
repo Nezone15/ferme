@@ -15,13 +15,14 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon_io/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/public/favicon_io/site.webmanifest">
-
-    <script defer src="/public/js/script.js"></script>
+    
+    <script defer src="/public/js/script.js"></script>    
     <link rel="stylesheet" href="/public/style/style.css">
+    <link rel="stylesheet" href="/public/style/politique.css">
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>
-    <main>
+    <main class="contenu">
         <h1>Politique de Confidentialité</h1>
         <p>Dernière mise à jour : 27 Avril 2026</p>
         <h2>1. Collecte des données personnelles</h2>

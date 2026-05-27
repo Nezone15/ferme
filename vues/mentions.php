@@ -18,13 +18,14 @@
 
     <script defer src="/public/js/script.js"></script>
     <link rel="stylesheet" href="/public/style/style.css">
-    <link rel="stylesheet" href="/public/style/mentions.css">
+    <link rel="stylesheet" href="/public/style/politique.css">
 
 </head>
 <body>
     <?php include VUES . 'header_footer/header.php'; ?>
-    <main>
+    <main class="contenu">
         <h1>Mentions légales</h1>
+        <p>Dernière mise à jour : 27 Avril 2026</p>
         <h2>Informations légales : Ferme Saint Achaire</h2>
         <ul>
             <li>Maison d’Accueil, Association de Promotion du Logement et Initiative d’Economie Sociale</li>

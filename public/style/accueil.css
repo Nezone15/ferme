@@ -290,3 +290,44 @@ Actualités
 .contenu-actu p {
   margin: 0;
 }
+
+/*
+----------------
+RESPONSIVE DESIGN
+----------------
+*/
+@media (max-width: 800px) {
+  .carrousel-contenu h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .carrousel-contenu p {
+    display: none;
+  }
+
+  .carrousel-contenu a {
+    font-size: 0.9rem;
+  }
+
+  .presentation {
+    max-width: 90%;
+  }
+
+  .projets {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chiffres p {
+    text-align: center;
+  }
+  .flex-actualites {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .actualite {
+    max-width: 90%;
+  }
+}

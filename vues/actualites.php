@@ -43,8 +43,8 @@
 						<option <?= ($ordre === 'DESC') ? 'selected' : '' ?> value="DESC">Ordre décroissant</option>
 						<option <?= ($ordre === 'ASC') ? 'selected' : '' ?> value="ASC">Ordre croissant</option>
 					</select>
-					<button type="submit">Rechercher</button>
-					<a href="actualites">Réinitialiser</a>
+					<button class="btn-secondaire" type="submit">Rechercher</button>
+					<a class="btn-primaire" href="actualites">Réinitialiser</a>
 				</form>
 			</search>
 			

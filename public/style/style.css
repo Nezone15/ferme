@@ -112,6 +112,8 @@ header nav ul {
   display: flex;
   gap: 2rem;
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 header .utilisateur-connecte {
@@ -166,14 +168,14 @@ section.hero h1 {
 }
 
 /*Section contenu. C'est tout sauf la hero section*/
-section.contenu {
+.contenu {
   width: 80%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/*Section zigzag*/
-section.zigzag {
+/*Zigzag*/
+.zigzag {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -181,11 +183,11 @@ section.zigzag {
   margin-bottom: 2rem;
 }
 
-section.zigzag article {
+.zigzag article {
   width: 60%;
 }
 
-section.zigzag article:nth-child(even) {
+.zigzag article:nth-child(even) {
   align-self: flex-end;
 }
 
@@ -216,7 +218,7 @@ footer {
 
 footer p {
   color: white;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin: 0;
   padding: 0;
 }
@@ -252,7 +254,9 @@ aside.copyright {
 }
 
 /*
+-------------------
 RESPONSIVE DESIGN
+------------------
 */
 
 /*HEADER*/
@@ -315,13 +319,57 @@ RESPONSIVE DESIGN
     gap: 0;
     align-items: center;
   }
+  nav ul li {
+    width: 100%;
+    text-align: center;
+  }
   nav a {
     padding: 1rem;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
   }
   .actif {
     display: flex;
   }
   .inactif {
     display: none;
+  }
+
+  /*TITRE*/
+  h1 {
+    text-align: center;
+  }
+
+  /*CONTACT*/
+  aside.contact {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    padding-top: 2rem;
+  }
+
+  aside.contact p {
+    margin: 0;
+  }
+
+  /*ZIGZAG*/
+  .zigzag article {
+    width: 100%;
+  }
+  .zigzag article:nth-child(even) {
+    align-self: flex-start;
+  }
+
+  /*FOOTER*/
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  footer p {
+    margin-bottom: 1rem;
+    text-decoration: underline;
   }
 }

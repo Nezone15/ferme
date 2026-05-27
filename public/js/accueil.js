@@ -36,3 +36,40 @@ rail.addEventListener("transitionend", () => {
     deplacerRail(false);
   }
 });
+
+//Swipe pour mobile
+let touchStart = 0;
+let touchEnd = 0;
+const carrousel = document.getElementById("carrousel-conteneur");
+// Enregistrer la position du doigt au moment où il touche l'écran
+carrousel.addEventListener(
+  "touchstart",
+  (e) => {
+    touchStart = e.changedTouches[0].screenX;
+  },
+  { passive: true },
+);
+
+// Enregistrer la position du doigt quand il quitte l'écran et calculer le geste
+carrousel.addEventListener(
+  "touchend",
+  (e) => {
+    touchEnd = e.changedTouches[0].screenX;
+    verifierSwipe();
+  },
+  { passive: true },
+);
+
+// Déterminer la direction du swipe et simuler le clic sur vos boutons
+function verifierSwipe() {
+  const seuilDistance = 50; // Distance minimale en pixels pour valider le swipe
+  const difference = touchStart - touchEnd;
+
+  if (difference > seuilDistance) {
+    // Swipe vers la gauche -> Diapo suivante
+    btnSuivant.click();
+  } else if (difference < -seuilDistance) {
+    // Swipe vers la droite -> Diapo précédente
+    btnPrecedent.click();
+  }
+}

@@ -68,3 +68,37 @@ section.page-actualites {
 .contenu-actu p {
   margin: 0;
 }
+
+search form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+search form input[type="text"] {
+  min-width: 200px;
+  field-sizing: content;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+search form select {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  field-sizing: content;
+  padding: 5px;
+}
+
+/*
+-----------
+RESPONSIVE
+-----------
+*/
+@media screen and (max-width: 800px) {
+  search form {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}

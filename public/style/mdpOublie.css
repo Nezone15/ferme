@@ -44,3 +44,15 @@ section.formulaire-mdpOublie {
   margin: 0 auto;
   text-align: center;
 }
+
+p {
+  text-align: center;
+}
+
+/*RESPONSIVE*/
+@media (max-width: 800px) {
+  section.formulaire-mdpOublie {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}

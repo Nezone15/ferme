@@ -101,3 +101,34 @@ main {
   min-height: 40px;
   padding: 0.5rem;
 }
+
+/*
+----------
+RESPONSIVE
+----------
+*/
+@media screen and (max-width: 800px) {
+  main {
+    max-width: 90%;
+  }
+
+  h1 {
+    margin: 0.5rem 0;
+  }
+  p {
+    margin: 0;
+  }
+  #actu {
+    gap: 0.5rem;
+  }
+
+  .formulaire-commentaire {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .boutons-commentaires {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}

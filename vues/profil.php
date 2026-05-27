@@ -142,6 +142,7 @@
 						<?php endforeach; ?>
 					</tbody>
 				</table>
+				<p id="message-mobile">Cette fonctionnalité est disponible uniquement sur ordinateurs ou tablettes.</p>
 			<?php endif; ?>
 		</section>
 	</main>
