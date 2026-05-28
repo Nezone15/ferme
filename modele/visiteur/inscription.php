@@ -7,12 +7,11 @@
  * @param string $mdp Le mot de passe du visiteur
  * @param string $mdpConfirme La confirmation du mot de passe
  * @param int $question_id L'ID de la question secrète choisie par le visiteur
- * @param string $reponse_secrete La réponse à la question secrète du visiteur
  * @param string|null $numero Le numéro de l'adresse du visiteur (optionnel)
  * @return string L'erreur rencontrée ou 'succes' si les données sont valides
  */
-function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $question_id, $reponse_secrete, $numero = null) {
-    if (empty($email) || empty($nom) || empty($prenom) || empty($mdp) || empty($mdpConfirme) || empty($question_id) || empty($reponse_secrete)) {
+function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $question_id, $numero = null) {
+    if (empty($email) || empty($nom) || empty($prenom) || empty($mdp) || empty($mdpConfirme) || empty($question_id)) {
         return "champs_manquants";
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 255) {
@@ -34,12 +33,10 @@ function verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $que
     if (strlen($prenom) < 2) {
         return "prenom_court";
     }
-    if (1 > $question_id || $question_id > 5) {
+    if (1 > $question_id || $question_id > 10) {
         return "question_invalide";
     }
-    if (strlen($reponse_secrete) < 2) {
-        return "reponse_secrete_courte";
-    }
+    
     return 'succes';
 }
 

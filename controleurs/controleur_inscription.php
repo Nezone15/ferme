@@ -29,7 +29,7 @@ if (isset($_POST['bInscription'])) {
     //On appelle la fonction qui vérifie si les données sont valides.
     //Ensuite selon le retour, on fait un switch pour indiquer à l'utilisateur ce qui a foiré ou si l'inscription a réussi.
     //Pour l'instant ma vérification est basique. Je fais même pas tous les champs à voir plus tard.
-    $validation = verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $question_id, $reponse_secrete, $numero);
+    $validation = verificationInscription($email, $nom, $prenom, $mdp, $mdpConfirme, $question_id, $numero);
     switch ($validation) {
         case 'succes':
             //Ici les données sont vérifiées. Il ne reste plus qu'à l'insérer en bdd. 
@@ -78,9 +78,6 @@ if (isset($_POST['bInscription'])) {
             break;
         case 'question_invalide':
             $erreur_inscription = "La question secrète choisie n'est pas valide.";
-            break;
-        case 'reponse_secrete_courte':
-            $erreur_inscription = "La réponse à la question secrète doit contenir au moins 2 caractères.";
             break;
         default:
             $erreur_inscription = "Une erreur est survenue lors de l'inscription.";

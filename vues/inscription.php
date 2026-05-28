@@ -17,6 +17,7 @@
 	<link rel="manifest" href="/public/favicon_io/site.webmanifest">
 
 <script defer src="/public/js/script.js"></script>
+<script defer src="/public/js/inscription.js"></script>
     <link rel="stylesheet" href="/public/style/style.css">
     <link rel="stylesheet" href="/public/style/inscription.css">
 </head>
@@ -33,19 +34,24 @@
         }
         ?>
         <form action="inscription" method="post">
-            <label for="email">Email :</label>
-            <input type="text" id="email" name="email" maxlength="50" autofocus required>
+            <label for="email">Email :</label>            
+            <span id="email-invalide" class="message-erreur"></span>
+            <input type="email" id="email" name="email" maxlength="50" autofocus required>
 
             <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" maxlength="50" required>
+            <span id="nom-invalide" class="message-erreur"></span>
+            <input type="text" id="nom" name="nom" maxlength="50" pattern=".{2,}" required>
 
             <label for="prenom">Prénom :</label>
-            <input type="text" id="prenom" name="prenom" maxlength="50" required>
+            <span id="prenom-invalide" class="message-erreur"></span>
+            <input type="text" id="prenom" name="prenom" maxlength="50" pattern=".{2,}" required>
 
             <label for="mdp">Mot de passe :</label>
-            <input type="password" id="mdp" name="mdp" maxlength="72" required>
+            <span id="mdp-invalide" class="message-erreur"></span>
+            <input type="password" id="mdp" name="mdp" maxlength="72" pattern="(?=.*\d)(?=.*[A-Z]).{6,}" required>
 
             <label for="mdpConfirme">Confirmer le mot de passe :</label>
+            <span id="mdpConfirme-invalide" class="message-erreur"></span>
             <input type="password" id="mdpConfirme" name="mdpConfirme" maxlength="72" required>
 
             <label for="question">Choix de votre question secrète :</label>
