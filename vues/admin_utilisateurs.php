@@ -126,7 +126,7 @@
 					echo '<div class="pagination">';
 					echo '<span>Pages : ';
 						for ($i = 1; $i <= $paginationMax; $i++) {
-							?><a href="<?= genererUrlTriUtilisateur($triUtilisateur, $ordreUtilisateur, $recherche, $i) ?>"><?= $i ?></a></span>';<?php
+							?><a href="<?= genererUrlTriUtilisateur($triUtilisateur, $ordreUtilisateur, $recherche, $i) ?>"><?= $i ?></a></span><?php
 						 }
 					 echo '</div>';
 				}

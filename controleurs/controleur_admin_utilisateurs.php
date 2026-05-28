@@ -69,7 +69,6 @@ if (isset($_GET['utilisateur_id'])) {
         } else {
             $utilisateur = utilisateurId($utilisateur_id);
         }
-        var_dump($utilisateur);
         if ($utilisateur!==false) {
             $commentaires = jointureCommentaireActualiteParUtilisateur($utilisateur['id'], $triCommentaire, $ordreCommentaire);
             $nbCommentaires = nombreCommentairesUtilisateur($utilisateur['id']);

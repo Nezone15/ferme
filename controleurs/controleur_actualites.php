@@ -21,9 +21,13 @@ if (isset($_GET['pagination'])) {
 //Là si l'utilisateur a fait une recherche via mots-clés ou pas
 if (isset($_GET['recherche']) && !empty(trim($_GET['recherche']))) {
     $recherche = trim(($_GET['recherche']));
-    $actualites = rechercheActusMots($recherche, 9, $tri, $ordre, $pagination);
-    $totalActus = nombreRechercheActusMots($recherche);
-    var_dump($totalActus);
+    
+    //Oui c'est bizarre de prendre le modele admin mais la fonction de preparation de recherche est là bas
+    //J'ai un souci d'organisation de fichiers clariement
+    require_once(MODELE . 'admin.php');
+    $rechercheFormatte = prepareRechercheMots($_GET['recherche']);
+    $actualites = rechercheActusMots($rechercheFormatte, 9, $tri, $ordre, $pagination);
+    $totalActus = nombreRechercheActusMots($rechercheFormatte);
 } else {
     //Forcément pas dans le if donc on a pas faire de recherche mots clefs.
     $recherche = '';

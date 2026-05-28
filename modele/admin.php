@@ -15,13 +15,13 @@ function verificationActu($titre, $contenu, $image) {
     if (!verificationContenu($contenu)) {
         return 'contenu';
     }
-    if (!verificationExtensionImage($image)) {
-        return 'extension';
-    }
     if (!isset($image) || $image['error'] !== UPLOAD_ERR_OK) {
         return 'upload';
     }
-     if ($image['size'] > 5000000) {
+    if (!verificationExtensionImage($image)) {
+        return 'extension';
+    }    
+     if ($image['size'] > 2000000) {
         return 'taille';
     }
     return 'succes';

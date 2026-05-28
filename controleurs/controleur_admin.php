@@ -25,10 +25,10 @@ if (isset($_POST['bCreerActu'])) {
             $creation_actu = '<p class="message-erreur">L\'image doit être au format JPEG, PNG, GIF ou WEBP.</p>';
             break;
          case 'taille':
-            $creation_actu = '<p class="message-erreur">L\'image doit être inférieure à 5 Mo.</p>';
+            $creation_actu = '<p class="message-erreur">L\'image doit être inférieure à 2 Mo.</p>';
             break;
         case 'upload':
-            $creation_actu = '<p class="message-erreur">Une erreur est survenue lors du téléchargement de l\'image.</p>';
+            $creation_actu = '<p class="message-erreur">Une erreur est survenue lors du téléchargement de l\'image. Surement due à une taille excessive.</p>';
             break;
         case 'succes':
             $chemin_image = stockerImage($image);
