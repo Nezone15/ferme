@@ -1,0 +1,32 @@
+Accueil
+
+* La ferme St Achaire
+
+* Actualités
+    Liste des articles
+    	└── Article
+
+* Contact
+
+* Bois de chauffage (WIP cette page ne sera pas détaillée)
+
+* Compte
+    ├── Connexion
+	├── Mot de passe oublié
+    ├── Inscription    
+    └── Profil utilisateur
+
+* Espace gestion (selon rôle)
+    ├── Articles (Admin + Manager)
+        ├── Créer
+	├── Modifier
+	└── Supprimer
+    
+    ├── Modération (Admin + Manager)
+	├── Commentaires signalés
+		├── Historique de l'utilisateur
+    
+    └── Gestion des rôles (Admin)
+	├── Liste des utilisateurs
+	├── Modifier droits
+            
