@@ -18,7 +18,6 @@
 	<link rel="manifest" href="/public/favicon_io/site.webmanifest">
 	
 	<script defer src="/public/js/script.js"></script>
-	<script src="/public/js/maison.js" defer></script>	
 	<link rel="stylesheet" href="/public/style/style.css">
 	<link rel="stylesheet" href="/public/style/maison.css">
 </head>
