@@ -15,7 +15,7 @@ $actu = actualiteId($_GET['id']);
 //Si l'actu n'existe pas on redirige vers la page des actualités
 if (!$actu) {
     $_SESSION['erreur_actu_introuvable'] = "L'actualité que vous essayez de consulter n'existe pas ou n'est plus disponible.";
-    header('Location: actualites');
+    header('Location: /actualites');
     exit();
 } 
 
