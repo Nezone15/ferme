@@ -2,7 +2,7 @@
 //Controleur du profil.
 //Déjà si j'ai pas d'utilisateur en session, je le redirige vers la page d'accueil parce que forcément j'ai pas de données de profil à afficher
 if (!isset($_SESSION['utilisateur'])) {
-    header('Location: index.php');
+    header('Location: /index.php');
     exit();
 } else if(isset($_POST['modifier_profil'])) {
     //Si le formulaire de modification du profil est soumis, je récupére les données.
