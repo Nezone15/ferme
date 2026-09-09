@@ -1,5 +1,12 @@
-Site web test pour la ferme saint achaire qui est une maison de vie communautaire
+Projet Ferme Saint-Achaire
 
-Mes utilisateurs ont tous le mot de passe : Mpd123. Et comme réponse secrète : reponse.
 
-Mon admin est admin@gmail.com avec comme mdp : Admin1
+Site web test réalisé pour la maison de vie communautaire la Ferme Saint-Achaire de Mouscron.
+
+Technologies utilisées Backend : PHP (Architecture MVC), SQL.Frontend : HTML5, CSS3, JavaScript.
+
+Outils : Gestion du routage via .htaccess, maquettage Figma et suivi de projet Trello.
+
+Structure basée sur le modèle MVC (Modèle-Vue-Contrôleur).
+
+Système d'authentification et espace d'administration sécurisé (gestion des utilisateurs et des rôles).
